@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EventsComponent } from './events/events.component';
+import { DefaultComponent } from './layouts/default/default.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { PostsComponent } from './modules/posts/posts.component';
 import { RegisterComponent } from './register/register.component';
 import { SpecialEventsComponent } from './special-events/special-events.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/events',
+    redirectTo: '/login',
     pathMatch: 'full'
-  },
-  {
-    path: 'events',
-    component: EventsComponent
   },
   {
     path: 'special',
@@ -26,7 +24,23 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+  {
+    path: '#',
+    component: DefaultComponent,
+    children: [{
+      path: '',
+      component: DashboardComponent
+    },
+    {
+      path: 'posts',
+      component: PostsComponent
+    }]
+  },
+  // {
+  //   path: 'dashboard',
+  //   component: DashboardComponent
+  // },
 ];
 
 @NgModule({

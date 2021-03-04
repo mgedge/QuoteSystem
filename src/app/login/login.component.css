@@ -1,0 +1,13 @@
+.main-div mat-card {
+    margin-top: 40px;
+    padding: 0px;
+}
+
+.card {
+    padding: 0px;
+    max-width: 300px;
+}
+
+.login-form {
+    padding: 20px;
+}
