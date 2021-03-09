@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from "./../../auth.service";
+//import { userSchema } from "./../../../../server/models/user"
 
 @Component({
   selector: 'app-default',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DefaultComponent implements OnInit {
 
+  currentUser: any;
   sideBarOpen = true;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private _auth: AuthService
+  ) { 
+    this.currentUser = this._auth.getCurrentUser
+  }
 
   ngOnInit(): void {
   }

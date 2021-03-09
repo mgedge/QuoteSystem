@@ -7,8 +7,9 @@ import { AuthService } from './auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 //Material Design
 import { MatButtonModule } from '@angular/material/button';
@@ -17,19 +18,26 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatList, MatListModule } from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { RegisterComponent } from './register/register.component';
-import { SpecialEventsComponent } from './special-events/special-events.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-
+import { CardComponent } from './shared/widgets/card/card.component';
+import { EmployeesComponent } from './shared/widgets/admin/employees/employees.component'
+import { AuthInterceptor } from './auth/authconfig.interceptor';
+import { AdminComponent } from './modules/admin/admin.component';
+import { AssociateComponent } from './modules/associate/associate.component';
+import { SupervisorComponent } from './modules/supervisor/supervisor.component';
+import { ErrorInterceptor } from './auth/error.interceptor';
 /*
 import { xx } from '';
 
@@ -40,12 +48,16 @@ import { xx } from '';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    SpecialEventsComponent,
     DefaultComponent,
     DashboardComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    CardComponent,
+    EmployeesComponent,
+    AdminComponent,
+    AssociateComponent,
+    SupervisorComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -63,11 +75,24 @@ import { xx } from '';
     MatListModule,
     MatMenuModule,
     MatSidenavModule,
+    MatTableModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

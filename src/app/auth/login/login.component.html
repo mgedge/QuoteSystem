@@ -1,0 +1,41 @@
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+    <mat-card fxFlex="auto" class="card">
+        <mat-toolbar color="primary">Login</mat-toolbar>
+
+        <form [formGroup]="loginForm" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+            <mat-form-field>
+                <input matInput formControlName="username" placeholder="Username" id="username" [(ngModel)]="loginUserData.userName" type="text"  required>
+                <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                </div> -->
+            </mat-form-field>
+    
+            <mat-form-field>
+                <input matInput formControlName="password" placeholder="Password" id="password" [(ngModel)]="loginUserData.userPassword" type="password" required>
+            </mat-form-field>
+
+            <button mat-raised-button (click)="loginUser()" type="button" class="btn btn-success">Login</button>
+
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+    
+    
+                <!-- <div class="card-header">
+                    <h3 class="mb-0">Login</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="">Username</label>
+                            <input id="username" [(ngModel)]="loginUserData.userName" [ngModelOptions]="{standalone: true}" type="text" class="form-control rounded-0" required>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="">Password</label>
+                            <input id="password" [(ngModel)]="loginUserData.userPassword" [ngModelOptions]="{standalone: true}" type="password" class="form-control rounded-0" required>
+                        </div>
+                    </form>
+                </div> -->
+    
+    </mat-card>   
+</div>         

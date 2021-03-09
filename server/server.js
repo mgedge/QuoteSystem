@@ -2,14 +2,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const app = express();
 
 const PORT = 3000;
 const api = require('./routes/api');
 
 
-app.use(cors());
+const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(cors());
+
 
 app.use('/api', api);
 
@@ -18,9 +22,23 @@ app.get('/', function(req, res) {
     res.send("Hello from server")
 })
 
+//Open connection
 app.listen(PORT, function() {
     console.log('Running on localhost:' + PORT)
 })
+
+// Express error handling
+app.use((req, res, next) => {
+  setImmediate(() => {
+      next(new Error('Something went wrong'));
+  });
+});
+
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
+});
 
 
 /*

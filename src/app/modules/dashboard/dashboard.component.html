@@ -1,1 +1,50 @@
-<p>dashboard works!</p>
+<div>
+    <mat-card fxFlex="fxFlex">
+        <div>
+            Welcome to the dashboard! This is your personalized dashboard based on your role in the company! <br>
+        </div>
+    </mat-card>
+</div>
+
+<br>
+
+<mat-divider></mat-divider>
+
+<br>
+
+<div>
+    <mat-card fxFlex="fxFlex">
+        <div>
+            In this card, I will display this user's details:
+        </div>
+
+        <br>
+
+        <h3>User profile</h3>
+        <ul>
+            <li>Username: <b>{{username}}</b></li>
+        </ul>
+        <ul>
+            <li>Role: 
+                <b>
+                    <span ngSwitch={{role}} >
+                        <span *ngSwitchCase="1">Admin</span>
+                        <span *ngSwitchCase="2">Associate</span>
+                        <span *ngSwitchCase="3">Supervisor</span>
+                        <span *ngSwitchDefault>None</span>
+                    </span>
+                </b>
+            </li>
+        </ul>
+    </mat-card>
+</div>
+
+<!-- <div>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4]">
+            <mat-card fxFlex="fxFlex">
+                <app-widget-card></app-widget-card>
+            </mat-card>
+        </div>
+    </div>
+</div> -->

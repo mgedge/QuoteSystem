@@ -1,4 +1,7 @@
-const express = require('express');
+/** This file defines a user schema from the users table in the database
+ * 
+ */
+
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('quote', 'Matt', 'Matt', {
     host: 'localhost',
@@ -13,7 +16,7 @@ const sequelize = new Sequelize('quote', 'Matt', 'Matt', {
 
 });
 
-module.exports = sequelize.define('User', {
+let userSchema = sequelize.define('User', {
     userID: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -28,6 +31,47 @@ module.exports = sequelize.define('User', {
     userPassword: {
         type: Sequelize.STRING(35),
         allowNull: false
+    }
+});
+
+module.exports = userSchema;
+
+/*
+module.exports = sequelize.define('Roles', {
+    role_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    role_title: {
+        type: Sequelize.STRING(35),
+        allowNull: false
+    }
+});
+
+module.exports = sequelize.define('User_roles', {
+    user_role_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    user_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+            model: User,
+            key: 'userID'
+        }
+    },
+    role_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+                references: {
+            model: User,
+            key: 'userID'
+        }
     }
 });
 

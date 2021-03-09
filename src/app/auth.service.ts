@@ -1,21 +1,127 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators'
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
+  //endpoints
+  private endpoint = "http://localhost:3000/api"
   private _registerUrl = "http://localhost:3000/api/register";
   private _loginUrl = "http://localhost:3000/api/login";
+  private _userUrl = "http://localhost:3000/api/user"
 
-  constructor(private http: HttpClient) { }
+  currentUser: number = 0;
+
+
+  constructor(private http: HttpClient, public _router: Router) { }
 
   registerUser(user: any) {
-    return this.http.post<any>(this._registerUrl, user);
+    let api = this._registerUrl;
+    return this.http.post<any>(api, user)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   loginUser(user: any) {
-    return this.http.post<any>(this._loginUrl, user);
+    return this.http.post<any>(this._loginUrl, user)
+      .subscribe((res: any) => {
+        localStorage.setItem('token', res.token)
+        localStorage.setItem('currentUser', res.msg.userID)
+
+        console.log("auth.service - CURRENT USER: " + res.msg.userID)
+        this.currentUser = res.msg.userID
+
+        //console.log(this.currentUser)
+
+        // this.getUserProfile(res._id).subscribe((res) => {
+        //   this.currentUser = res;
+        //   this.router.navigate(['/#'])
+        // })
+
+        //let role: any;
+
+        console.log("auth.service - Entering getUserRole: " + res.msg.userID)
+        this.getUserRole(res.msg.userID).subscribe(
+          (res: any) => {
+            console.log("auth.service - CURRENT ROLE: " + res.msg.role_id)
+            //role = res.msg.role_id;
+            localStorage.setItem('role', res.msg.role_id)
+        },
+          (error) => {
+            console.log(error)
+        });
+
+        this._router.navigate(['/#'])
+      });
+  }
+
+  logoutUser() {
+    console.log("Logging out from auth.service.ts")
+    let authToken = localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('role')
+
+    if(authToken == null) {
+      this._router.navigate(['login']);
+    }
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  public get loggedIn(): boolean {
+    let authToken = localStorage.getItem('token');
+    return (authToken !== null) ? true : false;
+    //return !!localStorage.getItem('token');
+  }
+
+  public getUserRole(id: any){  
+    console.log("auth.service - entered getUserRole")
+    let api = `${this.endpoint}/user/${id}`;
+
+    console.log("Performing api: " + api)
+
+    let resp = this.http.get(api);
+
+    console.log("Reponse received: " + resp);
+    console.log(resp);
+
+    return resp;
+      
+   //   , { headers: this.headers })
+    /*
+    .pipe(
+      map((res: any) => {
+        console.log(res)
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+    */
+  }
+
+  public getCurrentUser() {
+    return this.currentUser;
+  }
+
+  handleError(error: HttpErrorResponse) {
+    let msg = '';
+
+    if(error.error instanceof ErrorEvent) {
+      msg = error.error.message;
+    }
+    else {
+      msg = `Error code: ${error.status}\nMessage: ${error.message}`;
+    }
+
+    return throwError(msg);
   }
 }

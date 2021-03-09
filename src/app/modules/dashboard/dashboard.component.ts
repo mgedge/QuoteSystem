@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  username: String = "Shiba Inu";
+  role =  Number(localStorage.getItem('role'))
 
   constructor() { }
 

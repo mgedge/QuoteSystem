@@ -7,6 +7,26 @@
 
         <span>QuoteSystem</span>
 
+        <div fxFlex fxLayout="row">
+            <ul fxLayout="row">
+                <li *ngIf="isAdmin">
+                    <button mat-button routerLink="admin">
+                        Admin
+                    </button>
+                </li>
+                <li *ngIf="isSales">
+                    <button mat-button routerLink="associate">
+                        Sales
+                    </button>
+                </li>
+                <li *ngIf="isSupervisor" routerLink="supervisor">
+                    <button mat-button>
+                        Supervisor
+                    </button>
+                </li>
+            </ul>
+        </div>
+
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
@@ -20,17 +40,18 @@
                     </button>
                 </li>
                 <li>
-                    <button mat-button [matMenuTriggerFor]="menu">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>person_outline</mat-icon>
                     </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item routerLinkActive="list-item-active" routerLink="/">
-                            <mat-icon>exit_to_app</mat-icon>
-                            Sign out
-                        </button>
-                    </mat-menu>
-
                 </li>
+
+                <!-- Submenu for person outline-->
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLinkActive="list-item-active" (click)="logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        Sign out
+                    </button>
+                </mat-menu>
             </ul>
         </div>
     </mat-toolbar-row>
