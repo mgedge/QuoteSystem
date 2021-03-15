@@ -1,7 +1,8 @@
 <div>
     <mat-card fxFlex="fxFlex">
         <div>
-            Welcome to the dashboard! This is your personalized dashboard based on your role in the company! <br>
+            <div>Welcome to the dashboard! This is your personalized dashboard based on your role in the company!</div> <br>
+            <div *ngIf="!hasRole()">Since you do not have a role, an administrator will assign your role shortly!</div>
         </div>
     </mat-card>
 </div>

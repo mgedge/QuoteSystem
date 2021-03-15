@@ -35,12 +35,12 @@ export class AuthGuard implements CanActivate {
             let role = this._auth.getCurrentRole();
 
             //let userID = localStorage.getItem('currentUser');
-            //let routeUserID = this._activatedRoute.snapshot.paramMap.get('user_id');
+            let routeUserID = this._activatedRoute.snapshot.paramMap.get('userID');
             let userID = this._auth.getCurrentID();
 
             let roleVar = Number(role);
 
-            //console.log("activate:: " + routeUserID + "  ::  " + userID);
+            console.log("activate:: " + routeUserID + "  ::  " + userID);
 
             //console.log(route.data)
 

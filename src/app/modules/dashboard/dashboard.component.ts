@@ -43,4 +43,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  hasRole(): boolean {
+    if(this._auth.currentUserRole !== 0) {
+      return true;
+    }
+
+    return false;
+  }
 }
