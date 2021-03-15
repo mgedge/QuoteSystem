@@ -10,19 +10,24 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title = 'Quote System';
-  currentUser: any;
+  //currentUser: any;
   
   constructor(
     private http: HttpClient,
     private router: Router,
     private _auth: AuthService
   ) {
-    this.currentUser = this._auth.currentUser //Does this work?
+    //this.currentUser = this._auth.currentUser //Does this work?
+  }
+
+  logout() {
+    this._auth.logoutUser();
   }
 
   get isAdmin(): boolean { 
     //Retrieve the user from storage
-    let role = localStorage.getItem('role');
+    //let role = localStorage.getItem('role');
+    let role = this._auth.getCurrentRole();
 
     //Convert the string to a number 
     let roleVar = Number(role);
@@ -43,7 +48,8 @@ export class AppComponent {
 
   get isSales(): boolean {
     //Retrieve the user from storage
-    let role = localStorage.getItem('role');
+    //let role = localStorage.getItem('role');
+    let role = this._auth.getCurrentRole();
 
     //Convert the string to a number 
     let roleVar = Number(role);
@@ -64,7 +70,8 @@ export class AppComponent {
 
   get isSupervisor(): boolean {
     //Retrieve the user from storage
-    let role = localStorage.getItem('role');
+    //let role = localStorage.getItem('role');
+    let role = this._auth.getCurrentRole();
 
     //Convert the string to a number 
     let roleVar = Number(role);
@@ -82,8 +89,4 @@ export class AppComponent {
     //Assume access is denied
     return false;  
   }
-
-  // get isAdmin() {
-  //   return true;
-  // }
 }

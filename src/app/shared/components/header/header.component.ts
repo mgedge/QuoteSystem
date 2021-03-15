@@ -11,14 +11,22 @@ export class HeaderComponent implements OnInit {
 
   @Output() _toggleSideBar: EventEmitter<any> = new EventEmitter()
 
-  currentUser: any;
+  currentUser: any = {};
 
   constructor(
     private _auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
   ) { 
-    this.currentUser = this._auth.getCurrentUser()
+    let id = this.route.snapshot.paramMap.get('userID');
+    //let id = localStorage.getItem('currentUser');
+    this._auth.getCurrentUser(id).subscribe((res: any) => {
+      //Set the user to the returned user profile
+      this.currentUser = res.msg;
+
+      //Next retrieve the user's role
+      this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => { this.currentUser.role = res.msg.role_id });
+    })  
   }
 
   ngOnInit(): void {
@@ -34,7 +42,10 @@ export class HeaderComponent implements OnInit {
 
   get isAdmin(): boolean { 
     //Retrieve the user from storage
-    let role = localStorage.getItem('role');
+    //let role = localStorage.getItem('role');
+    let role = this.currentUser.role;
+
+    //console.log("header.ts - isAdmin : " + role);
 
     //Convert the string to a number 
     let roleVar = Number(role);
@@ -46,6 +57,7 @@ export class HeaderComponent implements OnInit {
     //Check the role
     if(this._auth.loggedIn) {
       let hasRole = (roleVar == 1);
+      //console.log("roleVar: " + roleVar + " " + hasRole)
       return hasRole;
     }
 
@@ -55,7 +67,8 @@ export class HeaderComponent implements OnInit {
 
   get isSales(): boolean {
     //Retrieve the user from storage
-    let role = localStorage.getItem('role');
+    //let role = localStorage.getItem('role');
+    let role = this.currentUser.role;
 
     //Convert the string to a number 
     let roleVar = Number(role);
@@ -76,7 +89,8 @@ export class HeaderComponent implements OnInit {
 
   get isSupervisor(): boolean {
     //Retrieve the user from storage
-    let role = localStorage.getItem('role');
+    let role = this.currentUser.role;
+    //let role = localStorage.getItem('role');
 
     //Convert the string to a number 
     let roleVar = Number(role);

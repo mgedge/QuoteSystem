@@ -6,7 +6,7 @@ const cors = require('cors');
 const PORT = 3000;
 const api = require('./routes/api');
 
-
+//Setup the express server
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -14,9 +14,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 
-
+//Establish the api endpoint
 app.use('/api', api);
 
+//Connect to the server
 app.get('/', function(req, res) {
     console.log("Connected at port " + PORT)
     res.send("Hello from server")
@@ -27,7 +28,7 @@ app.listen(PORT, function() {
     console.log('Running on localhost:' + PORT)
 })
 
-// Express error handling
+//Express error handling
 app.use((req, res, next) => {
   setImmediate(() => {
       next(new Error('Something went wrong'));

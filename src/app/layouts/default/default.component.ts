@@ -17,10 +17,11 @@ export class DefaultComponent implements OnInit {
     private router: Router,
     private _auth: AuthService
   ) { 
-    this.currentUser = this._auth.getCurrentUser
+    this.currentUser = this._auth.getCurrentID
   }
 
   ngOnInit(): void {
+
   }
 
   sideBarToggler() {

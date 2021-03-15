@@ -14,20 +14,17 @@
 
 <div>
     <mat-card fxFlex="fxFlex">
-        <div>
-            In this card, I will display this user's details:
-        </div>
-
-        <br>
-
         <h3>User profile</h3>
         <ul>
-            <li>Username: <b>{{username}}</b></li>
+            <li>Username: <b>{{this.currentUser.userName}}</b></li>
+        </ul>
+        <ul>
+            <li>Name: <b>{{this.currentUser.firstname}} {{this.currentUser.lastname}}</b></li>
         </ul>
         <ul>
             <li>Role: 
                 <b>
-                    <span ngSwitch={{role}} >
+                    <span ngSwitch={{this.currentUser.role}} >
                         <span *ngSwitchCase="1">Admin</span>
                         <span *ngSwitchCase="2">Associate</span>
                         <span *ngSwitchCase="3">Supervisor</span>

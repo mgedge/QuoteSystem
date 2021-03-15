@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
     public formBuilder: FormBuilder
   ) { 
     this.registerForm = this.formBuilder.group({
+      firstname: [''], 
+      lastname: [''],
       username: [''],
       password: ['']
     })
@@ -36,7 +38,7 @@ export class RegisterComponent implements OnInit {
           //Registration complete
           if(res.result) {
             this.registerForm.reset()
-            this._router.navigate(['/#'])
+            this._router.navigate(['/login'])
           }
           //localStorage.setItem('token', res.token)
         },

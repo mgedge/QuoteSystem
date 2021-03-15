@@ -22,7 +22,7 @@ var connection = mysql.createConnection({
 //Connect to the local db server
 connection.connect(function(err) {
     if(err) {
-        console.log(err)
+        console.log(err);
     }
     else {
         console.log("Connected");
@@ -35,6 +35,31 @@ connection.connect(function(err) {
     // });
 });
 
+//Verify Authentication
+function verifyToken(req, res, next) {
+    //Check auth in header
+    if(!req.headers.authorization) {
+        return res.status(401).send('Unauthorized request');
+    }
+
+    let token = req.headers.authorization.split(' ')[1];
+
+    //Check token 
+    if(token === 'null') {
+        return res.status(401).send('Unauthorized request');
+    }
+
+    let payload = jwt.verify(token, 'secretKey');
+
+    //Invalid token
+    if(!payload) {
+        return res.status(401).send('Unauthorized request')
+    }
+
+    req.userID = playload.subject;
+    next();
+}
+
 //Get the admin ui
 router.get('/admin', (req, res) => {
     res.send('From API');
@@ -46,12 +71,13 @@ router.get('/admin', (req, res) => {
 router.post('/register', (req, res, next) => {
     //Hash the password
     bcrypt.hash(req.body.userPassword, 10).then((hash) => {
-        //Add the user to db using the hashed password
+        //Create the user using the hashed password
         const user = new User({
             userName: req.body.userName,
             userPassword: hash
         });
 
+        //Save the user to the database
         user.save().then((response) => {
             res.status(201).json({
                 message: "Registration successful",
@@ -63,61 +89,6 @@ router.post('/register', (req, res, next) => {
             });
         });
     });
-
-
-    /*
-    let userData = req.body;
-    let user = new User(userData);
-    
-    user.save((err, registeredUser) => {
-        if(err) {
-            console.log("ERROR: " + err);
-        }
-        else {
-            let payload = { subject: registeredUser._id }
-            let token = jwt.sign(payload, 'secretKey');
-            res.status(200).send({token});
-        }
-    });
-
-    /*
-
-    const userAccount = User.findOne({userName: userData.userName}, (err, user));
-    if(userAccount == null) {
-        //res.status(401).send('Invalid username!');
-    }
-    else {
-        user.save((err, registeredUser) => {
-            if(err) {
-                console.log("ERROR: " + err);
-            }
-            else {
-                res.status(200).send(registeredUser);
-            }
-        });
-    }
-
-    /*
-    User.findOne({userName: userData.username}, (err, user) => {
-        if(err) {
-            console.log(err)
-        }
-        else {
-            if(!user) {
-                res.status(401).send('Invalid username');
-            }
-            else {
-                if(user.password !== userData.password) {
-                    res.status(401).send('Invalid password');
-                }
-                else {
-                    res.status(200).send(user);
-                }
-            }
-        }
-    });
-    */
-
 });
 
 //When user posts login button, verify credentials
@@ -168,72 +139,20 @@ router.post('/login', (req, res) => {
             message: "Something went wrong with authentication"
         })
     })
-
-
-    /*
-    let userData = req.body;
-    let role;
-
-    console.log('Enter login')
-
-    User.findOne({ where: { userName: userData.userName } }).then((user) => {
-        console.log('Enter find')
-        if (!user) {
-            console.log('Invalid username');
-            res.status(401).send('Invalid username!');
-        }
-        else {
-            if(user.userPassword != userData.userPassword) {
-                console.log('Invalid password');
-                res.status(401).send('Invalid password!');
-            }
-            else {
-                console.log('Access granted');
-                let payload = { subject: user._id }
-                let token = jwt.sign(payload, 'secretKey');
-
-                res.status(200).send({token})
-
-                //Replace this with GraphQL to remove the query statemnt
-                // connection.query("SELECT `role_id` FROM `user_roles` WHERE `user_id`=" + user.userID, function(err, result, fields) {
-                //     if(err) console.log(err)
-                    
-                //     //Query returns a json object
-                //     var json = JSON.parse(JSON.stringify(result));
-
-                //     //Save the role to storage
-                //     localStorage.setItem('role', json)
-                //     console.log(json[0].role_id)
-                // });
-
-                // UserRole.findAll({ where: {role_id: user.userID} }).then((roles) => {
-                //     role = roles.role_id
-
-                //     console.log('Role: ' + role)
-
-                //     //!!localStorage.setItem('role', role)
-                //     res.send({role})
-                // });
-
-            }
-        }
-    });
-
-    */
 });
 
 //Get the admin ui
-router.get('/admin', (req, res) => {
+router.get('/admin', verifyToken, (req, res) => {
     res.send('From API');
 })
 
 //Get the sales ui
-router.get('/sales', (req, res) => {
+router.get('/sales', verifyToken, (req, res) => {
     res.send('From API');
 })
 
 //Get the supervisor ui
-router.get('/super', (req, res) => {
+router.get('/super', verifyToken, (req, res) => {
     res.send('From API');
 })
 
@@ -251,9 +170,9 @@ router.route('/').get((req, res) => {
 
 //Get the user info from the user_role table
 // @returns json object of the row where passed id is requested
-router.route('/user/:id').get((req, res, next) => {
-    UserRole.findOne({ where: { user_id: req.params.id} }).then((user) => {
-        console.log("The user role is: " + user.role_id)
+router.route('/user/:id').get((req, res) => {
+    User.findOne({ where: { userID: req.params.id} }).then((user) => {
+        //console.log("The user role is: " + user.role_id)
 
         res.status(200).json({
             msg: user
@@ -261,28 +180,20 @@ router.route('/user/:id').get((req, res, next) => {
 
         //return user.role_id;
     });
-
-
-
-    // UserRole.findOne({ where: { user_id: req.params.id} }, (err, data) => {
-    //     if(err) {
-    //         console.log("'/user/id' failed to find the requested user")
-    //         return next(err);
-    //     }
-    //     else {
-    //         console.log("Item foudn")
-
-    //         res.status(200).json({
-    //             msg: data
-    //         })
-    //     }
-    // });
 })
 
-// router.route('/user/:id/role').get((req, res, next) => {
-//     User
-// })
+//Get the user role info from the user_role table
+// @returns json object of the row where passed id is requested
+router.route('/user/role/:id').get((req, res) => {
+    UserRole.findOne({ where: { user_id: req.params.id} }).then((user) => {
+        //console.log("The user role is: " + user.role_id)
 
+        res.status(200).json({
+            msg: user
+        })
 
+        //return user.role_id;
+    });
+})
 
 module.exports = router;
