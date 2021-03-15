@@ -29,12 +29,19 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    const loginData = this.loginForm.value;
+    //const loginData = this.loginForm.value;
 
     // if(this.loginForm.invalid) {
     //   return;
     // }
 
-    this._auth.loginUser(this.loginUserData);
+    this._auth.loginUser(this.loginUserData)
+    // .subscribe(
+    //   res => {
+    //     localStorage.setItem('token', res.token)
+    //     this._router.navigate(['/#'])
+    //   }, 
+    //   err => console.log(err)
+    // );
   }
 }

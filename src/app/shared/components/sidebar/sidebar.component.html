@@ -1,9 +1,16 @@
 <mat-nav-list>
     <div class="profile-card">
         <div class="header">
-            <h2>Shiba Inu</h2>
-            <h4>{{ role }}</h4>
-            <img src="https://thehappypuppysite.com/wp-content/uploads/2018/06/Shiba-Inu-Wonderful-Watchdog-or-Family-Pet_-HP-long-1024x488.jpg" alt="">
+            <h2>{{this.currentUser.firstname}} {{this.currentUser.lastname}}</h2>
+            <h4>                    
+                <span ngSwitch={{this.currentUser.role}} >
+                    <span *ngSwitchCase="1">Admin</span>
+                    <span *ngSwitchCase="2">Associate</span>
+                    <span *ngSwitchCase="3">Supervisor</span>
+                <span *ngSwitchDefault>No role</span>
+                </span>
+            </h4>
+            <img src="/assets/images/{{this.currentUser.image}}.jpg" alt="" onerror="this.onerror=null; this.src='/assets/images/default.jpg'">
         </div>
     </div>
 

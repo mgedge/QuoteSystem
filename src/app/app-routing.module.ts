@@ -11,60 +11,19 @@ import { AssociateComponent } from './modules/associate/associate.component';
 import { SupervisorComponent } from './modules/supervisor/supervisor.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
-  },
-  {
-    path: '#',
-    component: DefaultComponent,
-    canActivate: [AuthGuard],
-    children: 
-    [
-      {
-        path: '',
-        component: DashboardComponent
-      },
-      {
-        path: 'posts',
-        component: PostsComponent
-      },
-      {
-        path: 'admin',
-        component: AdminComponent,
-        canActivate: [AuthGuard],
-        data: 
-        { 
-          role: [1]
-        }
-      },
-      {
-        path: 'associate',
-        component: AssociateComponent,
-        canActivate: [AuthGuard],
-        data: 
-        { 
-          role: [2]
-        }
-      },
-      {
-        path: 'supervisor',
-        component: SupervisorComponent,
-        canActivate: [AuthGuard],
-        data: 
-        { 
-          role: [3]
-        }
-      },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '#/:userID', component: DefaultComponent, canActivate: [AuthGuard],
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'posts', component: PostsComponent },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+        data: { role: [1] } },
+      { path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
+        data: { role: [2] } },
+      { path: 'supervisor', component: SupervisorComponent, canActivate: [AuthGuard],
+        data: { role: [3] } },
     ]
   }
 ];

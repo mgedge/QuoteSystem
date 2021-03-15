@@ -31,6 +31,21 @@ let userSchema = sequelize.define('User', {
     userPassword: {
         type: Sequelize.STRING(35),
         allowNull: false
+    },
+    firstname: {
+        type: Sequelize.STRING(35),
+        unique: false,
+        allowNull: false
+    },
+    lastname: {
+        type: Sequelize.STRING(35),
+        unique: false,
+        allowNull: false
+    },
+    image: {
+        type: Sequelize.STRING(128),
+        unique: false,
+        allowNull: true
     }
 });
 

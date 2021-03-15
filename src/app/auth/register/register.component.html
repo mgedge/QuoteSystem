@@ -7,6 +7,18 @@
             <div class="card-body">
                 <form class="form" [formGroup]="registerForm">
                     <div class="form-group">
+                        <label for="">First name</label>
+                        <input id="firstname" formControlName="firstname" [(ngModel)]="registerUserData.firstname"  name="firstname" type="text" class="form-control rounded-0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Last name</label>
+                        <input id="lastname" formControlName="lastname" [(ngModel)]="registerUserData.lastname"  name="lastname" type="text" class="form-control rounded-0" required>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
                         <label for="">Username</label>
                         <input id="username" formControlName="username" [(ngModel)]="registerUserData.userName"  name="username" type="text" class="form-control rounded-0" required>
                     </div>
