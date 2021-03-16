@@ -1,18 +1,16 @@
+<!-- Welcome card -->
 <div>
     <mat-card fxFlex="fxFlex">
         <div>
-            <div>Welcome to the dashboard! This is your personalized dashboard based on your role in the company!</div> <br>
-            <div *ngIf="!hasRole()">Since you do not have a role, an administrator will assign your role shortly!</div>
+            <div><b>Welcome to the dashboard!</b><br> This is your personalized dashboard based on your role in the company! Here your profile is displayed.</div>
+            <div *ngIf="!hasRole()"><br>Since you do not have a role, an administrator will assign your role shortly!</div>
         </div>
     </mat-card>
 </div>
 
 <br>
 
-<mat-divider></mat-divider>
-
-<br>
-
+<!-- User profile Card-->
 <div>
     <mat-card fxFlex="fxFlex">
         <h3>User profile</h3>
@@ -29,11 +27,26 @@
                         <span *ngSwitchCase="1">Admin</span>
                         <span *ngSwitchCase="2">Associate</span>
                         <span *ngSwitchCase="3">Supervisor</span>
+                        <span *ngSwitchCase="4">Super</span>
                         <span *ngSwitchDefault>None</span>
                     </span>
                 </b>
             </li>
         </ul>
+    </mat-card>
+</div>
+
+<!-- <mat-divider></mat-divider><br>   -->
+<br>
+
+
+
+<!-- Super user -->
+<div *ngIf="hasRoleID(4)">
+    <mat-card fxFlex="fxFlex">
+        <div>
+            This is for super administrator
+        </div>
     </mat-card>
 </div>
 

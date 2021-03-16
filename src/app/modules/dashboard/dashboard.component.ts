@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DefaultComponent } from 'src/app/layouts/default/default.component';
 import { AuthService } from './../../auth.service'
 import { currentUser } from './../../currentUser'
 
@@ -9,43 +10,67 @@ import { currentUser } from './../../currentUser'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  // currentUser: Object = {
-  // };
+  currentUser: any = {
+    image: 'default'
+  };
 
-  currentUser: any = {};
-
-  // user: any = {
-  //   userID: null, 
-  //   username: '',
-  //   firstname: '', 
-  //   lastname: ''
-  // };
-  //myUser: Object = {};
-  //username: String = "Shiba Inu";
-  //role =  Number(localStorage.getItem('role'))
-
-  //role = Number(this._auth.getCurrentRole());
 
   constructor(        
       private _auth: AuthService,
       private actRoute: ActivatedRoute,
+      private _router: Router,
+      private _default: DefaultComponent,
     ) { 
-      let id = this.actRoute.snapshot.paramMap.get('userID');
-      //let id = localStorage.getItem('currentUser');
-      this._auth.getCurrentUser(id).subscribe((res: any) => {
-        //Set the user to the returned user profile
-        this.currentUser = res.msg;
+      // this.currentUser = _default.currentUser;
+      // console.log(this.currentUser)
+      // console.log(_default.currentUser);
 
-        //Next retrieve the user's role
-        this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => { this.currentUser.role = res.msg.role_id });
-      })
+      //First get the userID from the token
+      this._auth.getUser().subscribe((res: any) => {
+        this.currentUser.userID = res.msg;
+
+        console.log("API CALL:")
+        console.log(res.msg)
+
+        console.log("USER ID:")
+        console.log(this.currentUser.userID)
+
+        //Retrieve the id from the url
+        let id = this.actRoute.snapshot.paramMap.get('userID');
+        let userID = Number(localStorage.getItem('currentUser'));
+
+        //Authenticate the url
+        if( Number(id) !== Number(localStorage.getItem('currentUser')) ) {
+          this._auth.logoutUser();
+          this._router.navigate([`/login`])
+        }
+
+        //Retrieve the current user's profile
+        this._auth.getCurrentUser(id).subscribe((res: any) => {
+          //Set the user to the returned user profile
+          this.currentUser = res.msg;
+
+          //Next retrieve the user's role
+          this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => { 
+            this.currentUser.role = res.msg.role_id 
+          });
+        });
+      });
     }
 
   ngOnInit(): void {
   }
 
   hasRole(): boolean {
-    if(this._auth.currentUserRole !== 0) {
+    if(Number(this.currentUser.role) !== 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  hasRoleID(role: number): boolean {
+    if(Number(this.currentUser.role) === Number(role)) {
       return true;
     }
 

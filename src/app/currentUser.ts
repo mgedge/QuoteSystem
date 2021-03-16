@@ -3,6 +3,6 @@ export interface currentUser {
     username: string;
     firstname: string;
     lastname: string;
-    role?: number;
+    role?: Array<string>;
     image?: string;
 }

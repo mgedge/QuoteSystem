@@ -143,6 +143,10 @@ router.post('/login', (req, res) => {
     })
 });
 
+router.get('/#', verifyToken, (req, res) => {
+    res.sendStatus(200);
+})
+
 //Get the admin ui
 router.get('/admin', verifyToken, (req, res) => {
     res.send('From API');
@@ -167,6 +171,21 @@ router.route('/').get((req, res) => {
         else {
             res.status(200).json(response)
         }
+    })
+})
+
+router.get('/user', (req, res) => {
+    let token = req.headers.authorization.split(' ')[1];
+    
+    let decode = jwt.verify(token, 'secretKey');
+    console.log(decode)
+
+    let userID = decode.userID;
+
+    console.log(userID)
+
+    res.status(200).json({
+        msg: userID
     })
 })
 

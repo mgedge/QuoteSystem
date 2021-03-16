@@ -39,8 +39,6 @@ export class AuthService {
         localStorage.setItem('currentUser', res.msg.userID)
 
         this.currentUser = res;
-
-        console.log("auth.service - CURRENT USER: " + res.msg.userID)
         this.currentUserID = res.msg.userID
 
         //console.log(this.currentUser)
@@ -52,13 +50,9 @@ export class AuthService {
 
         //let role: any;
 
-        console.log("auth.service - Entering getUserRole: " + res.msg.userID)
         this.getUserRole(res.msg.userID).subscribe(
           (res: any) => {
-            console.log("auth.service - CURRENT ROLE: " + res.msg.role_id)
-            //role = res.msg.role_id;
             this.currentUserRole = res.msg.role_id;
-            //localStorage.setItem('role', res.msg.role_id)
         },
           (error) => {
             console.log(error)
@@ -69,7 +63,6 @@ export class AuthService {
   }
 
   logoutUser() {
-    console.log("Logging out from auth.service.ts")
     let authToken = localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
     localStorage.removeItem('role')
@@ -129,6 +122,17 @@ export class AuthService {
 
   public getCurrentUser(id: any): Observable<any> {
     let api = `${this.endpoint}/user/${id}`;
+
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  public getUser(): Observable<any> {
+    let api = `${this.endpoint}/user`;
 
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res: any) => {

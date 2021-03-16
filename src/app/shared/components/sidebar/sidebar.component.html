@@ -7,10 +7,11 @@
                     <span *ngSwitchCase="1">Admin</span>
                     <span *ngSwitchCase="2">Associate</span>
                     <span *ngSwitchCase="3">Supervisor</span>
+                    <span *ngSwitchCase="4">Super</span>
                 <span *ngSwitchDefault>No role</span>
                 </span>
             </h4>
-            <img src="/assets/images/{{this.currentUser.image}}.jpg" alt="" onerror="this.onerror=null; this.src='/assets/images/default.png'">
+            <img src="/assets/images/{{this.currentUser.image}}.jpg" alt="" onerror="this.onerror=null; this.src='/assets/images/default.jpg'">
         </div>
     </div>
 
