@@ -1,6 +1,6 @@
 import { RowOutlet } from '@angular/cdk/table';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
@@ -13,18 +13,25 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private _auth: AuthService,
-    //private router: Router,
+    private _router: Router,
     private route: ActivatedRoute,
   ) { 
-    let id = this.route.snapshot.paramMap.get('userID');
+      //First get the userID from the token
+      this._auth.getUser().subscribe((res: any) => {
+        this.currentUser.userID = res.msg;
 
-    this._auth.getCurrentUser(id).subscribe((res: any) => {
-      //Set the user to the returned user profile
-      this.currentUser = res.msg;
+        //Retrieve the current user's profile
+        this._auth.getCurrentUser(this.currentUser.userID).subscribe((res: any) => {
+          //Set the user to the returned user profile
+          this.currentUser = res.msg;
 
-      //Next retrieve the user's role
-      this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => { this.currentUser.role = res.msg.role_id });
-    })  
+          //Next retrieve the user's role
+          this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => { 
+            if(res.msg)
+              this.currentUser.role = res.msg.role_id 
+          });
+        });
+      });
   }
 
   ngOnInit(): void {

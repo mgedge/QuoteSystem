@@ -14,55 +14,35 @@ export class DashboardComponent implements OnInit {
     image: 'default'
   };
 
+  constructor(
+    private _auth: AuthService,
+    private actRoute: ActivatedRoute,
+    private _router: Router,
+    private _default: DefaultComponent,
+  ) {
+    //First get the userID from the token
+    this._auth.getUser().subscribe((res: any) => {
+      this.currentUser.userID = res.msg;
 
-  constructor(        
-      private _auth: AuthService,
-      private actRoute: ActivatedRoute,
-      private _router: Router,
-      private _default: DefaultComponent,
-    ) { 
-      // this.currentUser = _default.currentUser;
-      // console.log(this.currentUser)
-      // console.log(_default.currentUser);
+      //Retrieve the current user's profile
+      this._auth.getCurrentUser(this.currentUser.userID).subscribe((res: any) => {
+        //Set the user to the returned user profile
+        this.currentUser = res.msg;
 
-      //First get the userID from the token
-      this._auth.getUser().subscribe((res: any) => {
-        this.currentUser.userID = res.msg;
-
-        console.log("API CALL:")
-        console.log(res.msg)
-
-        console.log("USER ID:")
-        console.log(this.currentUser.userID)
-
-        //Retrieve the id from the url
-        let id = this.actRoute.snapshot.paramMap.get('userID');
-        let userID = Number(localStorage.getItem('currentUser'));
-
-        //Authenticate the url
-        if( Number(id) !== Number(localStorage.getItem('currentUser')) ) {
-          this._auth.logoutUser();
-          this._router.navigate([`/login`])
-        }
-
-        //Retrieve the current user's profile
-        this._auth.getCurrentUser(id).subscribe((res: any) => {
-          //Set the user to the returned user profile
-          this.currentUser = res.msg;
-
-          //Next retrieve the user's role
-          this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => { 
-            this.currentUser.role = res.msg.role_id 
-          });
+        //Next retrieve the user's role
+        this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => {
+          if (res.msg)
+            this.currentUser.role = res.msg.role_id
         });
       });
-    }
+    });
+  }
 
   ngOnInit(): void {
   }
 
   hasRole(): boolean {
-    if(Number(this.currentUser.role) !== 0) {
+    if (Number(this.currentUser.role) !== 0) {
       return true;
     }
 
@@ -70,7 +50,7 @@ export class DashboardComponent implements OnInit {
   }
 
   hasRoleID(role: number): boolean {
-    if(Number(this.currentUser.role) === Number(role)) {
+    if (Number(this.currentUser.role) === Number(role)) {
       return true;
     }
 

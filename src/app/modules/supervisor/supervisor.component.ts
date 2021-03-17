@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./supervisor.component.css']
 })
 export class SupervisorComponent implements OnInit {
+  stringVar = 'Hello people'
+  database: any = {};
 
   constructor() { }
 
