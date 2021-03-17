@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators'
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,6 @@ export class AuthService {
 
   //endpoints
   private endpoint = "http://localhost:3000/api"
-  // private _registerUrl = "http://localhost:3000/api/register";
-  // private _loginUrl = "http://localhost:3000/api/login";
-  // private _userUrl = "http://localhost:3000/api/user"
 
   currentUser = {};
   currentUserID: number = 0;
@@ -25,7 +22,6 @@ export class AuthService {
 
   registerUser(user: any) {
     let api = `${this.endpoint}/register`
-    //let api = this._registerUrl;
     return this.http.post<any>(api, user)
       .pipe(
         catchError(this.handleError)
@@ -36,19 +32,9 @@ export class AuthService {
     return this.http.post<any>(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('token', res.token)
-        localStorage.setItem('currentUser', res.msg.userID)
 
-        this.currentUser = res;
+        this.currentUser = res.msg;
         this.currentUserID = res.msg.userID
-
-        //console.log(this.currentUser)
-
-        // this.getUserProfile(res._id).subscribe((res) => {
-        //   this.currentUser = res;
-        //   this.router.navigate(['/#'])
-        // })
-
-        //let role: any;
 
         this.getUserRole(res.msg.userID).subscribe(
           (res: any) => {
@@ -58,14 +44,12 @@ export class AuthService {
             console.log(error)
         });
 
-        this._router.navigate([`/#/${this.currentUserID}`])
+        this._router.navigate([`/#`])
       });
   }
 
   logoutUser() {
     let authToken = localStorage.removeItem('token');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('role')
 
     if(authToken == null) {
       this._router.navigate(['login']);
@@ -79,41 +63,20 @@ export class AuthService {
   public get loggedIn(): boolean {
     let authToken = localStorage.getItem('token');
     return (authToken !== null) ? true : false;
-    //return !!localStorage.getItem('token');
   }
 
   public getUserRole(id: any){  
-    //console.log("auth.service - entered getUserRole")
     let api = `${this.endpoint}/user/role/${id}`;
-
-   //console.log("Performing api: " + api)
-
     let resp = this.http.get(api);
 
-    //console.log("Reponse received: " + resp);
-    //console.log(resp);
-
     return resp;
-      
-   //   , { headers: this.headers })
-    /*
-    .pipe(
-      map((res: any) => {
-        console.log(res)
-        return res || {}
-      }),
-      catchError(this.handleError)
-    )
-    */
   }
 
   public getCurrentUserRole(id: any): Observable<any> {
     let api = `${this.endpoint}/user/role/${id}`;
-    // var role = 0;
 
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res: any) => {
-        // role = res.msg.role;
         return res || {}
       }),
       catchError(this.handleError)

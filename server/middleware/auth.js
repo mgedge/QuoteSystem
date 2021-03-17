@@ -4,7 +4,12 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        jwt.verify(token, 'secretKey'); //bad practice...key should be environment variable
+        jwt.verify(token, 'secretKey', function(err, data) {
+          if(err) {
+            console.log("JWT Failure: " + err);
+            localStorage.removeItem('token');
+          }
+        }); //bad practice...key should be environment variable
         next();
     }
     catch (err) {
