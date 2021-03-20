@@ -3,16 +3,29 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const PORT = 3000;
+require('dotenv/config')
+
+const mongoose = require('mongoose');
+
+const PORT = process.env.PORT || 3000;
 const api = require('./routes/api');
 
 //Setup the express server
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//     extended: false
+// }));
 app.use(cors());
+
+
+const db = require('./database');
+const dbName = "quote";
+const collectionName = "users"
+
 
 //Establish the api endpoint
 app.use('/api', api);
@@ -22,6 +35,12 @@ app.get('/', function(req, res) {
     console.log("Connected at port " + PORT)
     res.send("Hello from server")
 })
+
+mongoose.connect(process.env.DB_CONNECTION, 
+  { useNewUrlParser: true, useUnifiedTopology: true }, () => 
+  console.log("Connected to database through server.js")
+)
+
 
 //Open connection
 app.listen(PORT, function() {
@@ -43,6 +62,12 @@ app.use(function (err, req, res, next) {
 
 
 /*
+***********************************
+* DEPRECATED MySQL IMPLEMENTATION *
+***********************************
+
+
+
 const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'Matt',

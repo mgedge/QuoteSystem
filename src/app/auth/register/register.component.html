@@ -20,12 +20,12 @@
 
                     <div class="form-group">
                         <label for="">Username</label>
-                        <input id="username" formControlName="username" [(ngModel)]="registerUserData.userName"  name="username" type="text" class="form-control rounded-0" required>
+                        <input id="username" formControlName="username" [(ngModel)]="registerUserData.username"  name="username" type="text" class="form-control rounded-0" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input id="password" formControlName="password" [(ngModel)]="registerUserData.userPassword" name="password" type="password" class="form-control rounded-0" required>
+                        <input id="password" formControlName="password" [(ngModel)]="registerUserData.password" name="password" type="password" class="form-control rounded-0" required>
                     </div>
                     <button (click)="registerUser()" type="button" class="btn btn-primary float-right">Register</button>
                 </form>

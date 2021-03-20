@@ -4,14 +4,14 @@
 
         <form [formGroup]="loginForm" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
             <mat-form-field>
-                <input matInput formControlName="username" placeholder="Username" id="username" [(ngModel)]="loginUserData.userName" type="text"  required>
+                <input matInput formControlName="username" placeholder="Username" id="username" [(ngModel)]="loginUserData.username" type="text"  required>
                 <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                     <div *ngIf="f.username.errors.required">Username is required</div>
                 </div> -->
             </mat-form-field>
     
             <mat-form-field>
-                <input matInput formControlName="password" placeholder="Password" id="password" [(ngModel)]="loginUserData.userPassword" type="password" required>
+                <input matInput formControlName="password" placeholder="Password" id="password" [(ngModel)]="loginUserData.password" type="password" required>
             </mat-form-field>
 
             <button mat-raised-button (click)="loginUser()" type="button" class="btn btn-success">Login</button>

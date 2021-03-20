@@ -9,17 +9,17 @@
 
         <div fxFlex fxLayout="row">
             <ul fxLayout="row">
-                <li *ngIf="isAdmin">
+                <li *ngIf="hasRoleID('Admin')">
                     <button mat-button routerLink="admin">
                         Admin
                     </button>
                 </li>
-                <li *ngIf="isSales">
+                <li *ngIf="hasRoleID('Associate')">
                     <button mat-button routerLink="associate">
                         Sales
                     </button>
                 </li>
-                <li *ngIf="isSupervisor" routerLink="supervisor">
+                <li *ngIf="hasRoleID('Supervisor')" routerLink="supervisor">
                     <button mat-button>
                         Supervisor
                     </button>

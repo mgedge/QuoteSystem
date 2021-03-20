@@ -15,12 +15,12 @@ export class AuthGuard implements CanActivate {
         //Retrieve the user from the database
         this._auth.getUser().subscribe((res: any) => {
             //Set the user to the returned user profile
-            this.currentUser = res.msg;
+            this.currentUser.userID = res.userID;
 
             //Next retrieve the user's role
             this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => {
-                if (res.msg)
-                    this.currentUser.role = res.msg.role_id
+                if (res.user)
+                    this.currentUser.role = res.user.roles[0].role_id
             });
         })
     }

@@ -8,8 +8,9 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   @Output() _toggleSideBar: EventEmitter<any> = new EventEmitter()
+
+  roles: any = [];
 
   currentUser: any = {};
 
@@ -20,18 +21,17 @@ export class HeaderComponent implements OnInit {
   ) {
     //First get the userID from the token
     this._auth.getUser().subscribe((res: any) => {
-      this.currentUser.userID = res.msg;
+      this.currentUser.userID = res.userID
 
       //Retrieve the current user's profile
       this._auth.getCurrentUser(this.currentUser.userID).subscribe((res: any) => {
         //Set the user to the returned user profile
-        this.currentUser = res.msg;
+        this.currentUser = res.user;
 
-        //Next retrieve the user's role
-        this._auth.getCurrentUserRole(this.currentUser.userID).subscribe((res: any) => {
-          if (res.msg)
-            this.currentUser.role = res.msg.role_id
-        });
+        //Next retrieve the user's roles
+        if (this.currentUser.roles.length > 0) {
+          this.populateRoles();
+        }
       });
     });
   }
@@ -45,6 +45,26 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this._auth.logoutUser();
+  }
+
+  populateRoles() {
+    for(var i = 0; i < this.currentUser.roles.length; i++) {
+      this.roles[i] = this.currentUser.roles[i].role_title;
+    }
+    console.log(this.roles)
+  }
+
+  hasRole(): boolean {
+    return (this.roles.length >= 1) ? true : false;
+  }
+
+  hasRoleID(role: any): boolean {
+    for(var i = 0; i < this.roles.length; i++) {
+      if(this.roles[i] === role)
+        return true;
+    }
+
+    return false;
   }
 
   get isAdmin(): boolean {

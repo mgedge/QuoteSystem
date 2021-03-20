@@ -1,3 +1,15 @@
+const mongoose = require('mongoose')
+
+const Schema = mongoose.Schema
+const user_roleSchema = new Schema({
+    user_id: Number,
+    role_id: Number
+})
+module.exports = mongoose.model('user_role', user_roleSchema, 'user_roles')
+
+
+/*
+
 const Sequelize = require('sequelize');
 const User = require('../models/user');
 const Role = require('../models/role');
@@ -39,3 +51,4 @@ module.exports = sequelize.define('User_role', {
         }
     }
 });
+*/

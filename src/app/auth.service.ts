@@ -33,16 +33,20 @@ export class AuthService {
       .subscribe((res: any) => {
         localStorage.setItem('token', res.token)
 
-        this.currentUser = res.msg;
-        this.currentUserID = res.msg.userID
+        console.log(res)
+        this.currentUser = res.user;
+        this.currentUserID = res.user._id;
 
-        this.getUserRole(res.msg.userID).subscribe(
-          (res: any) => {
-            this.currentUserRole = res.msg.role_id;
-        },
-          (error) => {
-            console.log(error)
-        });
+        //If there are any roles, set them
+        // if (res.user.roles) {
+        //   this.getUserRole(res.user._id).subscribe(
+        //     (result: any) => {
+        //       this.currentUserRole = result.user.roles[0].role_id;
+        //     },
+        //     (error) => {
+        //       console.log(error)
+        //     });
+        // }
 
         this._router.navigate([`/#`])
       });
@@ -51,7 +55,7 @@ export class AuthService {
   logoutUser() {
     let authToken = localStorage.removeItem('token');
 
-    if(authToken == null) {
+    if (authToken == null) {
       this._router.navigate(['login']);
     }
   }
@@ -65,7 +69,7 @@ export class AuthService {
     return (authToken !== null) ? true : false;
   }
 
-  public getUserRole(id: any){  
+  public getUserRole(id: any) {
     let api = `${this.endpoint}/user/role/${id}`;
     let resp = this.http.get(api);
 
@@ -116,7 +120,7 @@ export class AuthService {
   handleError(error: HttpErrorResponse) {
     let msg = '';
 
-    if(error.error instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       msg = error.error.message;
     }
     else {
