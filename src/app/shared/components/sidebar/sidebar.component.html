@@ -3,13 +3,7 @@
         <div class="header">
             <h2>{{this.currentUser.firstname}} {{this.currentUser.lastname}}</h2>
             <h4>                    
-                <span ngSwitch={{this.currentUser.role}} >
-                    <span *ngSwitchCase="1">Admin</span>
-                    <span *ngSwitchCase="2">Associate</span>
-                    <span *ngSwitchCase="3">Supervisor</span>
-                    <span *ngSwitchCase="4">Super</span>
-                <span *ngSwitchDefault>No role</span>
-                </span>
+                {{this.priorityRole.title}}
             </h4>
             <img src="/assets/images/{{this.currentUser.image}}.jpg" alt="" onerror="this.onerror=null; this.src='/assets/images/default.jpg'">
         </div>

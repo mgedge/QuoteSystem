@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
           console.log(res)
 
           //Registration complete
-          if(res.result) {
+          if(res.new_user) {
             this.registerForm.reset() 
             this._router.navigate(['/login'])
           }
