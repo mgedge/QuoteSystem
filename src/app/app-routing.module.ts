@@ -6,6 +6,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AdminComponent } from './modules/admin/admin.component';
+import { EmployeesComponent } from './shared/widgets/admin/employees/employees.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AssociateComponent } from './modules/associate/associate.component';
 import { SupervisorComponent } from './modules/supervisor/supervisor.component';
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '#', component: DefaultComponent, canActivate: [AuthGuard],
     children: [
-      { path: '', component: DashboardComponent },
+      { path: '', component: DashboardComponent, children: [
+        { path: '', component: EmployeesComponent, outlet: 'users'}
+      ]},
       { path: 'posts', component: PostsComponent },
       { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         data: { role: [1] } },

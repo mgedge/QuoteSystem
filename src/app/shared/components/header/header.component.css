@@ -5,3 +5,8 @@ ul li {
 ul {
     margin: 0px;
 }
+
+.title.mat-button {
+    outline: none;
+    font-size: 18px;
+}

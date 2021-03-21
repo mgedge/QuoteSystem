@@ -51,6 +51,4 @@ export class SidebarComponent implements OnInit {
       }5
     }
   }
-
-
 }

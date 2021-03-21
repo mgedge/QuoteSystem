@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultComponent } from 'src/app/layouts/default/default.component';
 import { AuthService } from './../../auth.service'
@@ -10,6 +10,7 @@ import { AuthService } from './../../auth.service'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  //Form Group
   registerForm: FormGroup;
   registerUserData: any = {
     username: '',
@@ -22,21 +23,20 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  bRole: any = [
-    {name: 'Associate', checked: false},
-    {name: 'Supervisor', checked: false},
-    {name: 'Admin', checked: false},
-    {name: 'Super', checked: false}
-  ]
-
   error = '';
 
-  allRoles = ['Associate', 'Supervisor', 'Admin', 'Super']
+  //Form roles
+  addEmployeeRoles: any = [
+    { role_title: 'Associate', role_id: '1', checked: false },
+    { role_title: 'Supervisor', role_id: '2', checked: false },
+    { role_title: 'Admin', role_id: '3', checked: false },
+    { role_title: 'Super', role_id: '4', checked: false }
+  ];
 
+  //Logged in user account
   currentUser: any = {
     image: 'default'
   };
-
   roles: any = [];
 
   constructor(
@@ -48,12 +48,12 @@ export class DashboardComponent implements OnInit {
 
   ) {
     this.registerForm = this.formBuilder.group({
-      firstname: [''],
-      lastname: [''],
-      username: [''],
-      password: [''],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
       image: [''],
-      roles: [ {role_id: String, role_title: String}
+      roles: [
         // {role_id: '', role_title: ''}
       ],
     })
@@ -78,22 +78,37 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  /**
+   * @returns true or false if user has more than 1 role
+   */
   hasManyRoles(): boolean {
     return (this.roles.length > 1) ? true : false;
   }
 
+  /** Sets component roles to the current user's roles
+   * 
+   */
   populateRoles() {
     for (var i = 0; i < this.currentUser.roles.length; i++) {
       this.roles[i] = this.currentUser.roles[i].role_title;
     }
-    console.log(this.roles)
   }
 
+  /** Determines if the use has any role
+   * 
+   * @returns true or false if user has 1 or more roles
+   */
   hasRole(): boolean {
     return (this.roles.length >= 1) ? true : false;
   }
 
-  hasRoleID(role: any): boolean {
+  /**
+   * 
+   * @param role (as string) to search in user's roles
+   * @returns true or false if user has searched role
+   */
+  hasRoleID(role: String): boolean {
     for (var i = 0; i < this.roles.length; i++) {
       if (this.roles[i] === role)
         return true;
@@ -102,54 +117,55 @@ export class DashboardComponent implements OnInit {
     return false;
   }
 
+  /**
+   * 
+   * @param role to be toggled
+   */
   toggleRole(role: any) {
-    console.log(role);
-
-    if (this.hasRoleID(role)) {
-      delete this.roles[role.role_id]
+    if (role.checked) {
+      role.checked = false;
     }
     else {
-      let size = this.roles.length;
-      var temp;
-
-      this.roles[size].role_title = role;
-
-      switch (role) {
-        case 'Admin':
-          temp = 1;
-          break;
-        case 'Supervisor':
-          temp = 2;
-          break;
-        case 'Associate':
-          temp = 3;
-          break;
-        case 'Super':
-          temp = 4;
-          break;
-      }
-
-      this.roles[size].role_id = temp;
+      role.checked = true;
     }
+  }
 
-    console.log(this.roles)
+  /**
+   * Iterate through all the roles. If checked add them to the user's form submission
+   */
+  enableRoles() {
+    var counter = 0;
 
+    //Iterate through the roles
+    for (var i = 0; i < this.addEmployeeRoles.length; i++) {
+      //If checked, add to user's role profile
+      if (this.addEmployeeRoles[i].checked) {
+        //Set the index of the profile equal to the checked role
+        this.registerUserData.roles[counter] = this.addEmployeeRoles[i];
+
+        //Remove the checked property
+        delete this.registerUserData.roles[counter].checked;
+
+        //Increment next registerUser role
+        counter++;
+      }
+    }
   }
 
   registerUser() {
-    console.log(this.registerUserData)
+    this.enableRoles();
 
-    //   this._auth.registerUser(this.registerUserData)
-    //     .subscribe(
-    //       res => {
-    //         console.log(res)
+    this._auth.registerUser(this.registerUserData)
+      .subscribe(
+        res => {
+          console.log(res)
 
-    //         //Registration complete
-    //         if(res.new_user) {
-    //           this.registerForm.reset() 
-    //         }
-    //       },
-    //       err => console.log(err)
-    //     )
+          //Registration complete
+          if (res.new_user) {
+            this.registerForm.reset()
+          }
+        },
+        err => console.log(err)
+      )
   }
 }

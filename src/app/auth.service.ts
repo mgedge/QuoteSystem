@@ -109,6 +109,17 @@ export class AuthService {
     )
   }
 
+  public getUsers(): Observable<any> {
+    let api = `${this.endpoint}/users`;
+
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
   public getCurrentID() {
     return this.currentUserID;
   }

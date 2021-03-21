@@ -1,0 +1,30 @@
+.grid {
+    display: grid-inline;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 50px;
+    padding: 10px;
+}
+
+.grid-container{
+    display: grid;
+    grid-column-gap: 8px;
+    justify-content: space-around;
+}
+
+.row {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+.username {
+
+}
+
+.name {
+
+}

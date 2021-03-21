@@ -15,3 +15,7 @@ img {
     object-fit: cover;
     border-radius: 50%;
 }
+
+.list_item {
+    padding-left: 8px;
+}

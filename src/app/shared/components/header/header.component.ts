@@ -51,7 +51,6 @@ export class HeaderComponent implements OnInit {
     for(var i = 0; i < this.currentUser.roles.length; i++) {
       this.roles[i] = this.currentUser.roles[i].role_title;
     }
-    console.log(this.roles)
   }
 
   hasRole(): boolean {
@@ -64,75 +63,6 @@ export class HeaderComponent implements OnInit {
         return true;
     }
 
-    return false;
-  }
-
-  get isAdmin(): boolean {
-    //Retrieve the user from storage
-    //let role = localStorage.getItem('role');
-    let role = this.currentUser.role;
-
-    //console.log("header.ts - isAdmin : " + role);
-
-    //Convert the string to a number 
-    let roleVar = Number(role);
-
-    // *** DEBUG *** //
-    //console.log("FROM USER: " + user)
-    //console.log("ROLE     : " + localStorage.getItem('role')  )
-
-    //Check the role
-    if (this._auth.loggedIn) {
-      let hasRole = (roleVar == 1);
-      //console.log("roleVar: " + roleVar + " " + hasRole)
-      return hasRole;
-    }
-
-    //Assume access is denied
-    return false;
-  }
-
-  get isSales(): boolean {
-    //Retrieve the user from storage
-    //let role = localStorage.getItem('role');
-    let role = this.currentUser.role;
-
-    //Convert the string to a number 
-    let roleVar = Number(role);
-
-    // *** DEBUG *** //
-    //console.log("FROM USER: " + user)
-    //console.log("ROLE     : " + localStorage.getItem('role')  )
-
-    //Check the role
-    if (this._auth.loggedIn) {
-      let hasRole = (roleVar == 2);
-      return hasRole;
-    }
-
-    //Assume access is denied
-    return false;
-  }
-
-  get isSupervisor(): boolean {
-    //Retrieve the user from storage
-    let role = this.currentUser.role;
-    //let role = localStorage.getItem('role');
-
-    //Convert the string to a number 
-    let roleVar = Number(role);
-
-    // *** DEBUG *** //
-    //console.log("FROM USER: " + user)
-    //console.log("ROLE     : " + localStorage.getItem('role')  )
-
-    //Check the role
-    if (this._auth.loggedIn) {
-      let hasRole = (roleVar == 3);
-      return hasRole;
-    }
-
-    //Assume access is denied
     return false;
   }
 }

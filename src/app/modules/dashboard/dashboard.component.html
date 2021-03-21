@@ -50,7 +50,7 @@
 <!-- Super user -->
 <div *ngIf="hasRoleID('Super')" class="content">
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap">
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" class="main-div">
+        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <mat-toolbar color="primary">Add Employee</mat-toolbar>
 
@@ -88,8 +88,8 @@
                     <h3>Roles:</h3>
                     <span>
                         <ul>
-                            <li *ngFor="let role of allRoles">
-                                <mat-checkbox color="primary" (change)="toggleRole($event)">{{role}}</mat-checkbox>
+                            <li *ngFor="let role of addEmployeeRoles">
+                                <mat-checkbox color="primary" formControlName="roles" (change)="toggleRole(role)">{{role.role_title}}</mat-checkbox>
                             </li>
                         </ul>
                     </span>
@@ -103,51 +103,12 @@
             </mat-card>
         </div>
 
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" class="main-div">
+        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
-                <mat-toolbar color="primary">Sample Form</mat-toolbar>
-
-                <form fxLayoutAlign="stretch" fxLayout="column" class="register-form">
-                    <br>
-                    <h3 display="block">Login:</h3>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Username" id="fusername" type="text" required>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Password" id="fpassword" type="password" required>
-                    </mat-form-field>
-
-                    <h3>Name:</h3>
-
-                    <mat-form-field>
-                        <input matInput placeholder="First name" id="ffirstname" type="text" required>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Last name" id="flastname" type="text" required>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Image" id="fimage" type="text">
-                    </mat-form-field>
-
-                    <h3>Roles:</h3>
-                    <span>
-                        <ul>
-                            <li *ngFor="let role of allRoles">
-                                <mat-checkbox color="primary" (change)="toggleRole(role)">{{role}}</mat-checkbox>
-                            </li>
-                        </ul>
-                    </span>
-
-
-                    <button mat-raised-button type="button"
-                        class="btn btn-success">Add</button>
-
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-                </form>
+                <mat-toolbar color="primary">Users</mat-toolbar>
+                <div  class="form">
+                    <router-outlet name="users"></router-outlet>
+                </div>
             </mat-card>
         </div>
     </div>
