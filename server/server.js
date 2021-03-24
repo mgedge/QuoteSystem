@@ -10,6 +10,11 @@ const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 const api = require('./routes/api');
 
+const { graphqlHTTP } = require('express-graphql');
+
+const resolvers = require('./GraphQL/resolvers');
+const schema = require('./GraphQL/schema');
+
 //Setup the express server
 const app = express();
 
@@ -22,10 +27,15 @@ app.use(express.json());
 app.use(cors());
 
 
-const db = require('./database');
-const dbName = "quote";
-const collectionName = "users"
 
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema: schema,
+    rootValue: resolvers,
+    graphiql: true,
+  }),
+);
 
 //Establish the api endpoint
 app.use('/api', api);
@@ -40,7 +50,6 @@ mongoose.connect(process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true }, () => 
   console.log("Connected to database through server.js")
 )
-
 
 //Open connection
 app.listen(PORT, function() {

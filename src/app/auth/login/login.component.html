@@ -14,7 +14,7 @@
                 <input matInput formControlName="password" placeholder="Password" id="password" [(ngModel)]="loginUserData.password" type="password" required>
             </mat-form-field>
 
-            <button mat-raised-button (click)="loginUser()" type="button" class="btn btn-success">Login</button>
+            <button mat-raised-button (click)="loginUser()" type="button" class="btn btn-success" color="primary">Login</button>
 
             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>

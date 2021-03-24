@@ -1,0 +1,30 @@
+<div class="content" fxLayoutWrap>
+    <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
+        <div fxFlex="100" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+            <mat-card>
+                <mat-toolbar color="primary">Sample GraphQL Card</mat-toolbar>
+                <div class="form">
+                    <h1>This page samples a simple GraphQL query of all users' names and roles</h1>
+                    <mat-divider class="header"></mat-divider>
+                    <div *ngFor="let user of users | async">
+                        <mat-divider></mat-divider>
+                        <div class="container">
+                            <h2>{{user.firstname}} {{user.lastname}}</h2>
+                            <div class="row">
+                                <ng-container *ngIf="user.roles.length > 1; else manyRoles">Roles: </ng-container>
+                                <ng-template #manyRoles>Role: </ng-template>
+
+                                <span *ngIf="user.roles.length == 0">None</span>
+
+                                <div *ngFor="let role of user.roles; let i = index" class="roles">
+                                    <span>{{role.role_title}}{{i === (user.roles.length - 1) ? '': ', '}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div><br>
+</div>

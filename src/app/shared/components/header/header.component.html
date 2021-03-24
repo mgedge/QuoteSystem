@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="nav">
 
     <mat-toolbar-row>
         <button mat-icon-button (click)="toggleSideBar()">
@@ -7,25 +7,28 @@
 
         <button mat-button class="title" routerLink="/#" >QuoteSystem</button>
 
-        <div fxFlex fxLayout="row">
-            <ul fxLayout="row">
-                <li *ngIf="hasRoleID('Admin')">
-                    <button mat-button routerLink="admin">
-                        Admin
-                    </button>
-                </li>
-                <li *ngIf="hasRoleID('Associate')">
-                    <button mat-button routerLink="associate">
-                        Sales
-                    </button>
-                </li>
-                <li *ngIf="hasRoleID('Supervisor')" routerLink="supervisor">
-                    <button mat-button>
-                        Supervisor
-                    </button>
-                </li>
-            </ul>
+        <div *ngIf="!mobileQuery.matches">
+            <div fxFlex fxLayout="row" class="roles" style="display:block">
+                <ul fxLayout="row">
+                    <li *ngIf="hasRoleID('Admin')">
+                        <button mat-button routerLink="admin">
+                            Admin
+                        </button>
+                    </li>
+                    <li *ngIf="hasRoleID('Associate')">
+                        <button mat-button routerLink="associate">
+                            Sales
+                        </button>
+                    </li>
+                    <li *ngIf="hasRoleID('Supervisor')" routerLink="supervisor">
+                        <button mat-button>
+                            Supervisor
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
+
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">

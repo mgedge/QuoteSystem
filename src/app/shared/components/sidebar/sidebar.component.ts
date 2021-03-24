@@ -1,5 +1,6 @@
+import { MediaMatcher } from '@angular/cdk/layout';
 import { RowOutlet } from '@angular/cdk/table';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 
@@ -9,6 +10,10 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  mobileQuery: MediaQueryList;
+
+  private _mobileQueryListener: () => void;
+  
   currentUser: any = {};
   priorityRole: any = {
     title: 'No role',
@@ -19,7 +24,15 @@ export class SidebarComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private route: ActivatedRoute,
+    changeDetectorRef: ChangeDetectorRef, 
+    media: MediaMatcher, 
   ) {
+    //Get size to show links
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+
+
     //First get the userID from the token
     this._auth.getUser().subscribe((res: any) => {
       this.currentUser.userID = res.userID
@@ -50,5 +63,15 @@ export class SidebarComponent implements OnInit {
         this.priorityRole.priority = this.currentUser.roles[i].role_id;
       }5
     }
+  }
+
+
+  toLower(link: any): any {
+    String(link);
+    return link.toLowerCase();
+  }
+
+  isSmall(): boolean {
+    return false;
   }
 }

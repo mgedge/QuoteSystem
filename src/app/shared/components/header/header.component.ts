@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 
@@ -9,6 +10,9 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class HeaderComponent implements OnInit {
   @Output() _toggleSideBar: EventEmitter<any> = new EventEmitter()
+  
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
 
   roles: any = [];
 
@@ -18,7 +22,14 @@ export class HeaderComponent implements OnInit {
     private _auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
+    changeDetectorRef: ChangeDetectorRef, 
+    media: MediaMatcher, 
   ) {
+    //Get size to show links
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+
     //First get the userID from the token
     this._auth.getUser().subscribe((res: any) => {
       this.currentUser.userID = res.userID
@@ -48,7 +59,7 @@ export class HeaderComponent implements OnInit {
   }
 
   populateRoles() {
-    for(var i = 0; i < this.currentUser.roles.length; i++) {
+    for (var i = 0; i < this.currentUser.roles.length; i++) {
       this.roles[i] = this.currentUser.roles[i].role_title;
     }
   }
@@ -58,8 +69,8 @@ export class HeaderComponent implements OnInit {
   }
 
   hasRoleID(role: any): boolean {
-    for(var i = 0; i < this.roles.length; i++) {
-      if(this.roles[i] === role)
+    for (var i = 0; i < this.roles.length; i++) {
+      if (this.roles[i] === role)
         return true;
     }
 

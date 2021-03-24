@@ -2,7 +2,7 @@
 
 
 <mat-drawer-container>
-    <mat-drawer mode="side" [opened]="sideBarOpen">        
+    <mat-drawer [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="sideBarOpen">        
         <app-sidebar></app-sidebar>
     </mat-drawer>
 

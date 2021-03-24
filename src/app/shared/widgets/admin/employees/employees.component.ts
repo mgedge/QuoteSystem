@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { AuthService } from 'src/app/auth.service';
 
 export interface PeriodicElement {
@@ -27,12 +30,16 @@ export class EmployeesComponent implements OnInit {
     this._auth.getUsers().subscribe(users =>{
       this.employees = users
       this.dataSource = this.employees;
-
-      console.log(this.employees)
     })
   }
 
+  
   ngOnInit(): void {
+
   }
 
+  // @ViewChild(MatSort) sort: MatSort;
+  // ngAfterViewInit(): void {
+  //   throw new Error('Method not implemented.');
+  // }
 }

@@ -166,8 +166,8 @@ router.get('/user/:id', async (req, res) => {
         //TODO REMOVE this line when GraphQL implemented
         user.password = "";
 
-        if(user) {
-            res.status(200).json({ user: user});            
+        if (user) {
+            res.status(200).json({ user: user });
         }
         else {
             res.status(404).json({ message: "No user found by that id" })

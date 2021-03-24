@@ -10,3 +10,41 @@ ul {
     outline: none;
     font-size: 18px;
 }
+
+.mat-toolbar {
+    position: relative;
+    box-shadow: 20px 20px 20px green;
+}
+
+@media (max-width: 767px) {
+    .title.mat-button {
+        display: none;
+        padding: 0px;
+        margin: 0px;
+        outline: none;
+        font-size: 0px;
+    }
+
+    .roles {
+        padding: 0px;
+        margin: 0px;
+        display: none;
+    }
+
+    button {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    mat-toolbar-row {
+        padding: 0px;
+    }
+
+    ul {
+        padding: 0px;
+    }
+    /* app-footer {
+        /* display: none; 
+        height: 20px;
+    } */
+}

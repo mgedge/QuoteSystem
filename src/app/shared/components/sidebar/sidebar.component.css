@@ -1,7 +1,10 @@
-:host {
-        vertical-align: middle;
-        margin-right: 20px;
-    
+h2 {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+h4 {
+    margin-bottom: 20px;
 }
 
 .profile-card {
@@ -14,8 +17,29 @@ img {
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
+    border: 1px solid;
+    border-color: #01579B;
 }
 
 .list_item {
     padding-left: 8px;
+}
+
+footer {
+    flex: end;
+    display: none;
+    padding: 10px;
+    background-color: dimgrey;
+    color: gainsboro;
+}
+
+mat-nav-list {
+    padding: 0px;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    footer {
+        display: block;
+    }
 }

@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$QuoteSystem-primary: mat-palette($mat-indigo);
-$QuoteSystem-accent: mat-palette($mat-pink, A200, A100, A400);
+$QuoteSystem-primary: mat-palette($mat-light-blue, 900);
+$QuoteSystem-accent: mat-palette($mat-yellow, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $QuoteSystem-warn: mat-palette($mat-red);
@@ -47,8 +47,8 @@ $QuoteSystem-theme: mat-light-theme((
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$QuoteSystem-primary: mat-palette($mat-indigo);
-$QuoteSystem-accent: mat-palette($mat-pink, A200, A100, A400);
+$QuoteSystem-primary: mat-palette($mat-light-blue, 900);
+$QuoteSystem-accent: mat-palette($mat-yellow, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $QuoteSystem-warn: mat-palette($mat-red);

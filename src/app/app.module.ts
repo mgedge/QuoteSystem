@@ -15,9 +15,10 @@ import { RegisterComponent } from './auth/register/register.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -40,6 +41,12 @@ import { AdminComponent } from './modules/admin/admin.component';
 import { AssociateComponent } from './modules/associate/associate.component';
 import { SupervisorComponent } from './modules/supervisor/supervisor.component';
 import { ErrorInterceptor } from './auth/error.interceptor';
+import { SampleCardsComponent } from './modules/sample-cards/sample-cards.component';
+import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
+import { GraphQLModule } from './graphql.module';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { InMemoryCache } from '@apollo/client/core';
 /*
 import { xx } from '';
 
@@ -60,6 +67,8 @@ import { xx } from '';
     AdminComponent,
     AssociateComponent,
     SupervisorComponent,
+    SampleCardsComponent,
+    SampleGraphqlComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -71,6 +80,7 @@ import { xx } from '';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDividerModule,
     MatFormFieldModule,
     MatGridListModule,
@@ -84,6 +94,7 @@ import { xx } from '';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatSortModule,
+    GraphQLModule,
   ],
   providers: [
     AuthService,
@@ -96,7 +107,19 @@ import { xx } from '';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true
-    }
+    },
+    // {
+    //   provide: APOLLO_OPTIONS,
+    //   useFactory: (httpLink: HttpLink) => {
+    //     return {
+    //       cache: new InMemoryCache(),
+    //       link: httpLink.create({
+    //         uri: 'https://48p1r2roz4.sse.codesandbox.io',
+    //       }),
+    //     };
+    //   },
+    //   deps: [HttpLink],
+    // },
   ],
   bootstrap: [AppComponent]
 })

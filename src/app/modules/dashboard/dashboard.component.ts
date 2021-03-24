@@ -134,6 +134,7 @@ export class DashboardComponent implements OnInit {
    * Iterate through all the roles. If checked add them to the user's form submission
    */
   enableRoles() {
+    var hasRole = false;
     var counter = 0;
 
     //Iterate through the roles
@@ -148,7 +149,15 @@ export class DashboardComponent implements OnInit {
 
         //Increment next registerUser role
         counter++;
+
+        //Check has role
+        hasRole = true;
       }
+    }
+
+    //If has no role, delete that
+    if(!hasRole) {
+      delete this.registerUserData.roles;
     }
   }
 

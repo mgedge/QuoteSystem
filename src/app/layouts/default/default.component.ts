@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {MediaMatcher} from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from "./../../auth.service";
-//import { userSchema } from "./../../../../server/models/user"
 
 @Component({
   selector: 'app-default',
@@ -9,18 +9,24 @@ import { AuthService } from "./../../auth.service";
   styleUrls: ['./default.component.css']
 })
 export class DefaultComponent implements OnInit {
+  mobileQuery: MediaQueryList;
 
   currentUser: any = {};
   sideBarOpen = true;
 
+  private _mobileQueryListener: () => void;
+
   constructor(
     private _router: Router,
     private _auth: AuthService,
-
     private actRoute: ActivatedRoute,
+    changeDetectorRef: ChangeDetectorRef, 
+    media: MediaMatcher
   ) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
-
   ngOnInit(): void {
 
   }

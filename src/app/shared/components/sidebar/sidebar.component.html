@@ -2,22 +2,35 @@
     <div class="profile-card">
         <div class="header">
             <h2>{{this.currentUser.firstname}} {{this.currentUser.lastname}}</h2>
-            <h4>                    
+            <h4>
                 {{this.priorityRole.title}}
             </h4>
-            <img src="/assets/images/{{this.currentUser.image}}.jpg" alt="" onerror="this.onerror=null; this.src='/assets/images/default.jpg'">
+            <img src="/assets/images/{{this.currentUser.image}}.jpg" alt=""
+                onerror="this.onerror=null; this.src='/assets/images/default.jpg'">
         </div>
     </div>
 
     <mat-divider></mat-divider>
 
-    <h2 matSubheader>Menu 1</h2>
+    <h2 matSubheader>Quick Links</h2>
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">Dashboard</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">Dashboard</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">Dashboard</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/#/cards">Sample Cards</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/#/graphql">Sample GraphQL</a>
 
     <mat-divider></mat-divider>
+
+    <div *ngIf="mobileQuery.matches">
+        <h2 matSubheader>Roles</h2>
+
+        <div *ngFor="let role of currentUser.roles">
+            <a mat-list-item routerLinkActive="list-item-active"
+                [routerLink]="['/#/' + toLower(role.role_title)]">{{role.role_title}}</a>
+        </div>
+    
+        <mat-divider></mat-divider>
+    </div>
+
 
     <h2 matSubheader>Tools</h2>
 
@@ -36,5 +49,12 @@
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">
         <mat-icon>feedback</mat-icon> <span class="list_item">Feedback</span>
     </a>
+
+    <div class="legal">
+        <mat-divider></mat-divider>
+        <footer>
+            Developed by Group 6B &copy; All rights reserved 2021
+        </footer>
+    </div>
 
 </mat-nav-list>
