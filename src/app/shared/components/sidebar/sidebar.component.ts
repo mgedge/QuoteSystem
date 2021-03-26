@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
-  
+
   currentUser: any = {};
   priorityRole: any = {
     title: 'No role',
@@ -24,8 +24,8 @@ export class SidebarComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private route: ActivatedRoute,
-    changeDetectorRef: ChangeDetectorRef, 
-    media: MediaMatcher, 
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
   ) {
     //Get size to show links
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -61,7 +61,7 @@ export class SidebarComponent implements OnInit {
       if ((id <= this.priorityRole.priority) || (id === '10')) {
         this.priorityRole.title = this.currentUser.roles[i].role_title;
         this.priorityRole.priority = this.currentUser.roles[i].role_id;
-      }5
+      } 5
     }
   }
 
@@ -75,11 +75,12 @@ export class SidebarComponent implements OnInit {
     return false;
   }
 
-    /** Determines if the use has any role
-   * 
-   * @returns true or false if user has 1 or more roles
-   */
-     hasRole(): boolean {
-      return (this.currentUser.roles.length >= 1) ? true : false;
-    }
+  /** Determines if the use has any role
+ * 
+ * @returns true or false if user has 1 or more roles
+ */
+  hasRole(): boolean {
+    console.log(this.currentUser)
+    return (this.currentUser.roles.length >= 1) ? true : false;
+  }
 }
