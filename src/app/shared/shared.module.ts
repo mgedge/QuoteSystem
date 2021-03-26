@@ -6,7 +6,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { CardComponent } from './widgets/card/card.component';
 import { EmployeesComponent } from './widgets/admin/employees/employees.component';
 import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.component';
 import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
@@ -17,7 +16,6 @@ import { YoutubeComponent } from './widgets/demo/youtube/youtube.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    CardComponent,
     EmployeesComponent,
     AddQuoteComponent,
     EditQuoteComponent,
@@ -33,7 +31,6 @@ import { YoutubeComponent } from './widgets/demo/youtube/youtube.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    CardComponent
   ]
 })
 export class SharedModule { }

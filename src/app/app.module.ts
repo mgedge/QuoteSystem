@@ -34,7 +34,6 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-import { CardComponent } from './shared/widgets/card/card.component';
 import { EmployeesComponent } from './shared/widgets/admin/employees/employees.component'
 import { AuthInterceptor } from './auth/authconfig.interceptor';
 import { AdminComponent } from './modules/admin/admin.component';
@@ -62,7 +61,6 @@ import { xx } from '';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    CardComponent,
     EmployeesComponent,
     AdminComponent,
     AssociateComponent,
