@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
     private _router: Router,
     private _default: DefaultComponent,
     public formBuilder: FormBuilder,
-    private employees: EmployeesComponent,
+    // private employees: EmployeesComponent,
   ) {
     this.registerForm = this.formBuilder.group({
       firstname: ['', Validators.required],

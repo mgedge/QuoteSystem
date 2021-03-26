@@ -11,8 +11,6 @@ import { EmployeesComponent } from './widgets/admin/employees/employees.componen
 import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.component';
 import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
 import { YoutubeComponent } from './widgets/demo/youtube/youtube.component';
-import { LizbethComponent } from './widgets/demo/lizbeth/lizbeth.component';
-
 
 @NgModule({
   declarations: [
@@ -24,7 +22,6 @@ import { LizbethComponent } from './widgets/demo/lizbeth/lizbeth.component';
     AddQuoteComponent,
     EditQuoteComponent,
     YoutubeComponent,
-    LizbethComponent
   ],
   imports: [
     CommonModule,

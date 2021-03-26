@@ -38,9 +38,9 @@ export class EmployeesComponent implements OnInit {
 
   }
 
-  loadUsers() {
+  // loadUsers() {
 
-  }
+  // }
 
   // @ViewChild(MatSort) sort: MatSort;
   // ngAfterViewInit(): void {
