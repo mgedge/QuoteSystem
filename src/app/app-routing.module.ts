@@ -23,19 +23,22 @@ const routes: Routes = [
     children: [
       {
         path: '', component: DashboardComponent, children: [
-          // { path: '', component: EmployeesComponent, outlet: 'users' },
+          { path: '', component: EmployeesComponent, outlet: 'users' },
         ]
       },
       { path: 'posts', component: PostsComponent },
       { path: 'cards', component: SampleCardsComponent, children: [
-        // { path: '', component: EmployeesComponent, outlet: 'users' },
-        // { path: '', component: YoutubeComponent, outlet: 'youtube' },
+        { path: '', component: EmployeesComponent, outlet: 'users' },
+        { path: '', component: YoutubeComponent, outlet: 'youtube' },
 
       ]},
       { path: 'graphql', component: SampleGraphqlComponent },
       {
         path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
-        data: { role: [1] }
+        data: { role: [1] }, children: [
+          { path: '', component: EmployeesComponent, outlet: 'users' },
+
+        ]
       },
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
@@ -45,7 +48,9 @@ const routes: Routes = [
       },
       {
         path: 'supervisor', component: SupervisorComponent, canActivate: [AuthGuard],
-        data: { role: [3] }
+        data: { role: [3] }, children: [
+          { path: '', component: EmployeesComponent, outlet: 'users' },
+        ]
       },
     ]
   }

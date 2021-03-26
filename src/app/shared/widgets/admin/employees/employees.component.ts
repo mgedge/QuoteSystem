@@ -27,20 +27,20 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private _auth: AuthService,
   ) { 
+    this.loadUsers();
+  }
+
+
+  ngOnInit(): void {
+    // this.loadUsers();
+  }
+
+  loadUsers() {
     this._auth.getUsers().subscribe(users =>{
       this.employees = users
       this.dataSource = this.employees;
     })
   }
-
-
-  ngOnInit(): void {
-
-  }
-
-  // loadUsers() {
-
-  // }
 
   // @ViewChild(MatSort) sort: MatSort;
   // ngAfterViewInit(): void {
