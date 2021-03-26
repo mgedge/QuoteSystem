@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultComponent } from 'src/app/layouts/default/default.component';
+import { EmployeesComponent } from 'src/app/shared/widgets/admin/employees/employees.component';
 import { AuthService } from './../../auth.service'
 
 @Component({
@@ -45,7 +46,7 @@ export class DashboardComponent implements OnInit {
     private _router: Router,
     private _default: DefaultComponent,
     public formBuilder: FormBuilder,
-
+    private employees: EmployeesComponent,
   ) {
     this.registerForm = this.formBuilder.group({
       firstname: ['', Validators.required],
@@ -175,6 +176,9 @@ export class DashboardComponent implements OnInit {
           }
         },
         err => console.log(err)
+
       )
+
+
   }
 }

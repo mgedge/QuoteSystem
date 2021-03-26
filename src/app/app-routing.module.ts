@@ -12,6 +12,7 @@ import { AssociateComponent } from './modules/associate/associate.component';
 import { SupervisorComponent } from './modules/supervisor/supervisor.component';
 import { SampleCardsComponent } from './modules/sample-cards/sample-cards.component';
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
+import { YoutubeComponent } from './shared/widgets/demo/youtube/youtube.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,7 +27,11 @@ const routes: Routes = [
         ]
       },
       { path: 'posts', component: PostsComponent },
-      { path: 'cards', component: SampleCardsComponent },
+      { path: 'cards', component: SampleCardsComponent, children: [
+        { path: '', component: EmployeesComponent, outlet: 'users' },
+        { path: '', component: YoutubeComponent, outlet: 'youtube' },
+
+      ]},
       { path: 'graphql', component: SampleGraphqlComponent },
       {
         path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
@@ -34,7 +39,9 @@ const routes: Routes = [
       },
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
-        data: { role: [2] }
+        data: { role: [2] }, children: [
+          // { path: '', component: EmployeesComponent, outlet: 'users' },
+        ]
       },
       {
         path: 'supervisor', component: SupervisorComponent, canActivate: [AuthGuard],

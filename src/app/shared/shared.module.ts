@@ -10,6 +10,8 @@ import { CardComponent } from './widgets/card/card.component';
 import { EmployeesComponent } from './widgets/admin/employees/employees.component';
 import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.component';
 import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
+import { YoutubeComponent } from './widgets/demo/youtube/youtube.component';
+import { LizbethComponent } from './widgets/demo/lizbeth/lizbeth.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.c
     CardComponent,
     EmployeesComponent,
     AddQuoteComponent,
-    EditQuoteComponent
+    EditQuoteComponent,
+    YoutubeComponent,
+    LizbethComponent
   ],
   imports: [
     CommonModule,

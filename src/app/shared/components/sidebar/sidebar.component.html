@@ -12,11 +12,19 @@
 
     <mat-divider></mat-divider>
 
-    <h2 matSubheader>Quick Links</h2>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">Dashboard</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/#/cards">Sample Cards</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/#/graphql">Sample GraphQL</a>
+
+
+    <div *ngIf="hasRole()">
+        <h2 matSubheader>Quick Links</h2>
+        
+        <div *ngIf="mobileQuery.matches">
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">Dashboard</a>
+        </div>
+        
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/#/cards">Sample Cards</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/#/graphql">Sample GraphQL</a>
+    </div>
 
     <mat-divider></mat-divider>
 
@@ -32,7 +40,7 @@
     </div>
 
 
-    <h2 matSubheader>Tools</h2>
+    <!-- <h2 matSubheader>Tools</h2>
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">
         <mat-icon>settings</mat-icon> <span class="list_item">Settings</span>
@@ -48,7 +56,7 @@
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/#">
         <mat-icon>feedback</mat-icon> <span class="list_item">Feedback</span>
-    </a>
+    </a> -->
 
     <div class="legal">
         <mat-divider></mat-divider>

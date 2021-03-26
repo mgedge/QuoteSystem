@@ -33,8 +33,12 @@ export class EmployeesComponent implements OnInit {
     })
   }
 
-  
+
   ngOnInit(): void {
+
+  }
+
+  loadUsers() {
 
   }
 

@@ -1,26 +1,89 @@
 <div class="content" fxLayoutWrap>
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="100" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <mat-toolbar color="primary">Sample GraphQL Card</mat-toolbar>
                 <div class="form">
-                    <h1>This page samples a simple GraphQL query of all users' names and roles</h1>
+                    <h1>This page samples a simple, dynamic GraphQL query of all users' names and roles</h1>
+
+                    <form class="row">
+                        <mat-chip-list *ngFor="let select of selection" aria-label="GraphQL Parameters" class="chip">
+                            <mat-chip (click)="toggleSelection(select)" [value]="select" [selected]="select.selected" color="primary">{{select.item}}</mat-chip>
+                        </mat-chip-list>
+                    </form>
+
                     <mat-divider class="header"></mat-divider>
-                    <div *ngFor="let user of users | async">
-                        <mat-divider></mat-divider>
-                        <div class="container">
-                            <h2>{{user.firstname}} {{user.lastname}}</h2>
-                            <div class="row">
-                                <ng-container *ngIf="user.roles.length > 1; else manyRoles">Roles: </ng-container>
-                                <ng-template #manyRoles>Role: </ng-template>
+                    <div *ngIf="this.isValidQuery()" class="container">
+                        <div *ngFor="let user of users | async; let i = index">
+                            <div class="user"> 
+                                <!-- *ngIf="this.users.length > 0" -->
+                                <mat-divider></mat-divider>
+    
+                                <div class="row">
+                                    <div *ngIf="this.getSelected('First name') === true">
+                                        <h2>{{user.firstname}}&nbsp;</h2>
+                                    </div>
+                                    <div *ngIf="this.getSelected('Last name') === true">
+                                        <h2> {{user.lastname}}&nbsp;</h2>
+                                    </div>
+                                    <div *ngIf="(this.getSelected('First name') === true || this.getSelected('Last name') === true) && this.selection[0].selected === true">
+                                        <h2>-&nbsp;</h2>
+                                    </div>
+                                    <div *ngIf="this.getSelected('Username') === true">
+                                        <h2>{{user.username}}</h2>
+                                    </div>
+                                </div>
 
-                                <span *ngIf="user.roles.length == 0">None</span>
-
-                                <div *ngFor="let role of user.roles; let i = index" class="roles">
-                                    <span>{{role.role_title}}{{i === (user.roles.length - 1) ? '': ', '}}</span>
+                                <div class="row">
+                                    <div *ngIf="this.getSelected('Image') === true">
+                                        <span class="image">Image: {{user.image}}&nbsp;</span>
+                                    </div>
+                                </div>
+    
+                                <div *ngIf="this.getSelected('Roles')" class="row roles">
+                                    <ng-container *ngIf="user.roles.length > 1; else manyRoles">Roles: </ng-container>
+                                    <ng-template #manyRoles>Role: </ng-template>
+    
+                                    <span *ngIf="user.roles.length == 0">None</span>
+    
+                                    <div *ngFor="let role of user.roles; let i = index">
+                                        <span>{{role.role_title}}{{i === (user.roles.length - 1) ? '': ', '}}</span>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
 
+        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+            <mat-card>
+                <mat-toolbar color="primary">Sample GraphQL Card</mat-toolbar>
+                <div class="form">
+                    <div>
+                        <h1>This card displays the GraphQL query of selected chips</h1>
+                    </div>
+                    <div>
+                        <mat-divider class="header"></mat-divider>
+                        <div>
+                            <div>
+                                <div class="row">
+                                    <h2>GraphQL Query Simplified</h2>
+                                </div>
+                                <div class="row">
+                                    {{this.graphqlQuerySimple}}
+                                </div>
+                            </div><br>
+        
+                            <div>
+                                <div class="row">
+                                    <h2>GraphQL Query Sent</h2>
+                                </div>
+                                <div class="row">
+                                    {{this.graphqlQueryDocument}}
+                                </div>
+                            </div><br>                           
                         </div>
                     </div>
                 </div>

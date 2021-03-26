@@ -74,4 +74,12 @@ export class SidebarComponent implements OnInit {
   isSmall(): boolean {
     return false;
   }
+
+    /** Determines if the use has any role
+   * 
+   * @returns true or false if user has 1 or more roles
+   */
+     hasRole(): boolean {
+      return (this.currentUser.roles.length >= 1) ? true : false;
+    }
 }

@@ -4,7 +4,7 @@
         <mat-card fxFlex="fxFlex">
             <div>
                 <div>
-                    <h1>Welcome to the dashboard!</h1>
+                    <h1>Welcome to the QuoteSystem!</h1>
                     <span>
                         This is your personalized dashboard based on your role in the
                         company! Here your profile is displayed.
@@ -97,7 +97,8 @@
                             <ul>
                                 <li *ngFor="let role of addEmployeeRoles">
                                     <mat-checkbox color="primary" formControlName="roles" (change)="toggleRole(role)">
-                                        {{role.role_title}}</mat-checkbox>
+                                        {{role.role_title}}
+                                    </mat-checkbox>
                                 </li>
                             </ul>
                         </span>
