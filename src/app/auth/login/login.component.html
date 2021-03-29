@@ -2,7 +2,7 @@
     <mat-card fxFlex="auto" class="card">
         <mat-toolbar color="primary">Login</mat-toolbar>
 
-        <form [formGroup]="loginForm" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+        <form [formGroup]="loginForm" (keydown)="submit($event)" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
             <mat-form-field>
                 <input matInput formControlName="username" placeholder="Username" id="username" [(ngModel)]="loginUserData.username" type="text"  required>
                 <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">

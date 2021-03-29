@@ -6,7 +6,7 @@ module.exports = buildSchema(`
         role_title: String!
     }
     type User {
-        _id: ID!
+        _id: String!
         username: String!
         password: String!
         firstname: String!
@@ -20,7 +20,11 @@ module.exports = buildSchema(`
     type RootQuery {
         users: UserData!
     }
+    type RootMutation {
+        getUserRoleByID(_id: ID!): User!
+    }
     schema {
         query: RootQuery
+        mutation: RootMutation
     }
 `);

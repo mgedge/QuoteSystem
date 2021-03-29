@@ -29,12 +29,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    //const loginData = this.loginForm.value;
-
-    // if(this.loginForm.invalid) {
-    //   return;
-    // }
-
     this._auth.loginUser(this.loginUserData)
     // .subscribe(
     //   res => {
@@ -43,5 +37,11 @@ export class LoginComponent implements OnInit {
     //   }, 
     //   err => console.log(err)
     // );
+  }
+
+  submit(event: any) {
+    if( event.keyCode == 13) {
+      this.loginUser();
+    }
   }
 }

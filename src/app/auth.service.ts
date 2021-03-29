@@ -33,7 +33,7 @@ export class AuthService {
       .subscribe((res: any) => {
         localStorage.setItem('token', res.token)
 
-        console.log(res)
+        // console.log(res)
         this.currentUser = res.user;
         this.currentUserID = res.user._id;
 

@@ -1,4 +1,10 @@
 <div>
+  <div class="row refresh">
+    <button mat-icon-button  class="refresh" (click)="loadUsers()">                        
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
   <table mat-table [dataSource]="dataSource" matSort>
 
     <!--- Note that these columns can be defined in any order.

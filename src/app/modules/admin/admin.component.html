@@ -6,9 +6,20 @@
 
                     <mat-toolbar>Admin Card #1</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/piechart.JPG" class="image">
+                        <div class="chart-wrapper-large">
+                            <ngx-charts-bar-vertical class="chart" 
+                            [results]="saleData" 
+                            [xAxisLabel]="'Products'"
+                            [yAxisLabel]="'Sale'" 
+                            [scheme]="colorSchemeC"
+                            [legend]="true" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true">
+                            </ngx-charts-bar-vertical>
+                        </div>
                     </div>
-
                 </div>
             </mat-card>
         </div>
@@ -21,7 +32,19 @@
 
                     <mat-toolbar>Admin Card #2</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/piechart.JPG" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-bar-horizontal class="chart" 
+                            [results]="saleData" 
+                            [scheme]="colorSchemeA"
+                            [xAxisLabel]="'Sale'"
+                            [yAxisLabel]="'Products'" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true"
+                            [legend]="true">
+                            </ngx-charts-bar-horizontal>
+                        </div>
                     </div>
 
                 </div>
@@ -51,7 +74,19 @@
 
                     <mat-toolbar>Admin Card #4</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/piechart.JPG" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-bar-vertical class="chart" 
+                            [results]="saleData" 
+                            [xAxisLabel]="'Products'"
+                            [yAxisLabel]="'Sale'" 
+                            [scheme]="colorSchemeC"
+                            [legend]="true" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true">
+                            </ngx-charts-bar-vertical>
+                        </div>
                     </div>
 
                 </div>
@@ -64,7 +99,15 @@
 
                     <mat-toolbar>Admin Card #5</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/supervisor.png" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-pie-chart class="chart" 
+                            [results]="saleData" 
+                            [scheme]="colorSchemeB"
+                            [legend]="true"
+                            [legendTitle]="'Product Sale Report'" 
+                            [labels]="true">
+                            </ngx-charts-pie-chart>
+                        </div>
                     </div>
 
                 </div>
@@ -77,7 +120,17 @@
 
                     <mat-toolbar>Admin Card #6</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/supervisor.png" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-line-chart 
+                              [results]="countryData"
+                              [showXAxisLabel]="true"
+                              [showYAxisLabel]="true"
+                              [xAxis]="true"
+                              [yAxis]="true"
+                              [xAxisLabel]="'Year'"
+                              [yAxisLabel]="'Sales'" >
+                            </ngx-charts-line-chart>
+                        </div>
                     </div>
 
                 </div>

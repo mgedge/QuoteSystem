@@ -42,6 +42,7 @@ export class SidebarComponent implements OnInit {
         //Set the user to the returned user profile
         this.currentUser = res.user;
 
+
         //Next retrieve the user's roles
         if (this.currentUser.roles.length > 0) {
           this.setPriorityRole();
@@ -80,7 +81,9 @@ export class SidebarComponent implements OnInit {
  * @returns true or false if user has 1 or more roles
  */
   hasRole(): boolean {
-    console.log(this.currentUser)
-    return (this.currentUser.roles.length >= 1) ? true : false;
+    if(this.currentUser.roles) {
+      return (this.currentUser.roles.length >= 1) ? true : false;
+    }
+    return false;
   }
 }

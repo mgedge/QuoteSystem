@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
     "@apollo/client": "^3.3.12",
+    "@swimlane/ngx-charts": "^17.0.1",
     "apollo-angular": "^2.4.0",
     "dotenv": "^8.2.0",
     "express-graphql": "^0.12.0",

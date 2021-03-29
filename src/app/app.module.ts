@@ -43,9 +43,7 @@ import { ErrorInterceptor } from './auth/error.interceptor';
 import { SampleCardsComponent } from './modules/sample-cards/sample-cards.component';
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
 import { GraphQLModule } from './graphql.module';
-import { APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular/http';
-import { InMemoryCache } from '@apollo/client/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 /*
 import { xx } from '';
 
@@ -89,6 +87,7 @@ import { xx } from '';
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
+    NgxChartsModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatSortModule,

@@ -9,7 +9,6 @@ import { MatListModule } from '@angular/material/list';
 import { EmployeesComponent } from './widgets/admin/employees/employees.component';
 import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.component';
 import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
-import { YoutubeComponent } from './widgets/demo/youtube/youtube.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { YoutubeComponent } from './widgets/demo/youtube/youtube.component';
     EmployeesComponent,
     AddQuoteComponent,
     EditQuoteComponent,
-    YoutubeComponent,
   ],
   imports: [
     CommonModule,

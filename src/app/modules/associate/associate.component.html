@@ -5,7 +5,18 @@
                 <div class="form">
                     <mat-toolbar>Sales Card #1</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/sales.jpg" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-bar-vertical class="chart" 
+                            [results]="saleData" 
+                            [xAxisLabel]="'Products'"
+                            [yAxisLabel]="'Sale'" 
+                            [legend]="true" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true">
+                            </ngx-charts-bar-vertical>
+                        </div>
                     </div>
                 </div>
             </mat-card>
@@ -16,7 +27,15 @@
                 <div class="form">
                     <mat-toolbar>Sales Card #2</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/sales.jpg" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-pie-chart class="chart" 
+                            [results]="saleData" 
+                            [scheme]="colorSchemeB"
+                            [legend]="true"
+                            [legendTitle]="'Product Sale Report'" 
+                            [labels]="true">
+                            </ngx-charts-pie-chart>
+                        </div>
                     </div>
                 </div>
             </mat-card>
@@ -26,18 +45,30 @@
 
 
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" class="main-div">
+        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
                     <mat-toolbar>Sales Card #3</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/sales1.jpg" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-bar-horizontal class="chart" 
+                            [results]="saleData" 
+                            [scheme]="colorSchemeA"
+                            [xAxisLabel]="'Sale'"
+                            [yAxisLabel]="'Products'" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true"
+                            [legend]="true">
+                            </ngx-charts-bar-horizontal>
+                        </div>
                     </div>
                 </div>
             </mat-card>
         </div>
 
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" class="main-div">
+        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
                     <mat-toolbar>Sales Card #4</mat-toolbar>
@@ -48,15 +79,25 @@
             </mat-card>
         </div>
 
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" class="main-div">
+        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
-
                     <mat-toolbar>Sales Card #5</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/piechart.JPG" class="image">
+                        <div class="chart-wrapper">
+                            <ngx-charts-bar-vertical class="chart" 
+                            [results]="saleData" 
+                            [xAxisLabel]="'Products'"
+                            [yAxisLabel]="'Sale'" 
+                            [scheme]="colorSchemeC"
+                            [legend]="true" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true">
+                            </ngx-charts-bar-vertical>
+                        </div>
                     </div>
-
                 </div>
             </mat-card>
         </div>
@@ -66,12 +107,20 @@
         <div fxFlex="100" class="main-div">
             <mat-card>
                 <div class="form">
-
                     <mat-toolbar>Sales Card #6</mat-toolbar>
                     <div class="container">
-                        <img src="./../../../assets/images/piechart.JPG" class="image">
+                        <div class="chart-wrapper-large">
+                            <ngx-charts-line-chart 
+                              [results]="countryData"
+                              [showXAxisLabel]="showXAxisLabel"
+                              [showYAxisLabel]="showYAxisLabel"
+                              [xAxis]="xAxis"
+                              [yAxis]="yAxis"
+                              [xAxisLabel]="xAxisLabel"
+                              [yAxisLabel]="yAxisLabel" >
+                            </ngx-charts-line-chart>
+                        </div>
                     </div>
-
                 </div>
             </mat-card>
         </div>

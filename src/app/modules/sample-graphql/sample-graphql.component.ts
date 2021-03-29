@@ -71,8 +71,6 @@ export class SampleGraphqlComponent implements OnInit {
   }
 
   toggleSelection(selection: any) {
-    console.log(selection);
-
     if (selection.selected) {
       selection.selected = false;
     }
@@ -95,7 +93,6 @@ export class SampleGraphqlComponent implements OnInit {
   }
 
   defineQuery() {
-    console.log("Toggled")
     let query;
     let username = '';
     let password = '';
@@ -181,8 +178,6 @@ export class SampleGraphqlComponent implements OnInit {
         valid = true;
       }    
     }
-
-    console.log(this.selection)
 
     return valid;
   }

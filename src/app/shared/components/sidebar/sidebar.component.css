@@ -29,8 +29,8 @@ footer {
     flex: end;
     display: none;
     padding: 10px;
-    background-color: dimgrey;
-    color: gainsboro;
+    background-color: rgb(150, 150, 150);
+    color: rgb(238, 238, 238);
 }
 
 mat-nav-list {
