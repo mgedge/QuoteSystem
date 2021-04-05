@@ -21,6 +21,10 @@ form {
     height: auto;
 }
 
+.video {
+    height: 100%
+}
+
 .mat-card {
     height: 100%;
 }

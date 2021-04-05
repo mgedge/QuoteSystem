@@ -1,3 +1,13 @@
+/***************************************************
+ * app.module
+ * 
+ * This file defines the components for the application.
+ * 
+ * Any components added to the project must be added
+ * here to function correctly.
+ * 
+ **************************************************/
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -44,10 +54,6 @@ import { SampleCardsComponent } from './modules/sample-cards/sample-cards.compon
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
 import { GraphQLModule } from './graphql.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-/*
-import { xx } from '';
-
-*/
 
 @NgModule({
   declarations: [

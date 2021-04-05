@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //Function to handle logging in
   loginUser() {
     this._auth.loginUser(this.loginUserData)
     // .subscribe(
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
     // );
   }
 
+  //Handle the enter button
   submit(event: any) {
     if( event.keyCode == 13) {
       this.loginUser();

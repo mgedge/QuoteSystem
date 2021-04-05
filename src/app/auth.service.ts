@@ -1,3 +1,11 @@
+/***************************************************
+ * auth.service
+ * 
+ * This file allows components throughout the project
+ * to login/register, access user's token, and logout
+ * 
+ **************************************************/
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators'
@@ -20,6 +28,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, public _router: Router) { }
 
+  // Service to call the register API
   registerUser(user: any) {
     let api = `${this.endpoint}/register`
     return this.http.post<any>(api, user)
@@ -28,14 +37,14 @@ export class AuthService {
       )
   }
 
+  // Service to call the login API and set token
   loginUser(user: any) {
     return this.http.post<any>(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('token', res.token)
 
-        // console.log(res)
-        this.currentUser = res.user;
-        this.currentUserID = res.user._id;
+        // this.currentUser = res.user;
+        // this.currentUserID = res.user._id;
 
         //If there are any roles, set them
         // if (res.user.roles) {
@@ -52,6 +61,7 @@ export class AuthService {
       });
   }
 
+  // Service to remove user token and navigate to login
   logoutUser() {
     let authToken = localStorage.removeItem('token');
 
@@ -60,15 +70,18 @@ export class AuthService {
     }
   }
 
+  // Returns the user's token
   getToken() {
     return localStorage.getItem('token');
   }
 
+  // Returns boolean if user has a token
   public get loggedIn(): boolean {
     let authToken = localStorage.getItem('token');
     return (authToken !== null) ? true : false;
   }
 
+  // DEPRECATED Returns API call for the entered user ID's role
   public getUserRole(id: any) {
     let api = `${this.endpoint}/user/role/${id}`;
     let resp = this.http.get(api);
@@ -76,6 +89,7 @@ export class AuthService {
     return resp;
   }
 
+  // DEPRECATED Returns the the current user's role
   public getCurrentUserRole(id: any): Observable<any> {
     let api = `${this.endpoint}/user/role/${id}`;
 
@@ -87,6 +101,7 @@ export class AuthService {
     )
   }
 
+  // Returns the current user's information
   public getCurrentUser(id: any): Observable<any> {
     let api = `${this.endpoint}/user/${id}`;
 
@@ -98,6 +113,7 @@ export class AuthService {
     )
   }
 
+  // Returns the user's information from token
   public getUser(): Observable<any> {
     let api = `${this.endpoint}/user`;
 
@@ -109,6 +125,7 @@ export class AuthService {
     )
   }
 
+  // Returns ALL employee users from the database including hashed password
   public getUsers(): Observable<any> {
     let api = `${this.endpoint}/users`;
 

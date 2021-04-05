@@ -1,3 +1,18 @@
+/***************************************************
+ * API.js
+ * 
+ * This file utilizes the traditional RESTful calls
+ * to retrieve data from the database.
+ * 
+ * For example, auth.service will call the HTTP 
+ * methods to register/login users. For login, this file
+ * will send the HTTP GET method to the server to find 
+ * the user's data using the user's username and password. 
+ * Once verified, a JWT is signed and returned to the caller.
+ * 
+ **************************************************/
+
+
 /**************************************************/
 /*              API CONFIGURATION                 */
 /**************************************************/
@@ -16,12 +31,12 @@ const User = require('../models/users');
 /**************************************************/
 
 
-//Sample get call
+//Sample get call for testing connection
 router.get('/', (req, res) => {
     res.send('From API')
 });
 
-//Verify Authentication
+//Verifies the user's token
 function verifyToken(req, res, next) {
     //Check auth in header
     if (!req.headers.authorization) {
@@ -46,7 +61,9 @@ function verifyToken(req, res, next) {
     next();
 }
 
-//POST : Registration
+// POST : Registration
+// Hashes the entered password, then attempts to save the 
+// account to the database
 router.post('/register', (req, res) => {
     //Hash the password
     bcrypt.hash(req.body.password, 10).then((hash) => {
@@ -81,12 +98,14 @@ router.post('/register', (req, res) => {
     })
 });
 
-//POST : Login authentication
+// POST : Login authentication
+// Finds the username then password from the database.
+// If the password does not match the database password login attempt fails
+// Otherwise, sign a token and give it to the user
 router.post('/login', (req, res) => {
-
     let thisUser;
 
-    //Find the user in the database
+    //Find the username in the database
     User.find({ username: req.body.username }).exec().then(userFound => {
         thisUser = userFound[0];
 
@@ -115,22 +134,24 @@ router.post('/login', (req, res) => {
         }
         else {
             return res.status(401).json({
-                message: "Invalid password"
+                error: "Invalid credentials"
             })
         }
     }).catch(err => {
         res.status(404).json({
-            message: "Invalid username",
+            error: "Invalid credentials",
             search: req.body.username,
         });
     })
 });
 
+// Verifies token for dashboard
 router.get('/#', verifyToken, (req, res) => {
     res.sendStatus(200);
 })
 
 // GET the logged in user's id and username from the token
+// Returns the userID
 router.get('/user', (req, res) => {
     let token = req.headers.authorization.split(' ')[1];
 
@@ -146,7 +167,8 @@ router.get('/user', (req, res) => {
     })
 })
 
-// GET All Users (employees)
+// GET All Users (employees) and their data
+// Returns JSON array of all users in database
 router.get('/users', (req, res) => {
     User.find().exec().then(result => {
         res.status(200).json(result);
@@ -158,6 +180,7 @@ router.get('/users', (req, res) => {
 
 // GET the user information by their id
 // TODO implement GraphQL call to trim info
+// Returns the user's data from the id
 router.get('/user/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -178,8 +201,8 @@ router.get('/user/:id', async (req, res) => {
     }
 });
 
-//Get the user role info from the user_role table
-// @returns json object of the row where passed id is requested
+// GET the user role info from the user_role table
+// Returns json object of the row where passed id is requested
 router.route('/user/role/:id').get((req, res) => {
     User.findOne({ where: { role_id: req.params.id } }).then((user) => {
         //console.log("The user role is: " + user.role_id)

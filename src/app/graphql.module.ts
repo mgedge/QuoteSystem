@@ -1,3 +1,10 @@
+/***************************************************
+ * graphql.module
+ * 
+ * This file defines the GraphQL server.
+ * 
+ **************************************************/
+
 import {NgModule} from '@angular/core';
 import {APOLLO_OPTIONS} from 'apollo-angular';
 import {ApolloClientOptions, InMemoryCache} from '@apollo/client/core';

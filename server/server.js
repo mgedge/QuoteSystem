@@ -1,8 +1,19 @@
-
+/***************************************************
+ * server.js
+ * 
+ * This file creates the backend service for the application
+ * 
+ * When run, using 'node server' or 'nodemon server',
+ * the user will be able to log-in. Without it, the API
+ * calls would do nothing. This file would be run on the 
+ * home server users to connect to.
+ * 
+ **************************************************/
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+//Hidden passkeys
 require('dotenv/config')
 
 const mongoose = require('mongoose');
@@ -46,6 +57,7 @@ app.get('/', function(req, res) {
     res.send("Hello from server")
 })
 
+//Connect to mongoose (middleman for API)
 mongoose.connect(process.env.DB_CONNECTION, 
   { useNewUrlParser: true, useUnifiedTopology: true }, () => 
   console.log("Connected to database through server.js")

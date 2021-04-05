@@ -1,6 +1,13 @@
+/***************************************************
+ * resolvers.js
+ * 
+ * This file defines GraphQL calls.
+ * 
+ **************************************************/
 const User = require('../models/users');
 
 module.exports = {
+    // GET GraphQL call for ALL users
     users: async function() {
         const users = await User.find();
         return {
@@ -13,6 +20,7 @@ module.exports = {
         }
     },
 
+    // GET GraphQL call for all users with the specified ID
     getUserRoleByID: async function({_id}) {
         const user = await User.findById(_id);
 

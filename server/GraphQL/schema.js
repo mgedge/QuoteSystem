@@ -1,3 +1,16 @@
+/***************************************************
+ * schema.js
+ * 
+ * This file defines the schemas that can be retrieved from
+ * GraphQL calls.
+ * 
+ * For example, to get the users, the RootQuery and UserData
+ * are accessed in the form of { users { users }}, defined by
+ * its property. To request the properties of users the User
+ * type is accessed. { users { users { username }}} for example.
+ * 
+ **************************************************/
+
 const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
