@@ -49,14 +49,6 @@ export class AuthGuard implements CanActivate {
     }
 
     //Return true or false if the user is permitted to access the called url
-
-    /* TODO: Fix role authorization
-        It is currently possible, with the use of multiple roles, to navigate to unauthorized pages by manipulating
-        the url. In order to remedy, this function needs to get the user's roles and iterate through them to verify
-        that the user has the required role. The issue here is with the asynchronous subscribe function. Subscribe does
-        not stop the subsequent program, so by the time the function returns the user's roles, the canActivate function has 
-        already determined (falsely), that the user does not have the required role.
-    */
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         //Get the userID
         await this._auth.getUser().then((res: any) => {
@@ -84,14 +76,29 @@ export class AuthGuard implements CanActivate {
 
             //If the user has roles
             if (this.currentUser.roles) {
+
+                let access = false;
+
                 //Ensure the user has role access to this area
                 for (let i = 0; i < this.currentUser.roles.length; i++) {
+                    console.log(this.currentUser.roles.length)
                     //Ensure the required role and user role match
                     if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
-                        window.alert("Access not permitted - required role: '" + route.data.role + "'");
-                        this._router.navigate(['/#']);
-                        return false;
+                        if(!access)
+                            access = false;
                     }
+                    else {
+                        access = true;
+                    }
+                }
+
+                if(access) {
+                    return true;
+                }
+                else {
+                    window.alert("Access not permitted - required role: '" + route.data.role + "'");
+                    this._router.navigate(['/#']);
+                    return false;
                 }
             }
 
@@ -136,22 +143,6 @@ export class AuthGuard implements CanActivate {
                 return res.data.getUserRoleByID.roles;
             })
     }
-
-    // //Sets the currentUser object of this file
-    // setCurrentUser(user: any) {
-    //     this.currentUser = user;
-    // }
-
-    // //Returns t/f if the user has the required role
-    // hasRoleID(role: String): boolean {
-    //     for (var i = 0; i < this.currentUser.roles.length; i++) {
-    //         if (this.currentUser.roles[i].role_title === role) {
-    //             return true;
-    //         }
-    //     }
-
-    //     return false;
-    // }
 
     //This function determines if the token has expired
     tokenExpired(token: string) {
