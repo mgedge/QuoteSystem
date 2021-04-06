@@ -45,21 +45,7 @@ export class AuthGuard implements CanActivate {
         private _authService: AuthService,
         private _activatedRoute: ActivatedRoute,
     ) {
-        //First get the userID from the token
-        this._auth.getUser().subscribe((res: any) => {
-            this.userID = res.userID
 
-            //Retrieve the current user's profile
-            this._auth.getCurrentUser(this.userID).subscribe((res: any) => {
-                //Set the user to the returned user profile
-                this.currentUser = res.user;
-
-                //Next retrieve the user's roles
-                if (this.currentUser.roles.length > 0) {
-                    //this.setPriorityRole();
-                }
-            });
-        });
     }
 
     //Return true or false if the user is permitted to access the called url
@@ -71,18 +57,17 @@ export class AuthGuard implements CanActivate {
         not stop the subsequent program, so by the time the function returns the user's roles, the canActivate function has 
         already determined (falsely), that the user does not have the required role.
     */
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        //Verify token is still valid
-        // if(this._auth.tokenExpired()) {
-        //     this._router.navigate(['login'])
-        //    return false; 
-        // }
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        //Get the userID
+        await this._auth.getUser().then((res: any) => {
+            this.userID = res.userID;
+        });
 
-        // this.getQuery(this.userID);
+        //Use GraphQL to get the user's roles
+        await this.getQuery(this.userID);
 
+        //Retrieve the token
         let token: any = localStorage.getItem('token');
-
-        // console.log(this.currentUser);
 
         //If user is not logged in, reject access
         if (this._authService.loggedIn === true) {
@@ -97,17 +82,18 @@ export class AuthGuard implements CanActivate {
                 return false;
             }
 
-            //Ensure the user has role access to this area
-            // for (let i = 0; i < this.currentUser.roles.length; i++) {
-            //     console.log(route.data.role)
-            //     console.log(this.currentUser.roles[i].role_id);
-
-            //     if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
-            //         window.alert("Access not permitted - required role: '" + route.data.role + "'");
-            //         this._router.navigate(['/#']);
-            //         return false;
-            //     }
-            // }
+            //If the user has roles
+            if (this.currentUser.roles) {
+                //Ensure the user has role access to this area
+                for (let i = 0; i < this.currentUser.roles.length; i++) {
+                    //Ensure the required role and user role match
+                    if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
+                        window.alert("Access not permitted - required role: '" + route.data.role + "'");
+                        this._router.navigate(['/#']);
+                        return false;
+                    }
+                }
+            }
 
             return true;
         }
@@ -122,31 +108,8 @@ export class AuthGuard implements CanActivate {
         return false;
     }
 
-    // This function will be used to determine if the user can access the url
-    authenticate(route: ActivatedRouteSnapshot): boolean {
-        //If user is not logged in, reject access
-        if (this._authService.loggedIn === true) {
-            //Ensure the user has access to this area
-            for (let i = 0; i < this.currentUser.roles.length; i++) {
-                console.log(route.data.role)
-                console.log(this.currentUser.roles[i].role_id);
-
-                if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
-                    window.alert("Access not permitted - required role: '" + route.data.role + "'");
-                    this._router.navigate(['/#']);
-                    return false;
-                }
-            }
-
-
-            return true;
-        }
-
-        return false
-    }
-
     // This function shall be used to retrieve the user's roles
-    getQuery(id: any) {
+    async getQuery(id: any) {
         let getQuery: any = `
         mutation {
             getUserRoleByID(_id: "` + id + `") {
@@ -157,9 +120,11 @@ export class AuthGuard implements CanActivate {
             }
         }`
 
+        //gqlize the query
         getQuery = gql(getQuery);
 
-        this.currentUser = this.apollo
+        //Set the roles in this file
+        this.currentUser.roles = await this.apollo
             .mutate({
                 mutation: getQuery,
                 refetchQueries: [{ query: GET_USER }],
@@ -167,26 +132,26 @@ export class AuthGuard implements CanActivate {
                     _id: id,
                 }
             })
-            .subscribe(res => {
-                this.setCurrentUser(res);
+            .toPromise().then((res: any) => {
+                return res.data.getUserRoleByID.roles;
             })
     }
 
-    //Sets the currentUser object of this file
-    setCurrentUser(user: any) {
-        this.currentUser = user;
-    }
+    // //Sets the currentUser object of this file
+    // setCurrentUser(user: any) {
+    //     this.currentUser = user;
+    // }
 
-    //Returns t/f if the user has the required role
-    hasRoleID(role: String): boolean {
-        for (var i = 0; i < this.currentUser.roles.length; i++) {
-            if (this.currentUser.roles[i].role_title === role) {
-                return true;
-            }
-        }
+    // //Returns t/f if the user has the required role
+    // hasRoleID(role: String): boolean {
+    //     for (var i = 0; i < this.currentUser.roles.length; i++) {
+    //         if (this.currentUser.roles[i].role_title === role) {
+    //             return true;
+    //         }
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 
     //This function determines if the token has expired
     tokenExpired(token: string) {

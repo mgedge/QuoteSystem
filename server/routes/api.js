@@ -133,16 +133,15 @@ router.post('/login', (req, res) => {
             })
         }
         else {
-            return res.status(401).json({
-                error: "Invalid credentials"
-            })
+            return res.status(404).json({
+                message: "Invalid credentials"
+            });
         }
     }).catch(err => {
-        res.status(404).json({
-            error: "Invalid credentials",
-            search: req.body.username,
+        return res.status(404).json({
+            message: "Invalid credentials"
         });
-    })
+    });
 });
 
 // Verifies token for dashboard

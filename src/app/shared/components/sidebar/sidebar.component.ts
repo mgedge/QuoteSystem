@@ -34,11 +34,11 @@ export class SidebarComponent implements OnInit {
 
 
     //First get the userID from the token
-    this._auth.getUser().subscribe((res: any) => {
+    this._auth.getUser().then((res: any) => {
       this.currentUser.userID = res.userID
 
       //Retrieve the current user's profile
-      this._auth.getCurrentUser(this.currentUser.userID).subscribe((res: any) => {
+      this._auth.getCurrentUser(this.currentUser.userID).then((res: any) => {
         //Set the user to the returned user profile
         this.currentUser = res.user;
 

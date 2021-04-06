@@ -40,25 +40,6 @@ export class AuthService {
   // Service to call the login API and set token
   loginUser(user: any) {
     return this.http.post<any>(`${this.endpoint}/login`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('token', res.token)
-
-        // this.currentUser = res.user;
-        // this.currentUserID = res.user._id;
-
-        //If there are any roles, set them
-        // if (res.user.roles) {
-        //   this.getUserRole(res.user._id).subscribe(
-        //     (result: any) => {
-        //       this.currentUserRole = result.user.roles[0].role_id;
-        //     },
-        //     (error) => {
-        //       console.log(error)
-        //     });
-        // }
-
-        this._router.navigate([`/#`])
-      });
   }
 
   // Service to remove user token and navigate to login
@@ -102,27 +83,34 @@ export class AuthService {
   }
 
   // Returns the current user's information
-  public getCurrentUser(id: any): Observable<any> {
+  public getCurrentUser(id: any): Promise<any> {
     let api = `${this.endpoint}/user/${id}`;
 
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res: any) => {
-        return res || {}
-      }),
-      catchError(this.handleError)
-    )
+    return this.http.get(api, { headers: this.headers }).toPromise()
+    
+    
+    
+    // .pipe(
+    //   map((res: any) => {
+    //     return res || {}
+    //   }),
+    //   catchError(this.handleError)
+    // )
   }
 
   // Returns the user's information from token
-  public getUser(): Observable<any> {
+  public getUser(): Promise<any> {
     let api = `${this.endpoint}/user`;
 
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res: any) => {
-        return res || {}
-      }),
-      catchError(this.handleError)
-    )
+    return this.http.get(api, { headers: this.headers }).toPromise()
+    
+    
+    // .pipe(
+    //   map((res: any) => {
+    //     return res || {}
+    //   }),
+    //   catchError(this.handleError)
+    // )
   }
 
   // Returns ALL employee users from the database including hashed password

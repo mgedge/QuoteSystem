@@ -53,17 +53,18 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
+        path: 'supervisor', component: SupervisorComponent, canActivate: [AuthGuard],
         data: { role: ['2'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
         ]
       },
       {
-        path: 'supervisor', component: SupervisorComponent, canActivate: [AuthGuard],
+        path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
         ]
       },
+
     ]
   }
 ];
