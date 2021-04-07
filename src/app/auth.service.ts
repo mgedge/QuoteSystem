@@ -114,15 +114,17 @@ export class AuthService {
   }
 
   // Returns ALL employee users from the database including hashed password
-  public getUsers(): Observable<any> {
+  public getUsers(): Promise<any> {
     let api = `${this.endpoint}/users`;
 
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res: any) => {
-        return res || {}
-      }),
-      catchError(this.handleError)
-    )
+    return this.http.get(api, { headers: this.headers }).toPromise()
+    
+    // .pipe(
+    //   map((res: any) => {
+    //     return res || {}
+    //   }),
+    //   catchError(this.handleError)
+    // )
   }
 
   public getCurrentID() {

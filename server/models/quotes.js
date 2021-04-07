@@ -1,0 +1,16 @@
+/** This file defines a user schema from the users table in the database  */
+
+const mongoose = require('mongoose')
+
+const quoteSchema = new mongoose.Schema({
+    quoteID: {type: Number, required: true},
+    username: {type: String, required: true},
+    customer: {type: String, required: true},
+    email: {type: String, required: true},
+    items: [
+        {name: String, count: Number}
+    ],
+    status: {type: String, required: true},
+    discount: {type: String},
+})
+module.exports = mongoose.model('quote', quoteSchema, 'quotes')

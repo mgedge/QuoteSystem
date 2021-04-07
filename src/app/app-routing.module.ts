@@ -19,6 +19,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import { EmployeesComponent } from './shared/widgets/admin/employees/employees.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RoleAuthGuard } from './auth/role-auth.guard';
 import { AssociateComponent } from './modules/associate/associate.component';
 import { SupervisorComponent } from './modules/supervisor/supervisor.component';
 import { SampleCardsComponent } from './modules/sample-cards/sample-cards.component';
@@ -27,15 +28,16 @@ import { VideoComponent } from './shared/widgets/demo/video/video.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '*', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   //Sub paths once the user is logged in
   {
-    path: '#', component: DefaultComponent, canActivate: [AuthGuard],
+    path: '#', component: DefaultComponent, canActivate: [AuthGuard], 
     children: [
       {
         path: '', component: DashboardComponent, children: [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
+          { path: '', component: EmployeesComponent, outlet: 'users' }, 
         ]
       },
       {
@@ -46,7 +48,7 @@ const routes: Routes = [
       },
       { path: 'graphql', component: SampleGraphqlComponent },
       {
-        path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+        path: 'admin', component: AdminComponent, canActivate: [RoleAuthGuard],
         data: { role: ['1'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
 

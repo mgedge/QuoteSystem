@@ -14,7 +14,9 @@ export class SidebarComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
 
-  currentUser: any = {};
+  currentUser: any = {
+    image: 'default'
+  };
   priorityRole: any = {
     title: 'No role',
     priority: 100

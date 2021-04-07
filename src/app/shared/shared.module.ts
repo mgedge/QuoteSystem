@@ -11,6 +11,7 @@ import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.compo
 import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
 import { VideoComponent } from './widgets/demo/video/video.component';
 
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -25,7 +26,7 @@ import { VideoComponent } from './widgets/demo/video/video.component';
     CommonModule,
     MatDividerModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
   ],
   exports: [
     HeaderComponent,

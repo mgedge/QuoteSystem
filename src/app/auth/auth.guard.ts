@@ -74,33 +74,33 @@ export class AuthGuard implements CanActivate {
                 return false;
             }
 
-            //If the user has roles
-            if (this.currentUser.roles) {
+            // //If the user has roles
+            // if (this.currentUser.roles) {
 
-                let access = false;
+            //     let access = false;
 
-                //Ensure the user has role access to this area
-                for (let i = 0; i < this.currentUser.roles.length; i++) {
-                    console.log(this.currentUser.roles.length)
-                    //Ensure the required role and user role match
-                    if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
-                        if(!access)
-                            access = false;
-                    }
-                    else {
-                        access = true;
-                    }
-                }
+            //     //Ensure the user has role access to this area
+            //     for (let i = 0; i < this.currentUser.roles.length; i++) {
+            //         console.log(this.currentUser.roles.length)
+            //         //Ensure the required role and user role match
+            //         if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
+            //             if(!access)
+            //                 access = false;
+            //         }
+            //         else {
+            //             access = true;
+            //         }
+            //     }
 
-                if(access) {
-                    return true;
-                }
-                else {
-                    window.alert("Access not permitted - required role: '" + route.data.role + "'");
-                    this._router.navigate(['/#']);
-                    return false;
-                }
-            }
+            //     if(access) {
+            //         return true;
+            //     }
+            //     else {
+            //         window.alert("Access not permitted - required role: '" + route.data.role + "'");
+            //         this._router.navigate(['/#']);
+            //         return false;
+            //     }
+            // }
 
             return true;
         }

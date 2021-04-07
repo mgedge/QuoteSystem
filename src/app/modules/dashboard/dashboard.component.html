@@ -67,29 +67,29 @@
 
                         <mat-form-field>
                             <input matInput formControlName="username" placeholder="Username" id="username"
-                                [(ngModel)]="registerUserData.username" type="text" required>
+                                 type="text" required>
                         </mat-form-field>
 
                         <mat-form-field>
                             <input matInput formControlName="password" placeholder="Password" id="password"
-                                [(ngModel)]="registerUserData.password" type="password" required>
+                                 type="password" required>
                         </mat-form-field>
 
                         <h3>Name:</h3>
 
                         <mat-form-field>
                             <input matInput formControlName="firstname" placeholder="First name" id="firstname"
-                                [(ngModel)]="registerUserData.firstname" type="text" required>
+                                 type="text" required>
                         </mat-form-field>
 
                         <mat-form-field>
                             <input matInput formControlName="lastname" placeholder="Last name" id="lastname"
-                                [(ngModel)]="registerUserData.lastname" type="text" required>
+                                 type="text" required>
                         </mat-form-field>
 
                         <mat-form-field>
                             <input matInput formControlName="image" placeholder="Image" id="image"
-                                [(ngModel)]="registerUserData.image" type="text">
+                                 type="text">
                         </mat-form-field>
 
                         <h3>Roles:</h3>
@@ -114,9 +114,12 @@
 
             <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
                 <mat-card>
-                    <mat-toolbar>Users</mat-toolbar>
                     <div class="form">
-                        <router-outlet name="users"></router-outlet>
+                        <mat-toolbar>Users</mat-toolbar>
+                        <div class="container">
+                            <router-outlet name="users"></router-outlet>
+                        </div>
+    
                     </div>
                 </mat-card>
             </div>

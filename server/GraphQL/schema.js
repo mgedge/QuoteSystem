@@ -30,6 +30,7 @@ module.exports = buildSchema(`
     type UserData {
         users: [User!]!
     }
+
     type RootQuery {
         users: UserData!
     }

@@ -11,12 +11,39 @@ ul {
     list-style: none;
 }
 
-form {
-    padding: 20px;
-    padding-top: 0px;
+.mat-card {
+    height: 100%;
 }
 
-.form{
+.form {
+    padding: 8px;
+}
+
+.image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;  
+    left: 0;
+    top: 0;
+    margin:auto;
+}
+
+.image-wrapper {
+    position: relative;
+    margin: auto;
+}
+
+.container {
+    padding: 0px;
+    padding-top: 16px;
+    display: block;
+    min-height: 200px;
+    align-items: center;
+    height: 100%;
+    margin: auto;
+}
+
+form {
     padding: 20px;
     padding-top: 0px;
 }
@@ -25,10 +52,10 @@ form {
     height: auto;
 }
 
-.mat-card {
+/* .mat-card {
     max-height: 700px;
     height: 100%;
-}
+} */
 
 @media (max-width: 1279px) {
     .mat-card {

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth.service';
 
 export interface PeriodicElement {
@@ -21,6 +22,9 @@ export class EmployeesComponent implements OnInit {
     {username: '', firstname: '', lastname: '', image: ''}
   ];
 
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatSort) sort: MatSort | undefined;
+
   displayedColumns: string[] = ['username', 'firstname', 'lastname', 'image'];
   dataSource: any;
 
@@ -28,6 +32,7 @@ export class EmployeesComponent implements OnInit {
     private _auth: AuthService,
   ) { 
     this.loadUsers();
+    this.dataSource = new MatTableDataSource(this.employees);
   }
 
 
@@ -36,7 +41,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   loadUsers() {
-    this._auth.getUsers().subscribe(users =>{
+    this._auth.getUsers().then(users =>{
       this.employees = users
       this.dataSource = this.employees;
     })

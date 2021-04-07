@@ -12,6 +12,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mysql = require('mysql');
 
 //Hidden passkeys
 require('dotenv/config')
@@ -62,6 +63,25 @@ mongoose.connect(process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true }, () => 
   console.log("Connected to database through server.js")
 )
+
+//Connect to external server
+const external = mysql.createConnection({
+  host: 'blitz.cs.niu.edu',
+  port: '3306',
+  database: 'csci467',
+  user: 'student',
+  password: 'student'
+});
+
+external.connect(function(err) {
+  if(err) throw err;
+
+  else console.log("Successfully connected to the external server");
+
+  // external.query("SELECT * FROM customers", function(err, result, fields) {
+  //   if(err) throw err;
+  // })
+})
 
 //Open connection
 app.listen(PORT, function() {
