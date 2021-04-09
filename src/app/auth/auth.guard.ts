@@ -83,17 +83,17 @@ export class AuthGuard implements CanActivate {
             }
 
             //If the user has roles
-            if (this.currentUser.roles) {
-                //Ensure the user has role access to this area
-                for (let i = 0; i < this.currentUser.roles.length; i++) {
-                    //Ensure the required role and user role match
-                    if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
-                        window.alert("Access not permitted - required role: '" + route.data.role + "'");
-                        this._router.navigate(['/#']);
-                        return false;
-                    }
-                }
-            }
+            // if (this.currentUser.roles) {
+            //     //Ensure the user has role access to this area
+            //     for (let i = 0; i < this.currentUser.roles.length; i++) {
+            //         //Ensure the required role and user role match
+            //         if (route.data.role && route.data.role.indexOf(this.currentUser.roles[i].role_id) === -1) {
+            //             window.alert("Access not permitted - required role: '" + route.data.role + "'");
+            //             this._router.navigate(['/#']);
+            //             return false;
+            //         }
+            //     }
+            // }
 
             return true;
         }
