@@ -56,13 +56,7 @@ export class SampleGraphqlComponent implements OnInit {
     private apollo: Apollo,
     public formBuilder: FormBuilder,
   ) {
-    // this.chipsForm = this.formBuilder.group({
-    //   username: false,
-    //   firstname: false,
-    //   lastname: false,
-    //   image: false,
-    //   roles: false,
-    // });
+
   }
 
   ngOnInit(): void {

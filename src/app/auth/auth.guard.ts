@@ -56,7 +56,7 @@ export class AuthGuard implements CanActivate {
         });
 
         //Use GraphQL to get the user's roles
-        await this.getQuery(this.userID);
+        // await this.getQuery(this.userID);
 
         //Retrieve the token
         let token: any = localStorage.getItem('token');
@@ -116,33 +116,33 @@ export class AuthGuard implements CanActivate {
     }
 
     // This function shall be used to retrieve the user's roles
-    async getQuery(id: any) {
-        let getQuery: any = `
-        mutation {
-            getUserRoleByID(_id: "` + id + `") {
-                roles {
-                    role_id
-                    role_title
-                }
-            }
-        }`
+    // async getQuery(id: any) {
+    //     let getQuery: any = `
+    //     mutation {
+    //         getUserRoleByID(_id: "` + id + `") {
+    //             roles {
+    //                 role_id
+    //                 role_title
+    //             }
+    //         }
+    //     }`
 
-        //gqlize the query
-        getQuery = gql(getQuery);
+    //     //gqlize the query
+    //     getQuery = gql(getQuery);
 
-        //Set the roles in this file
-        this.currentUser.roles = await this.apollo
-            .mutate({
-                mutation: getQuery,
-                refetchQueries: [{ query: GET_USER }],
-                variables: {
-                    _id: id,
-                }
-            })
-            .toPromise().then((res: any) => {
-                return res.data.getUserRoleByID.roles;
-            })
-    }
+    //     //Set the roles in this file
+    //     this.currentUser.roles = await this.apollo
+    //         .mutate({
+    //             mutation: getQuery,
+    //             refetchQueries: [{ query: GET_USER }],
+    //             variables: {
+    //                 _id: id,
+    //             }
+    //         })
+    //         .toPromise().then((res: any) => {
+    //             return res.data.getUserRoleByID.roles;
+    //         })
+    // }
 
     //This function determines if the token has expired
     tokenExpired(token: string) {

@@ -41,10 +41,9 @@
                                 </div>
     
                                 <div *ngIf="this.getSelected('Roles')" class="row roles">
-                                    <ng-container *ngIf="user.roles.length > 1; else manyRoles">Roles: </ng-container>
-                                    <ng-template #manyRoles>Role: </ng-template>
-    
-                                    <span *ngIf="user.roles.length == 0" class="image">None</span>
+                                    <ng-container *ngIf="user.roles.length > 1; else manyRoles">Roles:</ng-container>
+                                    <ng-template #manyRoles>Role:&nbsp;&nbsp;</ng-template>
+                                    <span *ngIf="user.roles.length == 0" class="image">&nbsp;None</span>
     
                                     <div *ngFor="let role of user.roles; let i = index">
                                         <span>{{role.role_title}}{{i === (user.roles.length - 1) ? '': ', '}}</span>

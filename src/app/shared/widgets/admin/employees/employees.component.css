@@ -11,16 +11,38 @@
     justify-content: space-around;
 }
 
-.row {
-    padding-left: 16px;
+.buttons {
+    display: flex;
+    width: 100%;
+    padding-left: 24px;
     padding-right: 16px;
     padding-top: 8px;
+}
+
+td, th {
+    width: 20%
+}
+
+.filter-form {
+    width: 100%
+}
+
+.filter-div {
+    width: stretch;
+    display: flex;
+    flex: bottom;
+    align-items: center;
+}
+
+.refresh-div {
+    float: right;
+    position: relative;
+    top: 0;
+    right: 0;
 }
 
 table {
     width: 100%;
 }
 
-.refresh {
-    float: right;
-}
+

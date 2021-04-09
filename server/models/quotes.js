@@ -1,4 +1,4 @@
-/** This file defines a user schema from the users table in the database  */
+/** This file defines a quote schema from the quotes table in the database  */
 
 const mongoose = require('mongoose')
 

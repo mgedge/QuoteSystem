@@ -11,7 +11,6 @@ import { AuthService } from "./../../auth.service";
 export class DefaultComponent implements OnInit {
   mobileQuery: MediaQueryList;
 
-  currentUser: any = {};
   sideBarOpen = true;
 
   private _mobileQueryListener: () => void;

@@ -15,8 +15,8 @@ const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
     type role {
-        role_id: String!
-        role_title: String!
+        role_id: String
+        role_title: String
     }
     type User {
         _id: String!
@@ -25,14 +25,36 @@ module.exports = buildSchema(`
         firstname: String!
         lastname: String!
         image: String!
-        roles: [role!]!
+        roles: [role!]
     }
     type UserData {
         users: [User!]!
     }
 
+
+    type item {
+        name: String!
+        count: Int!
+    }
+    type Quote {
+        _id: String!
+        quoteID: Int!
+        username: String!
+        customer: String!
+        email: String!
+        items: [item!]!
+        status: String!
+        discount: String!
+    }
+    type QuoteData {
+        quotes: [Quote!]!
+    }
+
+
+
     type RootQuery {
         users: UserData!
+        quotes: QuoteData!
     }
     type RootMutation {
         getUserRoleByID(_id: ID!): User!

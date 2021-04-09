@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DefaultComponent } from 'src/app/layouts/default/default.component';
-import { EmployeesComponent } from 'src/app/shared/widgets/admin/employees/employees.component';
-import { AuthService } from './../../auth.service'
+import { UserService } from 'src/app/shared/user.service';
+import { AuthService } from './../../auth.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements AfterViewInit {
   //Form Group
   registerForm: FormGroup;
   registerUserData: any = {
@@ -35,18 +33,13 @@ export class DashboardComponent implements OnInit {
   ];
 
   //Logged in user account
-  currentUser: any = {
-    image: 'default'
-  };
+  currentUser: any = {};
   roles: any = [];
 
   constructor(
     private _auth: AuthService,
-    private actRoute: ActivatedRoute,
-    private _router: Router,
-    private _default: DefaultComponent,
+    private _user: UserService,
     public formBuilder: FormBuilder,
-    //private employees: EmployeesComponent,
   ) {
     this.registerForm = this.formBuilder.group({
       firstname: ['', Validators.required],
@@ -59,7 +52,13 @@ export class DashboardComponent implements OnInit {
       ],
     })
 
-    //First get the userID from the token
+    // this._user.getUser();
+
+
+    
+    console.log(this.currentUser);
+
+    // //First get the userID from the token
     this._auth.getUser().then((res: any) => {
       this.currentUser.userID = res.userID
 
@@ -68,12 +67,23 @@ export class DashboardComponent implements OnInit {
         //Set the user to the returned user profile
         this.currentUser = res.user;
 
+        console.log(this.currentUser);
+
+
         //Next retrieve the user's roles
         if (this.currentUser.roles.length > 0) {
           this.populateRoles();
         }
       });
     });
+
+    console.log(this.currentUser);
+
+  }
+  ngAfterViewInit(): void {
+    // this.currentUser = this._user.getUser();
+    console.log(this.currentUser);
+
   }
 
   ngOnInit(): void {

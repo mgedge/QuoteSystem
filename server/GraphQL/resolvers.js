@@ -5,7 +5,7 @@
  * 
  **************************************************/
 const User = require('../models/users');
-//const Quote = require('../models/quotes');
+const Quote = require('../models/quotes');
 
 module.exports = {
     /***        USERS            ***/
@@ -40,15 +40,15 @@ module.exports = {
 
     /***        QUOTES            ***/
     // GET GraphQL call for ALL quotes
-    // quotes: async function () {
-    //     const quotes = await Quote.find();
-    //     return {
-    //         quotes: quotes.map((q) => {
-    //             return {
-    //                 ...q._doc,
-    //                 _id: q._id.toString(),
-    //             }
-    //         })
-    //     }
-    // },
+    quotes: async function () {
+        const quotes = await Quote.find();
+        return {
+            quotes: quotes.map((q) => {
+                return {
+                    ...q._doc,
+                    _id: q._id.toString(),
+                }
+            })
+        }
+    },
 }

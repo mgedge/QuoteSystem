@@ -35,12 +35,19 @@ export class RoleAuthGuard implements CanActivate {
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     //Get the userID
+    console.log("Enter role-auth")
+
     await this._auth.getUser().then((res: any) => {
+      console.log("user retrieved")
       this.userID = res.userID;
     });
 
+    console.log(this.userID);
+
     //Use GraphQL to get the user's roles
     await this.getQuery(this.userID);
+
+    console.log(this.currentUser)
 
     // //If the user has roles
     if (this.currentUser.roles) {

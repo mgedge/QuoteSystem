@@ -10,6 +10,7 @@ import { EmployeesComponent } from './widgets/admin/employees/employees.componen
 import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.component';
 import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
 import { VideoComponent } from './widgets/demo/video/video.component';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { VideoComponent } from './widgets/demo/video/video.component';
     AddQuoteComponent,
     EditQuoteComponent,
     VideoComponent,
+    UserService,
   ],
   imports: [
     CommonModule,
