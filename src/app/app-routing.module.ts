@@ -24,6 +24,7 @@ import { SupervisorComponent } from './modules/supervisor/supervisor.component';
 import { SampleCardsComponent } from './modules/sample-cards/sample-cards.component';
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
 import { VideoComponent } from './shared/widgets/demo/video/video.component';
+import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -62,6 +63,7 @@ const routes: Routes = [
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
+          { path: '', component: QuoteListComponent, outlet: 'quotes'},
         ]
       },
 
