@@ -36,6 +36,16 @@ export class AuthService {
         catchError(this.handleError)
       )
   }
+  
+  // Service to call the register API
+  createQuote(quote: any) {
+    let api = `${this.endpoint}/newQuote`
+    return this.http.post<any>(api, quote)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+  
 
   // Service to call the login API and set token
   loginUser(user: any) {

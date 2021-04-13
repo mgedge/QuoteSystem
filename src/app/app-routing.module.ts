@@ -26,6 +26,7 @@ import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.
 import { VideoComponent } from './shared/widgets/demo/video/video.component';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
+import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -65,7 +66,8 @@ const routes: Routes = [
         data: { role: ['3'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
-          { path: '', component: ItemListComponent, outlet: 'items'}
+          { path: '', component: ItemListComponent, outlet: 'items'},
+          { path: '', component: AddQuoteComponent, outlet: 'new-quote'},
         ]
       },
 

@@ -26,7 +26,9 @@ require('dotenv/config')
 
 const User = require('../models/users');
 const Quote = require('../models/quotes');
-const Item = require('../models/item')
+const Item = require('../models/item');
+const { Mongoose } = require('mongoose');
+const item = require('../models/item');
 
 /**************************************************/
 /*               END OF CONFIGURATION             */

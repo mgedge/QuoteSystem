@@ -9,7 +9,7 @@ import { QuoteService } from 'src/app/shared/services/quote.service';
 
 export class QuoteListComponent implements OnInit {
   quoteList: any = [
-    {quoteID: '', customer: '', username: '', status: '', items: {name: '', count: ''}}
+    {quoteID: '', customer: '', username: '', status: ''}
   ];
 
   displayedColumns: string[] = ['quoteID', 'customer', 'username', 'status'];

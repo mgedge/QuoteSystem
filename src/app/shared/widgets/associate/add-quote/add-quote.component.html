@@ -1,33 +1,43 @@
 <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
     <mat-card>
-        <mat-toolbar color="primary">Create New Quote</mat-toolbar>
-
-        <form [formGroup]="registerForm" fxLayoutAlign="stretch" fxLayout="column" class="register-form">
-            <br>
+        <form [formGroup]="quoteForm" fxLayoutAlign="stretch" fxLayout="column" class="register-form">
 
             <h3>Customer Info:</h3>
             <mat-form-field>
                 <input matInput formControlName="customer" placeholder="Customer Name" id="customer"
-                    [(ngModel)]="registerUserData.customer" type="text" required>
+                    [(ngModel)]="quoteData.customer" type="text" required>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput formControlName="email" placeholder="Customer Email" id="email"
-                    [(ngModel)]="registerUserData.email" type="text" required>
+                <input matInput formControlName="contact" placeholder="Customer Contact Info" id="contact"
+                    [(ngModel)]="quoteData.contact" type="text" required>
             </mat-form-field>
 
             <h3>Items:</h3>
             <span>
+                <h4> Steel Screws: </h4>
                 <ul>
-                    <li *ngFor="let role of addEmployeeRoles">
-                        <mat-checkbox color="primary" formControlName="roles" (change)="toggleRole(role)">
-                            {{role.role_title}}
+                    <li *ngFor="let amount of amountOptions">
+                        <mat-checkbox color="primary" formControlName="amount" 
+                            (ngModelChange)="updateAmtSelected()">
+                            {{amount.count}}
+                        </mat-checkbox>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h4> 2x4 Wood Planks: </h4>
+                <ul>
+                    <li *ngFor="let amount of amountOptions">
+                        <mat-checkbox color="primary" formControlName="amount" 
+                            (ngModelChange)="updateAmtSelected()">
+                            {{amount.count}}
                         </mat-checkbox>
                     </li>
                 </ul>
             </span>
 
-            <button mat-raised-button (click)="createQuote()" type="button" class="btn btn-success"
+            <button mat-raised-button (click)="newQuote()" type="button" class="btn btn-success"
                 color="primary">Create New Quote</button>
 
             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>

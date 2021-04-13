@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { ItemService } from 'src/app/shared/services/item.service';
 
 @Component({
@@ -14,6 +15,9 @@ export class ItemListComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'price', 'description'];
   dataSource: any;
+  @ViewChild(MatPaginator) set paginator(mp: MatPaginator) {
+    this.dataSource.paginator = mp;
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -22,10 +26,11 @@ export class ItemListComponent implements OnInit {
   constructor(
     private _item: ItemService,
   ) { 
-    this.loadItems();
+    
   }
 
   ngOnInit(): void {
+    this.loadItems();
   }
 
   loadItems() {

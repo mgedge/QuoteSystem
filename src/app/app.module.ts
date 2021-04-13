@@ -57,6 +57,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
 import { ItemsInQuoteComponent } from './shared/widgets/associate/items-in-quote/items-in-quote.component';
+import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component'
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ItemsInQuoteComponent } from './shared/widgets/associate/items-in-quote
     QuoteListComponent,
     ItemListComponent,
     ItemsInQuoteComponent,
+    AddQuoteComponent
   ],
   imports: [
     AppRoutingModule,
