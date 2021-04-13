@@ -1,22 +1,11 @@
 <div class="content" fxLayoutWrap>
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
                     <mat-toolbar>Sales Card #1</mat-toolbar>
                     <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-bar-vertical class="chart" 
-                            [results]="saleData" 
-                            [xAxisLabel]="'Products'"
-                            [yAxisLabel]="'Sale'" 
-                            [legend]="true" 
-                            [showXAxisLabel]="true" 
-                            [showYAxisLabel]="true"
-                            [xAxis]="true" 
-                            [yAxis]="true">
-                            </ngx-charts-bar-vertical>
-                        </div>
+                        <router-outlet name="quotes"></router-outlet>
                     </div>
                 </div>
             </mat-card>
@@ -41,8 +30,6 @@
             </mat-card>
         </div>
     </div><br>
-
-
 
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
         <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">

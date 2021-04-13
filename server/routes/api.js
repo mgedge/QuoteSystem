@@ -25,6 +25,7 @@ const router = express.Router();
 require('dotenv/config')
 
 const User = require('../models/users');
+const Quote = require('../models/quotes');
 
 /**************************************************/
 /*               END OF CONFIGURATION             */
@@ -213,5 +214,16 @@ router.route('/user/role/:id').get((req, res) => {
         //return user.role_id;
     });
 });
+
+// GET All Quotes and their data
+// Returns JSON array of all quotes in database
+router.get('/quotes', (req, res) => {
+    Quote.find().exec().then(result => {
+        res.status(200).json(result);
+    })
+        .catch(err => {
+            res.status(500).json({ error: err })
+        });
+})
 
 module.exports = router;
