@@ -3,7 +3,7 @@
         <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
-                    <mat-toolbar>Sales Card #1</mat-toolbar>
+                    <mat-toolbar>Quote List</mat-toolbar>
                     <div class="container">
                         <router-outlet name="quotes"></router-outlet>
                     </div>
@@ -11,20 +11,12 @@
             </mat-card>
         </div>
 
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
-                    <mat-toolbar>Sales Card #2</mat-toolbar>
+                    <mat-toolbar>Item List</mat-toolbar>
                     <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-pie-chart class="chart" 
-                            [results]="saleData" 
-                            [scheme]="colorSchemeB"
-                            [legend]="true"
-                            [legendTitle]="'Product Sale Report'" 
-                            [labels]="true">
-                            </ngx-charts-pie-chart>
-                        </div>
+                        <router-outlet name="items"></router-outlet>
                     </div>
                 </div>
             </mat-card>

@@ -137,6 +137,18 @@ export class AuthService {
     )
   }
 
+  // Returns ALL quotes from the database
+  public getItems(): Observable<any> {
+    let api = `${this.endpoint}/items`;
+
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
   public getCurrentID() {
     return this.currentUserID;
   }

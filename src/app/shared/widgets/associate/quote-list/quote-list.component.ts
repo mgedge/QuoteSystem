@@ -16,10 +16,10 @@ export interface PeriodicElement {
 
 export class QuoteListComponent implements OnInit {
   quoteList: any = [
-    {quoteID: '', username: '', customer: ''}
+    {quoteID: '', customer: '', username: '', status: '', items: {name: '', count: ''}}
   ];
 
-  displayedColumns: string[] = ['quoteID', 'username', 'customer'];
+  displayedColumns: string[] = ['quoteID', 'customer', 'username', 'status'];
   dataSource: any;
 
   constructor(
