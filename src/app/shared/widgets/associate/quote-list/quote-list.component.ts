@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth.service';
+import { QuoteService } from 'src/app/shared/services/quote.service';
 
 export interface PeriodicElement {
   name: string;
@@ -23,7 +23,7 @@ export class QuoteListComponent implements OnInit {
   dataSource: any;
 
   constructor(
-    private _auth: AuthService,
+    private _quote: QuoteService,
   ) { 
     this.loadQuotes();
   }
@@ -32,7 +32,7 @@ export class QuoteListComponent implements OnInit {
   }
 
   loadQuotes() {
-    this._auth.getQuotes().subscribe(quotes =>{
+    this._quote.getQuotes().subscribe(quotes =>{
       this.quoteList = quotes;
       this.dataSource = this.quoteList;
     })
