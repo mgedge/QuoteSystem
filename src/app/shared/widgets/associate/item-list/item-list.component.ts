@@ -15,6 +15,10 @@ export class ItemListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'price', 'description'];
   dataSource: any;
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   constructor(
     private _item: ItemService,
   ) { 

@@ -1,1 +1,36 @@
-<p>add-quote works!</p>
+<div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+    <mat-card>
+        <mat-toolbar color="primary">Create New Quote</mat-toolbar>
+
+        <form [formGroup]="registerForm" fxLayoutAlign="stretch" fxLayout="column" class="register-form">
+            <br>
+
+            <h3>Customer Info:</h3>
+            <mat-form-field>
+                <input matInput formControlName="customer" placeholder="Customer Name" id="customer"
+                    [(ngModel)]="registerUserData.customer" type="text" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput formControlName="email" placeholder="Customer Email" id="email"
+                    [(ngModel)]="registerUserData.email" type="text" required>
+            </mat-form-field>
+
+            <h3>Items:</h3>
+            <span>
+                <ul>
+                    <li *ngFor="let role of addEmployeeRoles">
+                        <mat-checkbox color="primary" formControlName="roles" (change)="toggleRole(role)">
+                            {{role.role_title}}
+                        </mat-checkbox>
+                    </li>
+                </ul>
+            </span>
+
+            <button mat-raised-button (click)="createQuote()" type="button" class="btn btn-success"
+                color="primary">Create New Quote</button>
+
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+    </mat-card>
+</div>
