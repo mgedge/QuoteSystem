@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteService } from 'src/app/shared/services/quote.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 @Component({
   selector: 'app-quote-list',
   templateUrl: './quote-list.component.html',

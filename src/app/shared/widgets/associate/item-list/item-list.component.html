@@ -1,4 +1,4 @@
-<div class="row refresh">
+  <div class="row refresh">
     <button mat-icon-button  class="refresh" (click)="loadItems()">                        
       <mat-icon>refresh</mat-icon>
     </button>
@@ -7,25 +7,24 @@
   <div>    
     <table mat-table [dataSource]="dataSource" matSort>
   
-      <!--- Note that these columns can be defined in any order.
-      The actual rendered columns are set as a property on the row definition -->
+      <!--- NOTE: these columns can be defined in any order. -->
   
-      <!-- Quote ID -->
+      <!-- Item Name -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quote ID </th>
-        <td mat-cell *matCellDef="let element"> <b> {{element.quoteID}} </b> </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
+        <td mat-cell *matCellDef="let element"> <b> {{element.name}} </b> </td>
       </ng-container>
   
-      <!-- Customer Name -->
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef> Customer Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
+      <!-- Item Price -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Item Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price | currency}} </td>
       </ng-container>
 
-      <!-- Username -->
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      <!-- Item Description -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Item Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

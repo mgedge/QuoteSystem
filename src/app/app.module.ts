@@ -55,6 +55,8 @@ import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.
 import { GraphQLModule } from './graphql.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
+import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
+import { ItemsInQuoteComponent } from './shared/widgets/associate/items-in-quote/items-in-quote.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-
     SampleCardsComponent,
     SampleGraphqlComponent,
     QuoteListComponent,
+    ItemListComponent,
+    ItemsInQuoteComponent,
   ],
   imports: [
     AppRoutingModule,

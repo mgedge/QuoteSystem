@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth.service';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+import { ItemService } from 'src/app/shared/services/item.service';
 
 @Component({
   selector: 'app-item-list',
@@ -23,7 +16,7 @@ export class ItemListComponent implements OnInit {
   dataSource: any;
 
   constructor(
-    private _auth: AuthService,
+    private _item: ItemService,
   ) { 
     this.loadItems();
   }
@@ -32,7 +25,7 @@ export class ItemListComponent implements OnInit {
   }
 
   loadItems() {
-    this._auth.getQuotes().subscribe(items =>{
+    this._item.getItems().subscribe(items =>{
       this.itemList = items;
       this.dataSource = this.itemList;
     })
