@@ -1,5 +1,18 @@
 <div class="content" fxLayoutWrap>
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
+
+    <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <mat-card>
+            <div class="container">
+                <mat-toolbar>Create New Quote</mat-toolbar>
+                <div class="container">
+                    <router-outlet name="new-quote"></router-outlet>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    
+    
         <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
@@ -10,7 +23,6 @@
                 </div>
             </mat-card>
         </div>
-
         <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
@@ -21,29 +33,16 @@
                 </div>
             </mat-card>
         </div>
-    </div><br>
 
-    <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Create New Quote</mat-toolbar>
-                    <div class="container">
-                        <router-outlet name="new-quote"></router-outlet>
-                    </div>
+    <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+       <mat-card>
+           <div class="form">
+                <mat-toolbar>Sales Card #4</mat-toolbar>
+                <div class="container">
+                    <router-outlet name="users"></router-outlet>
                 </div>
-            </mat-card>
-        </div>
-    </div><br>
-
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Sales Card #4</mat-toolbar>
-                    <div class="container">
-                        <router-outlet name="users"></router-outlet>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
+            </div>
+        </mat-card>
+    </div> 
+    </div>     
 </div>

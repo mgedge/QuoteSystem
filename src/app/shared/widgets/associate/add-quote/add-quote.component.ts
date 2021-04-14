@@ -61,7 +61,7 @@ export class AddQuoteComponent implements OnInit {
     { count: '10', checked: false },
     { count: '20', checked: false },
     { count: '50', checked: false }
-  ];
+  ];   
 
   itemOptions: any = [
     { name: 'steel screws', checked: false },
@@ -69,6 +69,7 @@ export class AddQuoteComponent implements OnInit {
   ]
 
   /**
+   * TODO: Alter to work with radio buttons instead
    * Iterate through all the roles. If checked add them to the user's form submission
    */
    addItems() {
