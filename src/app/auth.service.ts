@@ -49,13 +49,19 @@ export class AuthService {
   }
 
   // Josh: updates user, empty function for now
-  updateUser() {
-    
+  updateUser(_id: any, user: any): Observable<any> {
+    let url = `${this.endpoint}/update/${_id}`;
+    return this.http.put(url, user, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
   }
 
   // Josh: known to be broken
-  deleteUser(_id: any): Observable<any> {
-    return this.http.delete(this.endpoint + `/${_id}`);
+  deleteUser(_id: string): Observable<any> {
+    let url = `${this.endpoint}/delete/${_id}`;
+    return this.http.delete(url, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
   }
 
   // Service to call the login API and set token

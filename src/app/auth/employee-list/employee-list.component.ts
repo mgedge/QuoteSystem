@@ -32,9 +32,9 @@ export class EmployeeListComponent implements OnInit {
 
   // Josh: this is supposed to be the button "function"
   // to delete user, borked
-  removeUser(Employee: any) {
+  removeUser(_id: string) {
     if(window.confirm('Are you sure?')) {
-      this._auth.deleteUser(Employee._id).subscribe((res) => {
+      this._auth.deleteUser(_id).subscribe((res) => {
         this.loadUsers();
       });
     }

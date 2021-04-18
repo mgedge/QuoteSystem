@@ -9,39 +9,28 @@
 
                     <div class="form-group">
                         <label for="inputName">Username</label>
-                        <input class="form-control" type="text" formControlName="username">
-                        <!-- <div class="invalid-feedback" *ngIf="submitted && myForm.username.errors?.required">
-                            Username is required.
-                         </div> -->
+                        <input class="form-control" type="text" formControlName="username" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputName">First Name</label>
-                        <input class="form-control" type="text" formControlName="firstname">
-                        <!-- <div class="invalid-feedback" *ngIf="submitted && myForm.firstname.errors?.required">
-                            First name is required.
-                         </div> -->
+                        <input class="form-control" type="text" formControlName="firstname" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputName">Last Name</label>
-                        <input class="form-control" type="text" formControlName="lastname">
-                        <!-- <div class="invalid-feedback" *ngIf="submitted && myForm.lastname.errors?.required">
-                            Last name is required.
-                         </div> -->
+                        <input class="form-control" type="text" formControlName="lastname" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputName">Image</label>
-                        <input class="form-control" type="text" formControlName="image">
-                        <!-- <div class="invalid-feedback" *ngIf="submitted && myForm.image.errors?.required">
-                            Image is required.
-                         </div> -->
+                        <input class="form-control" type="text" formControlName="image" required>
                     </div>
 
                     <div class="form-group">
                         <button class="btn btn-success btn-lg btn-block" type="submit">Update</button>
                     </div>
+                    
                 </form>
             </div>
         </div>
