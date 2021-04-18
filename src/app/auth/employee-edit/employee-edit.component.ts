@@ -59,7 +59,7 @@ export class EmployeeEditComponent implements OnInit {
         this._auth.updateUser(id, this.editForm.value)
           .subscribe(res => {
             this._router.navigate(['/#/view'])
-            console.log('Content updated successfully!')
+            // console.log('Content updated successfully!')
           }, (error) => {
             console.log(error)
           })

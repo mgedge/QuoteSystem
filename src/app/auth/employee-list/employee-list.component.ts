@@ -30,11 +30,12 @@ export class EmployeeListComponent implements OnInit {
     })
   }
 
-  // Josh: this is supposed to be the button "function"
-  // to delete user, borked
+  // Josh: Delete function, deletes users
   removeUser(_id: string) {
+    // console.log('HTML grabbed (' + _id + ') and sent to removeUser. Sending now to deleteUser')
     if(window.confirm('Are you sure?')) {
       this._auth.deleteUser(_id).subscribe((res) => {
+        // console.log('Finshed deletion of (' + _id + '). Reloading users')
         this.loadUsers();
       });
     }

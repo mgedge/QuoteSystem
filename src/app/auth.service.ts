@@ -59,6 +59,7 @@ export class AuthService {
   // Josh: known to be broken
   deleteUser(_id: string): Observable<any> {
     let url = `${this.endpoint}/delete/${_id}`;
+    // console.log('Gave (' + _id + ') to deleteUser. Sending to API now.')
     return this.http.delete(url, { headers: this.headers }).pipe(
       catchError(this.handleError)
     )

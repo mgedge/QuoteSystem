@@ -101,7 +101,8 @@ router.post('/register', (req, res) => {
 
 // Josh: Not working, known. Will most likely be changed.
 router.route('/delete/:id').delete((req, res, next) => {
-    User.findOneAndRemove(req.params.id, (error, data) => {
+    // console.log('API deleting (' + req.params.id + ')')
+    User.findByIdAndRemove(req.params.id, (error, data) => {
       if (error) {
         return next(error);
       } else {
