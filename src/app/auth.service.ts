@@ -37,6 +37,27 @@ export class AuthService {
       )
   }
 
+  // Josh: loads user data into the update form
+  loadUser(id: any): Observable<any> {
+    let url = `${this.endpoint}/read/${id}`;
+    return this.http.get(url, {headers: this.headers}).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  // Josh: updates user, empty function for now
+  updateUser() {
+    
+  }
+
+  // Josh: known to be broken
+  deleteUser(_id: any): Observable<any> {
+    return this.http.delete(this.endpoint + `/${_id}`);
+  }
+
   // Service to call the login API and set token
   loginUser(user: any) {
     return this.http.post<any>(`${this.endpoint}/login`, user)

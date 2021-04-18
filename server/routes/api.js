@@ -99,6 +99,31 @@ router.post('/register', (req, res) => {
     })
 });
 
+// Josh: Not working, known. Will most likely be changed.
+router.route('/delete/:id').delete((req, res, next) => {
+    User.findOneAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
+
+// Josh: Loads data into update form
+router.route('/read/:id').get((req, res) => {
+    User.findById(req.params.id, (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.json(data)
+      }
+    })
+  })
+  
+
 // POST : Login authentication
 // Finds the username then password from the database.
 // If the password does not match the database password login attempt fails
