@@ -25,8 +25,8 @@ import { SampleCardsComponent } from './modules/sample-cards/sample-cards.compon
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
 import { VideoComponent } from './shared/widgets/demo/video/video.component';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
-import { EmployeeListComponent } from './auth/employee-list/employee-list.component';
-import { EmployeeEditComponent } from './auth/employee-edit/employee-edit.component';
+import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
+import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -42,13 +42,13 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'view', component: EmployeeListComponent, canActivate: [AuthGuard],
+        path: 'view', component: ViewUserComponent, canActivate: [AuthGuard],
         data: { role: ['2'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
         ]
       },
       {
-        path: 'edit-employee/:id', component: EmployeeEditComponent, canActivate: [AuthGuard],
+        path: 'edit-user/:id', component: EditUserComponent, canActivate: [AuthGuard],
         data: { role: ['2'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
         ]

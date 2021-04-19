@@ -55,8 +55,8 @@ import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.
 import { GraphQLModule } from './graphql.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
-import { EmployeeEditComponent } from './auth/employee-edit/employee-edit.component';
-import { EmployeeListComponent } from './auth/employee-list/employee-list.component';
+import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
+import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +75,8 @@ import { EmployeeListComponent } from './auth/employee-list/employee-list.compon
     SampleCardsComponent,
     SampleGraphqlComponent,
     QuoteListComponent,
-    EmployeeEditComponent,
-    EmployeeListComponent,
+    EditUserComponent,
+    ViewUserComponent,
   ],
   imports: [
     AppRoutingModule,
