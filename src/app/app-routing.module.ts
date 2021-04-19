@@ -25,8 +25,8 @@ import { SampleCardsComponent } from './modules/sample-cards/sample-cards.compon
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
 import { VideoComponent } from './shared/widgets/demo/video/video.component';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
-import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
-import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
+import { ViewUserComponent } from './shared/view-user/view-user.component';
+import { EditUserComponent } from './shared/edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
