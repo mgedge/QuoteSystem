@@ -27,6 +27,8 @@ import { VideoComponent } from './shared/widgets/demo/video/video.component';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
 import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
 import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
+import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
+import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -42,14 +44,26 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'view', component: ViewUserComponent, canActivate: [AuthGuard],
-        data: { role: ['2'] }, children: [
+        path: 'viewusers', component: ViewUserComponent, canActivate: [AuthGuard],
+        data: { role: ['1'] }, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
         ]
       },
       {
         path: 'edit-user/:id', component: EditUserComponent, canActivate: [AuthGuard],
-        data: { role: ['2'] }, children: [
+        data: { role: ['1'] }, children: [
+          { path: '', component: EmployeesComponent, outlet: 'users' },
+        ]
+      },
+      {
+        path: 'viewquotes', component: ViewQuoteComponent, canActivate: [AuthGuard],
+        data: { role: ['3'] }, children : [
+          { path: '', component: EmployeesComponent, outlet: 'users' },
+        ]
+      },
+      {
+        path: 'edit-quote/:id', component: EditQuoteComponent, canActivate: [AuthGuard],
+        data: { role: ['3'] }, children : [
           { path: '', component: EmployeesComponent, outlet: 'users' },
         ]
       },

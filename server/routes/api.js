@@ -100,7 +100,7 @@ router.post('/register', (req, res) => {
 });
 
 // Josh: Not working, known. Will most likely be changed.
-router.route('/delete/:id').delete((req, res, next) => {
+router.route('/deleteuser/:id').delete((req, res, next) => {
     // console.log('API deleting (' + req.params.id + ')')
     User.findByIdAndRemove(req.params.id, (error, data) => {
       if (error) {
@@ -113,8 +113,21 @@ router.route('/delete/:id').delete((req, res, next) => {
     })
   })
 
+router.route('/deletequote/:id').delete((req, res, next) => {
+    // console.log('API deleting (' + req.params.id + ')')
+    Quote.findByIdAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
+
 // Josh: Loads data into update form
-router.route('/read/:id').get((req, res) => {
+router.route('/loaduser/:id').get((req, res) => {
     User.findById(req.params.id, (error, data) => {
       if (error) {
         return next(error)
@@ -124,9 +137,33 @@ router.route('/read/:id').get((req, res) => {
     })
   })
 
+router.route('/loadquote/:id').get((req, res) => {
+    Quote.findById(req.params.id, (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.json(data)
+      }
+    })
+  })
+
 // Josh: update user
-router.route('/update/:id').put((req, res, next) => {
+router.route('/updateuser/:id').put((req, res, next) => {
     User.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+        console.log(error)
+      } else {
+        res.json(data)
+        console.log('Data updated successfully')
+      }
+    })
+  })
+
+router.route('/updatequote/:id').put((req, res, next) => {
+    Quote.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, (error, data) => {
       if (error) {

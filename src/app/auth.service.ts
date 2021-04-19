@@ -39,7 +39,17 @@ export class AuthService {
 
   // Josh: loads user data into the update form
   loadUser(id: any): Observable<any> {
-    let url = `${this.endpoint}/read/${id}`;
+    let url = `${this.endpoint}/loaduser/${id}`;
+    return this.http.get(url, {headers: this.headers}).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  loadQuote(id: any): Observable<any> {
+    let url = `${this.endpoint}/loadquote/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
       map((res: any) => {
         return res || {}
@@ -50,7 +60,15 @@ export class AuthService {
 
   // Josh: updates user, empty function for now
   updateUser(_id: any, user: any): Observable<any> {
-    let url = `${this.endpoint}/update/${_id}`;
+    let url = `${this.endpoint}/updateuser/${_id}`;
+    return this.http.put(url, user, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  // Josh: updates user, empty function for now
+  updateQuote(_id: any, user: any): Observable<any> {
+    let url = `${this.endpoint}/updatequote/${_id}`;
     return this.http.put(url, user, { headers: this.headers }).pipe(
       catchError(this.handleError)
     )
@@ -58,7 +76,15 @@ export class AuthService {
 
   // Josh: known to be broken
   deleteUser(_id: string): Observable<any> {
-    let url = `${this.endpoint}/delete/${_id}`;
+    let url = `${this.endpoint}/deleteuser/${_id}`;
+    // console.log('Gave (' + _id + ') to deleteUser. Sending to API now.')
+    return this.http.delete(url, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  deleteQuote(_id: string): Observable<any> {
+    let url = `${this.endpoint}/deletequote/${_id}`;
     // console.log('Gave (' + _id + ') to deleteUser. Sending to API now.')
     return this.http.delete(url, { headers: this.headers }).pipe(
       catchError(this.handleError)
@@ -144,6 +170,17 @@ export class AuthService {
   // Returns ALL employee users from the database including hashed password
   public getUsers(): Observable<any> {
     let api = `${this.endpoint}/users`;
+
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  public getQuotes(): Observable<any> {
+    let api = `${this.endpoint}/quotes`;
 
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res: any) => {
