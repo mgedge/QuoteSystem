@@ -57,8 +57,7 @@ export class EditQuoteComponent implements OnInit {
       let id = this.actRoute.snapshot.paramMap.get('id');
       this._auth.updateQuote(id, this.editForm.value)
         .subscribe(res => {
-          this._router.navigate(['/#/viewquotes'])
-          // console.log('Content updated successfully!')
+          this._router.navigate(['/#/associate'])
         }, (error) => {
           console.log(error)
         })

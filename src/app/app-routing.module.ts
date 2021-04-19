@@ -44,28 +44,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'viewusers', component: ViewUserComponent, canActivate: [AuthGuard],
-        data: { role: ['1'] }, children: [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
-        ]
-      },
-      {
         path: 'edit-user/:id', component: EditUserComponent, canActivate: [AuthGuard],
-        data: { role: ['1'] }, children: [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
-        ]
-      },
-      {
-        path: 'viewquotes', component: ViewQuoteComponent, canActivate: [AuthGuard],
-        data: { role: ['3'] }, children : [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
-        ]
+        data: { role: ['1'] }
       },
       {
         path: 'edit-quote/:id', component: EditQuoteComponent, canActivate: [AuthGuard],
-        data: { role: ['3'] }, children : [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
-        ]
+        data: { role: ['3'] }
       },
       {
         path: 'cards', component: SampleCardsComponent, children: [
@@ -77,7 +61,7 @@ const routes: Routes = [
       {
         path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         data: { role: ['1'] }, children: [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
+          { path: '', component: ViewUserComponent, outlet: 'users' },
 
         ]
       },
@@ -90,7 +74,7 @@ const routes: Routes = [
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
+          { path: '', component: ViewQuoteComponent, outlet: 'newquotes' },
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
         ]
       },

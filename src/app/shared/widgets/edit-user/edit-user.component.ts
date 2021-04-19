@@ -55,8 +55,7 @@ export class EditUserComponent implements OnInit {
       let id = this.actRoute.snapshot.paramMap.get('id');
       this._auth.updateUser(id, this.editForm.value)
         .subscribe(res => {
-          this._router.navigate(['/#/viewusers'])
-          // console.log('Content updated successfully!')
+          this._router.navigate(['/#/admin'])
         }, (error) => {
           console.log(error)
         })

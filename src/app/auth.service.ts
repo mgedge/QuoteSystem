@@ -37,7 +37,7 @@ export class AuthService {
       )
   }
 
-  // Josh: loads user data into the update form
+  // Load user by id
   loadUser(id: any): Observable<any> {
     let url = `${this.endpoint}/loaduser/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
@@ -48,6 +48,7 @@ export class AuthService {
     )
   }
 
+  // Load quote by id
   loadQuote(id: any): Observable<any> {
     let url = `${this.endpoint}/loadquote/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
@@ -58,7 +59,7 @@ export class AuthService {
     )
   }
 
-  // Josh: updates user, empty function for now
+  // Updates user data by id
   updateUser(_id: any, user: any): Observable<any> {
     let url = `${this.endpoint}/updateuser/${_id}`;
     return this.http.put(url, user, { headers: this.headers }).pipe(
@@ -66,7 +67,7 @@ export class AuthService {
     )
   }
 
-  // Josh: updates user, empty function for now
+  // Updates quote by id
   updateQuote(_id: any, user: any): Observable<any> {
     let url = `${this.endpoint}/updatequote/${_id}`;
     return this.http.put(url, user, { headers: this.headers }).pipe(
@@ -74,7 +75,7 @@ export class AuthService {
     )
   }
 
-  // Josh: known to be broken
+  // Deletes user by id
   deleteUser(_id: string): Observable<any> {
     let url = `${this.endpoint}/deleteuser/${_id}`;
     // console.log('Gave (' + _id + ') to deleteUser. Sending to API now.')
@@ -83,6 +84,7 @@ export class AuthService {
     )
   }
 
+  // Updates quote by id
   deleteQuote(_id: string): Observable<any> {
     let url = `${this.endpoint}/deletequote/${_id}`;
     // console.log('Gave (' + _id + ') to deleteUser. Sending to API now.')

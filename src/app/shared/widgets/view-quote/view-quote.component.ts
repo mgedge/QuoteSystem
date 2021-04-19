@@ -28,10 +28,8 @@ export class ViewQuoteComponent implements OnInit {
   }
 
   removeQuote(_id: string) {
-    // console.log('HTML grabbed (' + _id + ') and sent to removeUser. Sending now to deleteUser')
     if(window.confirm('Are you sure?')) {
       this._auth.deleteQuote(_id).subscribe((res) => {
-        // console.log('Finshed deletion of (' + _id + '). Reloading users')
         this.loadQuotes();
       });
     }

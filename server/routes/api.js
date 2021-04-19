@@ -99,7 +99,8 @@ router.post('/register', (req, res) => {
     })
 });
 
-// Josh: Not working, known. Will most likely be changed.
+// DELETE: Delete user
+// Deletes user by id
 router.route('/deleteuser/:id').delete((req, res, next) => {
     // console.log('API deleting (' + req.params.id + ')')
     User.findByIdAndRemove(req.params.id, (error, data) => {
@@ -113,6 +114,8 @@ router.route('/deleteuser/:id').delete((req, res, next) => {
     })
   })
 
+// DELETE: Delete quote
+// Deletes quote by id
 router.route('/deletequote/:id').delete((req, res, next) => {
     // console.log('API deleting (' + req.params.id + ')')
     Quote.findByIdAndRemove(req.params.id, (error, data) => {
@@ -126,7 +129,8 @@ router.route('/deletequote/:id').delete((req, res, next) => {
     })
   })
 
-// Josh: Loads data into update form
+// GET the requested user data
+// Returns the user data
 router.route('/loaduser/:id').get((req, res) => {
     User.findById(req.params.id, (error, data) => {
       if (error) {
@@ -137,6 +141,8 @@ router.route('/loaduser/:id').get((req, res) => {
     })
   })
 
+// GET the requested quote data
+// Returns the quote data
 router.route('/loadquote/:id').get((req, res) => {
     Quote.findById(req.params.id, (error, data) => {
       if (error) {
@@ -147,7 +153,7 @@ router.route('/loadquote/:id').get((req, res) => {
     })
   })
 
-// Josh: update user
+// PUT the new user data by id
 router.route('/updateuser/:id').put((req, res, next) => {
     User.findByIdAndUpdate(req.params.id, {
       $set: req.body
@@ -162,6 +168,7 @@ router.route('/updateuser/:id').put((req, res, next) => {
     })
   })
 
+// PUT the new quote data by id
 router.route('/updatequote/:id').put((req, res, next) => {
     Quote.findByIdAndUpdate(req.params.id, {
       $set: req.body
