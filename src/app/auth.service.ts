@@ -37,6 +37,62 @@ export class AuthService {
       )
   }
 
+  // Load user by id
+  loadUser(id: any): Observable<any> {
+    let url = `${this.endpoint}/loaduser/${id}`;
+    return this.http.get(url, {headers: this.headers}).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  // Load quote by id
+  loadQuote(id: any): Observable<any> {
+    let url = `${this.endpoint}/loadquote/${id}`;
+    return this.http.get(url, {headers: this.headers}).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  // Updates user data by id
+  updateUser(_id: any, user: any): Observable<any> {
+    let url = `${this.endpoint}/updateuser/${_id}`;
+    return this.http.put(url, user, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  // Updates quote by id
+  updateQuote(_id: any, user: any): Observable<any> {
+    let url = `${this.endpoint}/updatequote/${_id}`;
+    return this.http.put(url, user, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  // Deletes user by id
+  deleteUser(_id: string): Observable<any> {
+    let url = `${this.endpoint}/deleteuser/${_id}`;
+    // console.log('Gave (' + _id + ') to deleteUser. Sending to API now.')
+    return this.http.delete(url, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  // Updates quote by id
+  deleteQuote(_id: string): Observable<any> {
+    let url = `${this.endpoint}/deletequote/${_id}`;
+    // console.log('Gave (' + _id + ') to deleteUser. Sending to API now.')
+    return this.http.delete(url, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   // Service to call the login API and set token
   loginUser(user: any) {
     return this.http.post<any>(`${this.endpoint}/login`, user)
@@ -116,6 +172,17 @@ export class AuthService {
   // Returns ALL employee users from the database including hashed password
   public getUsers(): Observable<any> {
     let api = `${this.endpoint}/users`;
+
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  public getQuotes(): Observable<any> {
+    let api = `${this.endpoint}/quotes`;
 
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res: any) => {
