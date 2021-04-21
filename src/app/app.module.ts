@@ -82,7 +82,7 @@ import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.compo
     QuoteListComponent,
     ItemListComponent,
     ItemsInQuoteComponent,
-    AddQuoteComponent
+    AddQuoteComponent,
     EditUserComponent,
     ViewUserComponent,
     EditQuoteComponent,

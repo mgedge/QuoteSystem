@@ -128,40 +128,31 @@ export class AuthService {
     return (authToken !== null) ? true : false;
   }
 
-  // DEPRECATED Returns API call for the entered user ID's role
-  public getUserRole(id: any) {
-    let api = `${this.endpoint}/user/role/${id}`;
-    let resp = this.http.get(api);
+  // // DEPRECATED Returns API call for the entered user ID's role
+  // public getUserRole(id: any) {
+  //   let api = `${this.endpoint}/user/role/${id}`;
+  //   let resp = this.http.get(api);
 
-    return resp;
-  }
+  //   return resp;
+  // }
 
-  // DEPRECATED Returns the the current user's role
-  public getCurrentUserRole(id: any): Observable<any> {
-    let api = `${this.endpoint}/user/role/${id}`;
+  // // DEPRECATED Returns the the current user's role
+  // public getCurrentUserRole(id: any): Observable<any> {
+  //   let api = `${this.endpoint}/user/role/${id}`;
 
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res: any) => {
-        return res || {}
-      }),
-      catchError(this.handleError)
-    )
-  }
+  //   return this.http.get(api, { headers: this.headers }).pipe(
+  //     map((res: any) => {
+  //       return res || {}
+  //     }),
+  //     catchError(this.handleError)
+  //   )
+  // }
 
   // Returns the current user's information
   public getCurrentUser(id: any): Promise<any> {
     let api = `${this.endpoint}/user/${id}`;
 
     return this.http.get(api, { headers: this.headers }).toPromise()
-    
-    
-    
-    // .pipe(
-    //   map((res: any) => {
-    //     return res || {}
-    //   }),
-    //   catchError(this.handleError)
-    // )
   }
 
   // Returns the user's information from token
@@ -169,14 +160,6 @@ export class AuthService {
     let api = `${this.endpoint}/user`;
 
     return this.http.get(api, { headers: this.headers }).toPromise()
-    
-    
-    // .pipe(
-    //   map((res: any) => {
-    //     return res || {}
-    //   }),
-    //   catchError(this.handleError)
-    // )
   }
 
   // Returns ALL employee users from the database including hashed password

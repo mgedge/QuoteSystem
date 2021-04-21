@@ -16,7 +16,6 @@ import { DefaultComponent } from './layouts/default/default.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { AdminComponent } from './modules/admin/admin.component';
 import { EmployeesComponent } from './shared/widgets/admin/employees/employees.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AssociateComponent } from './modules/associate/associate.component';
@@ -25,12 +24,11 @@ import { SampleCardsComponent } from './modules/sample-cards/sample-cards.compon
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
 import { VideoComponent } from './shared/widgets/demo/video/video.component';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
-import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
-import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
 import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
 import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
 import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
 import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
+import { AdminComponent } from './modules/admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -78,8 +76,6 @@ const routes: Routes = [
         data: { role: ['3'] }, children: [
           { path: '', component: ViewQuoteComponent, outlet: 'newquotes' },
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
-          { path: '', component: ItemListComponent, outlet: 'items'},
-          { path: '', component: AddQuoteComponent, outlet: 'new-quote'},
         ]
       },
 
