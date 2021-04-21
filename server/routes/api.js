@@ -102,6 +102,91 @@ router.post('/register', (req, res) => {
     })
 });
 
+// DELETE: Delete user
+// Deletes user by id
+router.route('/deleteuser/:id').delete((req, res, next) => {
+    // console.log('API deleting (' + req.params.id + ')')
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
+
+// DELETE: Delete quote
+// Deletes quote by id
+router.route('/deletequote/:id').delete((req, res, next) => {
+    // console.log('API deleting (' + req.params.id + ')')
+    Quote.findByIdAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
+
+// GET the requested user data
+// Returns the user data
+router.route('/loaduser/:id').get((req, res) => {
+    User.findById(req.params.id, (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.json(data)
+      }
+    })
+  })
+
+// GET the requested quote data
+// Returns the quote data
+router.route('/loadquote/:id').get((req, res) => {
+    Quote.findById(req.params.id, (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.json(data)
+      }
+    })
+  })
+
+// PUT the new user data by id
+router.route('/updateuser/:id').put((req, res, next) => {
+    User.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+        console.log(error)
+      } else {
+        res.json(data)
+        console.log('Data updated successfully')
+      }
+    })
+  })
+
+// PUT the new quote data by id
+router.route('/updatequote/:id').put((req, res, next) => {
+    Quote.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+        console.log(error)
+      } else {
+        res.json(data)
+        console.log('Data updated successfully')
+      }
+    })
+  })
+  
+
 // POST : Login authentication
 // Finds the username then password from the database.
 // If the password does not match the database password login attempt fails

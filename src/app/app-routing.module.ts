@@ -27,6 +27,10 @@ import { VideoComponent } from './shared/widgets/demo/video/video.component';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
 import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
+import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
+import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
+import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
+import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -42,6 +46,14 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'edit-user/:id', component: EditUserComponent, canActivate: [AuthGuard],
+        data: { role: ['1'] }
+      },
+      {
+        path: 'edit-quote/:id', component: EditQuoteComponent, canActivate: [AuthGuard],
+        data: { role: ['3'] }
+      },
+      {
         path: 'cards', component: SampleCardsComponent, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
           { path: '', component: VideoComponent, outlet: 'video'},
@@ -51,7 +63,7 @@ const routes: Routes = [
       {
         path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         data: { role: ['1'] }, children: [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
+          { path: '', component: ViewUserComponent, outlet: 'users' },
 
         ]
       },
@@ -64,7 +76,7 @@ const routes: Routes = [
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
-          { path: '', component: EmployeesComponent, outlet: 'users' },
+          { path: '', component: ViewQuoteComponent, outlet: 'newquotes' },
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
           { path: '', component: ItemListComponent, outlet: 'items'},
           { path: '', component: AddQuoteComponent, outlet: 'new-quote'},

@@ -13,10 +13,6 @@ form {
     padding-top: 0px;
 }
 
-.form{
-    padding: 20px;
-}
-
 .content {
     height: auto;
 }
@@ -28,6 +24,95 @@ form {
 .mat-card {
     height: 100%;
 }
+
+.grid {
+    display: grid-inline;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 50px;
+    padding: 10px;
+}
+
+.grid-container{
+    display: grid;
+    grid-column-gap: 8px;
+    justify-content: space-around;
+}
+
+.row {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+.refresh {
+    float: right;
+}
+
+.form {
+    padding: 8px;
+}
+
+.image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;  
+    left: 0;
+    top: 0;
+    margin:auto;
+}
+
+.image-wrapper {
+    position: relative;
+    margin: auto;
+}
+
+.container {
+    padding: 0px;
+    padding-top: 16px;
+    display: block;
+    min-height: 200px;
+    align-items: center;
+    height: 100%;
+    margin: auto;
+}
+
+.chart {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;  
+    width: 100%;
+    height: fit-content;
+    left: 0;
+    top: 0;
+    margin:auto;
+}
+
+.chart-wrapper {
+    display: grid;
+    /* padding: 10px; */
+    /* padding-bottom: 30% */
+    padding-bottom: 56.25%;
+    /* overflow: auto; */
+    max-width: 100%;
+    max-height: 300px;
+    position: relative;
+}
+
+.chart-wrapper-large {
+    /* display: grid; */
+    padding: 10px;
+    padding-bottom: 15%;
+    /* overflow: auto; */
+    max-width: 100%;
+    min-width: 450px;
+    height: 300px;
+    position: relative;
+}
+
 
 @media (max-width: 1279px) {
     .mat-card {

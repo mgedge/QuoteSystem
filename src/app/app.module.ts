@@ -58,6 +58,10 @@ import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
 import { ItemsInQuoteComponent } from './shared/widgets/associate/items-in-quote/items-in-quote.component';
 import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component'
+import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
+import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
+import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
+import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +83,10 @@ import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quot
     ItemListComponent,
     ItemsInQuoteComponent,
     AddQuoteComponent
+    EditUserComponent,
+    ViewUserComponent,
+    EditQuoteComponent,
+    ViewQuoteComponent
   ],
   imports: [
     AppRoutingModule,

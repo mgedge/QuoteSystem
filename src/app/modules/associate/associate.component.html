@@ -1,5 +1,15 @@
 <div class="content" fxLayoutWrap>
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
+        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+            <mat-card>
+                <div class="form">
+                    <mat-toolbar>Sales Card #1</mat-toolbar>
+                    <div class="container">
+                        <router-outlet name="quotes"></router-outlet>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
 
     <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
         <mat-card>
@@ -19,6 +29,30 @@
                     <mat-toolbar>Quote List</mat-toolbar>
                     <div class="container">
                         <router-outlet name="quotes"></router-outlet>
+                        <div class="chart-wrapper">
+                            <ngx-charts-bar-horizontal class="chart" 
+                            [results]="saleData" 
+                            [scheme]="colorSchemeA"
+                            [xAxisLabel]="'Sale'"
+                            [yAxisLabel]="'Products'" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true"
+                            [legend]="true">
+                            </ngx-charts-bar-horizontal>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div fxFlex="60.00" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+            <mat-card>
+                <div class="form">
+                    <mat-toolbar>Sales Card #4</mat-toolbar>
+                    <div class="container">
+                        <router-outlet name="newquotes"></router-outlet>
                     </div>
                 </div>
             </mat-card>
