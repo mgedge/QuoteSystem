@@ -11,9 +11,7 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
-  employees: any = [
-    // {username: '', firstname: '', lastname: '', image: ''}
-  ];
+  employees: any = [ ];
 
   displayedColumns: string[] = ['username', 'firstname', 'lastname', 'image'];
   dataSource = new MatTableDataSource<Element>(this.employees);

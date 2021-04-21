@@ -11,6 +11,8 @@ import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.compo
 import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
 import { VideoComponent } from './widgets/demo/video/video.component';
 import { QuoteListComponent } from './widgets/associate/quote-list/quote-list.component';
+import { ItemsInQuoteComponent } from './widgets/associate/items-in-quote/items-in-quote.component';
+import { ItemListComponent } from './widgets/associate/item-list/item-list.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { QuoteListComponent } from './widgets/associate/quote-list/quote-list.co
     EditQuoteComponent,
     VideoComponent,
     QuoteListComponent,
+    ItemsInQuoteComponent,
+    ItemListComponent,
   ],
   imports: [
     CommonModule,

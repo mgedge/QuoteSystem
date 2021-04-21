@@ -26,6 +26,9 @@ require('dotenv/config')
 
 const User = require('../models/users');
 const Quote = require('../models/quotes');
+const Item = require('../models/item');
+const { Mongoose } = require('mongoose');
+const item = require('../models/item');
 
 /**************************************************/
 /*               END OF CONFIGURATION             */
@@ -304,6 +307,17 @@ router.route('/user/role/:id').get((req, res) => {
 // Returns JSON array of all quotes in database
 router.get('/quotes', (req, res) => {
     Quote.find().exec().then(result => {
+        res.status(200).json(result);
+    })
+        .catch(err => {
+            res.status(500).json({ error: err })
+        });
+})
+
+// GET All Items and their prices
+// Returns JSON array of all quotes in database
+router.get('/items', (req, res) => {
+    Item.find().exec().then(result => {
         res.status(200).json(result);
     })
         .catch(err => {

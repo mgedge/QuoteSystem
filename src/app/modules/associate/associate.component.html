@@ -11,32 +11,24 @@
             </mat-card>
         </div>
 
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Sales Card #2</mat-toolbar>
-                    <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-pie-chart class="chart" 
-                            [results]="saleData" 
-                            [scheme]="colorSchemeB"
-                            [legend]="true"
-                            [legendTitle]="'Product Sale Report'" 
-                            [labels]="true">
-                            </ngx-charts-pie-chart>
-                        </div>
-                    </div>
+    <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <mat-card>
+            <div class="container">
+                <mat-toolbar>Create New Quote</mat-toolbar>
+                <div class="container">
+                    <router-outlet name="new-quote"></router-outlet>
                 </div>
-            </mat-card>
-        </div>
-    </div><br>
-
-    <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
+            </div>
+        </mat-card>
+    </div>
+    
+    
         <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
-                    <mat-toolbar>Sales Card #3</mat-toolbar>
+                    <mat-toolbar>Quote List</mat-toolbar>
                     <div class="container">
+                        <router-outlet name="quotes"></router-outlet>
                         <div class="chart-wrapper">
                             <ngx-charts-bar-horizontal class="chart" 
                             [results]="saleData" 
@@ -65,51 +57,26 @@
                 </div>
             </mat-card>
         </div>
-
         <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
-                    <mat-toolbar>Sales Card #5</mat-toolbar>
+                    <mat-toolbar>Item List</mat-toolbar>
                     <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-bar-vertical class="chart" 
-                            [results]="saleData" 
-                            [xAxisLabel]="'Products'"
-                            [yAxisLabel]="'Sale'" 
-                            [scheme]="colorSchemeC"
-                            [legend]="true" 
-                            [showXAxisLabel]="true" 
-                            [showYAxisLabel]="true"
-                            [xAxis]="true" 
-                            [yAxis]="true">
-                            </ngx-charts-bar-vertical>
-                        </div>
+                        <router-outlet name="items"></router-outlet>
                     </div>
                 </div>
             </mat-card>
         </div>
-    </div><br>
 
-    <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Sales Card #6</mat-toolbar>
-                    <div class="container">
-                        <div class="chart-wrapper-large">
-                            <ngx-charts-line-chart 
-                              [results]="countryData"
-                              [showXAxisLabel]="showXAxisLabel"
-                              [showYAxisLabel]="showYAxisLabel"
-                              [xAxis]="xAxis"
-                              [yAxis]="yAxis"
-                              [xAxisLabel]="xAxisLabel"
-                              [yAxisLabel]="yAxisLabel" >
-                            </ngx-charts-line-chart>
-                        </div>
-                    </div>
+    <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+       <mat-card>
+           <div class="form">
+                <mat-toolbar>Sales Card #4</mat-toolbar>
+                <div class="container">
+                    <router-outlet name="users"></router-outlet>
                 </div>
-            </mat-card>
-        </div>
-    </div><br>
+            </div>
+        </mat-card>
+    </div> 
+    </div>     
 </div>
