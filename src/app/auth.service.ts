@@ -36,6 +36,16 @@ export class AuthService {
         catchError(this.handleError)
       )
   }
+  
+  // Service to call the register API
+  createQuote(quote: any) {
+    let api = `${this.endpoint}/newQuote`
+    return this.http.post<any>(api, quote)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+  
 
   // Load user by id
   loadUser(id: any): Observable<any> {

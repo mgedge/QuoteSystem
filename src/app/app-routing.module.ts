@@ -25,6 +25,8 @@ import { SampleCardsComponent } from './modules/sample-cards/sample-cards.compon
 import { SampleGraphqlComponent } from './modules/sample-graphql/sample-graphql.component';
 import { VideoComponent } from './shared/widgets/demo/video/video.component';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
+import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
+import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
 import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
 import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
 import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
@@ -76,6 +78,8 @@ const routes: Routes = [
         data: { role: ['3'] }, children: [
           { path: '', component: ViewQuoteComponent, outlet: 'newquotes' },
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
+          { path: '', component: ItemListComponent, outlet: 'items'},
+          { path: '', component: AddQuoteComponent, outlet: 'new-quote'},
         ]
       },
 

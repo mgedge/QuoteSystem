@@ -5,12 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
 @Component({
   selector: 'app-widget-admin-employees',
@@ -21,6 +15,7 @@ export class EmployeesComponent implements OnInit {
   employees: any = [
     // {username: '', firstname: '', lastname: '', image: ''}
   ];
+  //@ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = ['username', 'firstname', 'lastname', 'image'];
   dataSource = new MatTableDataSource<Element>(this.employees);
@@ -50,6 +45,7 @@ export class EmployeesComponent implements OnInit {
     })
   }
 }
+
 
 export interface Element {
     username: String

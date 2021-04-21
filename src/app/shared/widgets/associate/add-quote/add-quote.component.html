@@ -1,1 +1,43 @@
-<p>add-quote works!</p>
+<div fxFlex="100" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+    <mat-card>
+        <form [formGroup]="quoteForm" fxLayoutAlign="stretch" fxLayout="column" class="register-form">
+
+            <h3>Customer Info:</h3>
+            <mat-form-field>
+                <input matInput formControlName="customer" placeholder="Customer Name" id="customer"
+                    [(ngModel)]="quoteData.customer" type="text" required>
+            </mat-form-field>
+   
+            <mat-form-field>
+                <input matInput formControlName="contact" placeholder="Customer Contact Info" id="contact"
+                    [(ngModel)]="quoteData.contact" type="text" required>
+            </mat-form-field>
+
+            <h3>Items:</h3>
+            <span>
+                <h4> Steel Screws: </h4>
+                <ul>
+                    <input type="radio" id="ten" name="item1" value="10"> <label for="ten">10</label> <br>
+                    <input type="radio" id="twenty" name="item1" value="20"> <label for="twenty">20</label> <br>
+                    <input type="radio" id="fifty" name="item1" value="50"> <label for="fifty">50</label> <br>
+                    <input type="radio" id="hundred" name="item1" value="100"> <label for="hundred">100</label> <br>
+                </ul>
+            </span>
+            <span>
+                <h4> 2x4 Wood Planks: </h4>
+                <ul>
+                    <input type="radio" id="ten" name="item2" value="10"> <label for="ten">10</label> <br>
+                    <input type="radio" id="twenty" name="item2" value="20"> <label for="twenty">20</label> <br>
+                    <input type="radio" id="fifty" name="item2" value="50"> <label for="fifty">50</label> <br>
+                    <input type="radio" id="hundred" name="item2" value="100"> <label for="hundred">100</label> <br>
+                </ul>
+            </span>
+
+            <button mat-raised-button (click)="newQuote()" type="button" class="btn btn-success"
+                color="primary">Create New Quote</button><br>
+            <input type="reset" color="red">
+
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+    </mat-card>
+</div>

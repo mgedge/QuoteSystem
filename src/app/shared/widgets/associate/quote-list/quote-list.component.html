@@ -1,25 +1,43 @@
+  <div class="row refresh">
+    <button mat-icon-button  class="refresh" (click)="loadQuotes()">                        
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+  
   <div>    
     <table mat-table [dataSource]="dataSource" matSort>
   
       <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
+      The actual rendered columns are set as a property on the row definition -->
   
-      <!-- Position Column -->
+      <!-- Quote ID -->
       <ng-container matColumnDef="quoteID">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Quote ID </th>
         <td mat-cell *matCellDef="let element"> <b> {{element.quoteID}} </b> </td>
       </ng-container>
   
-      <!-- Weight Column -->
+      <!-- Customer Name -->
       <ng-container matColumnDef="customer">
         <th mat-header-cell *matHeaderCellDef> Customer Name </th>
         <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
       </ng-container>
 
-      <!-- Name Column -->
+      <!-- Username -->
       <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef> Username </th>
         <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <!-- Quote Status -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+
+      <!-- Items -->
+      <ng-container matColumnDef="items">
+        <th mat-header-cell *matHeaderCellDef> Items </th>
+        <td mat-cell *matCellDef="let element"> {{element.items.name}}, {{element.items.count}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
