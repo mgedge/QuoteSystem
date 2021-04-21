@@ -3,9 +3,9 @@
         <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
-                    <mat-toolbar>Sales Card #1</mat-toolbar>
+                    <mat-toolbar>Create New Quote</mat-toolbar>
                     <div class="container">
-                        <router-outlet name="quotes"></router-outlet>
+                        <router-outlet name="new-quote"></router-outlet>
                     </div>
                 </div>
             </mat-card>
@@ -14,21 +14,29 @@
     <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
         <mat-card>
             <div class="container">
-                <mat-toolbar>Create New Quote</mat-toolbar>
+                <mat-toolbar>Currently Open Quotes</mat-toolbar>
                 <div class="container">
-                    <router-outlet name="new-quote"></router-outlet>
+                    <router-outlet name="view-quote"></router-outlet>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <mat-card>
+            <div class="form">
+                <mat-toolbar>Item List</mat-toolbar>
+                <div class="container">
+                    <router-outlet name="items"></router-outlet>
                 </div>
             </div>
         </mat-card>
     </div>
     
-    
         <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
-                    <mat-toolbar>Quote List</mat-toolbar>
+                    <mat-toolbar>Legacy Customers</mat-toolbar>
                     <div class="container">
-                        <router-outlet name="quotes"></router-outlet>
                         <div class="chart-wrapper">
                             <ngx-charts-bar-horizontal class="chart" 
                             [results]="saleData" 
@@ -45,38 +53,6 @@
                     </div>
                 </div>
             </mat-card>
-        </div>
-
-        <div fxFlex="60.00" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Sales Card #4</mat-toolbar>
-                    <div class="container">
-                        <router-outlet name="newquotes"></router-outlet>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Item List</mat-toolbar>
-                    <div class="container">
-                        <router-outlet name="items"></router-outlet>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-
-    <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-       <mat-card>
-           <div class="form">
-                <mat-toolbar>Sales Card #4</mat-toolbar>
-                <div class="container">
-                    <router-outlet name="users"></router-outlet>
-                </div>
-            </div>
-        </mat-card>
-    </div> 
+        </div> 
     </div>     
 </div>
