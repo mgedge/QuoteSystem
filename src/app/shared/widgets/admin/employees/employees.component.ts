@@ -5,13 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 @Component({
   selector: 'app-widget-admin-employees',
   templateUrl: './employees.component.html',

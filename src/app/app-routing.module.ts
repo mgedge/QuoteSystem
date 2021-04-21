@@ -16,7 +16,6 @@ import { DefaultComponent } from './layouts/default/default.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { AdminComponent } from './modules/admin/admin.component';
 import { EmployeesComponent } from './shared/widgets/admin/employees/employees.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AssociateComponent } from './modules/associate/associate.component';
@@ -29,6 +28,7 @@ import { ViewUserComponent } from './shared/widgets/view-user/view-user.componen
 import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
 import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
 import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
+import { AdminComponent } from './modules/admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { flat, colorful, rainbow } from './../graphs/colorScheme';
-import { countryData, saleData } from './../graphs/graphData';
+import { flat, colorful, rainbow } from '../graphs/colorScheme';
+import { countryData, saleData } from '../graphs/graphData';
 
 @Component({
   selector: 'app-admin',
