@@ -65,24 +65,18 @@ mongoose.connect(process.env.DB_CONNECTION,
   console.log("Connected to database through server.js")
 )
 
-//Connect to external server
-const external = mysql.createConnection({
-  host: 'blitz.cs.niu.edu',
-  port: '3306',
-  database: 'csci467',
-  user: 'student',
-  password: 'student'
-});
+const db = require("./external");
+db.sequelize.sync();
 
-external.connect(function(err) {
-  if(err) throw err;
+// external.connect(function(err) {
+//   if(err) throw err;
 
-  else console.log("Successfully connected to the external server");
+//   else console.log("Successfully connected to the external server");
 
-  // external.query("SELECT * FROM customers", function(err, result, fields) {
-  //   if(err) throw err;
-  // })
-})
+//   // external.query("SELECT * FROM customers", function(err, result, fields) {
+//   //   if(err) throw err;
+//   // })
+// })
 
 //Open connection
 app.listen(PORT, function() {

@@ -29,6 +29,8 @@ const Quote = require('../models/quotes');
 const Item = require('../models/item');
 const { Mongoose } = require('mongoose');
 const item = require('../models/item');
+const { Customer } = require('../external');
+const { Part } = require('../external');
 
 /**************************************************/
 /*               END OF CONFIGURATION             */
@@ -325,4 +327,36 @@ router.get('/items', (req, res) => {
         });
 })
 
+/**************************************************/
+/*              EXTERNAL DATABASE                 */
+/**************************************************/
+// GET All customers and their properties from the external dB
+// Returns JSON array of all customers
+router.get('/customers', (req, res) => {
+  Customer.findAll({
+    attributes: [
+      'id', 'name', 'city', 'street', 'contact'
+    ]
+  }).then((customers) => {
+    res.status(200).json(customers);
+  })
+  .catch(err=> {
+    res.status(500).json({error: err});
+  });
+})
+
+// GET All parts and their properties from the external dB
+// Returns JSON array of all parts
+router.get('/parts', (req, res) => {
+  Part.findAll({
+    attributes: [
+      'number', 'description', 'price', 'weight', 'pictureURL'
+    ]
+  }).then((parts) => {
+    res.status(200).json(parts);
+  })
+  .catch(err=> {
+    res.status(500).json({error: err});
+  });
+})
 module.exports = router;

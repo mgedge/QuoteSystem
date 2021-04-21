@@ -29,6 +29,7 @@ import { EditUserComponent } from './shared/widgets/edit-user/edit-user.componen
 import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
 import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
 import { AdminComponent } from './modules/admin/admin.component';
+import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -76,6 +77,7 @@ const routes: Routes = [
         data: { role: ['3'] }, children: [
           { path: '', component: ViewQuoteComponent, outlet: 'newquotes' },
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
+          { path: '', component: ItemListComponent, outlet: 'parts'},
         ]
       },
 

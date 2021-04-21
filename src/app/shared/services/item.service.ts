@@ -40,8 +40,11 @@
        catchError(this.handleError)
      )
    }
- 
-   
+
+   public getParts(): Promise<any> {
+     let api = `${this.endpoint}/parts`;
+     return this.http.get(api, { headers: this.headers }).toPromise();
+   }
  
    handleError(error: HttpErrorResponse) {
      let msg = '';

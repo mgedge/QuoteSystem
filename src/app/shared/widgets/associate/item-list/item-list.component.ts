@@ -13,7 +13,7 @@ import { ItemService } from 'src/app/shared/services/item.service';
 export class ItemListComponent implements OnInit {
   searchValue = '';
   itemList: any = [];
-  displayedColumns: string[] = ['name', 'price', 'description'];
+  displayedColumns: string[] = ['number', 'name', 'price', 'weight', 'image'];
   dataSource = new MatTableDataSource<Element>(this.itemList);
 
   @ViewChild(MatPaginator)
@@ -40,14 +40,24 @@ export class ItemListComponent implements OnInit {
   }
 
   loadItems() {
-    this._item.getItems().subscribe(items =>{
-      this.dataSource = items;
-    })
+    // this._item.getItems().subscribe(items =>{
+    //   this.dataSource = items;
+    // })
+
+    //     this._item.getParts().subscribe(items =>{
+    //   this.dataSource = items;
+    // })
+
+    this._item.getParts().then(items => {
+      this.dataSource.data = items;
+    });
   }
 }
 
 interface Element {
+  number: String
   name: String
   description: String
   price: number
+  weight: number
 }
