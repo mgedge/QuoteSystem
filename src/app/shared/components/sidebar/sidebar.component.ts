@@ -59,10 +59,10 @@ export class SidebarComponent implements OnInit {
       let id = this.currentUser.roles[i].role_id;
 
       //If the role id is lower than the current priority, set it
-      if ((id <= this.priorityRole.priority) || (id === '10')) {
+      if ((id >= this.priorityRole.priority) || (id == "10")) {
         this.priorityRole.title = this.currentUser.roles[i].role_title;
         this.priorityRole.priority = this.currentUser.roles[i].role_id;
-      } 5
+      }
     }
   }
 
