@@ -1,37 +1,44 @@
-<div>
+<div class="container">
+  <!-- Fitler and refresh -->
   <div class="row">
-    <div>
-
+    <div class="col">
+      <mat-form-field class="search">
+        <mat-label>Filter</mat-label>
+        <input matInput type="text" (keyup)="applyFilter($event)" [(ngModel)]="searchValue">
+        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
-    <button mat-icon-button  class="refresh" (click)="loadUsers()">                        
-      <mat-icon>refresh</mat-icon>
-    </button>
+    <div class="refresh">
+      <!-- NOTE change the loadUsers to match your data retrieval function -->
+      <button mat-icon-button class="refresh" (click)="loadUsers()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
   </div>
 
+  <!-- NOTE modify the matColumnDef and the th/td property to match what you need -->
   <table mat-table [dataSource]="dataSource" matSort>
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+    <!-- Column -->
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
       <td mat-cell *matCellDef="let element"> <b> {{element.username}} </b> </td>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Column -->
     <ng-container matColumnDef="firstname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
       <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Column -->
     <ng-container matColumnDef="lastname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Last name </th>
       <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Column -->
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
       <td mat-cell *matCellDef="let element"> {{element.image}} </td>

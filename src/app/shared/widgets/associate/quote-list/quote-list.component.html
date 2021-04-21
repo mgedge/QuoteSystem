@@ -1,48 +1,62 @@
-  <div class="row refresh">
-    <button mat-icon-button  class="refresh" (click)="loadQuotes()">                        
-      <mat-icon>refresh</mat-icon>
-    </button>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="search">
+        <mat-label>Filter</mat-label>
+        <input matInput type="text" (keyup)="applyFilter($event)" [(ngModel)]="searchValue">
+        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="refresh">
+      <button mat-icon-button class="refresh" (click)="loadQuotes()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
   </div>
-  
-  <div>    
-    <table mat-table [dataSource]="dataSource" matSort>
-  
-      <!--- Note that these columns can be defined in any order.
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition -->
-  
-      <!-- Quote ID -->
-      <ng-container matColumnDef="quoteID">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quote ID </th>
-        <td mat-cell *matCellDef="let element"> <b> {{element.quoteID}} </b> </td>
-      </ng-container>
-  
-      <!-- Customer Name -->
-      <ng-container matColumnDef="customer">
-        <th mat-header-cell *matHeaderCellDef> Customer Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
-      </ng-container>
 
-      <!-- Username -->
-      <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-      </ng-container>
+    <!-- Quote ID -->
+    <ng-container matColumnDef="quoteID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Quote ID </th>
+      <td mat-cell *matCellDef="let element"> <b> {{element.quoteID}} </b> </td>
+    </ng-container>
 
-      <!-- Quote Status -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-      </ng-container>
+    <!-- Customer Name -->
+    <ng-container matColumnDef="customer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
+    </ng-container>
 
-      <!-- Items -->
-      <ng-container matColumnDef="items">
-        <th mat-header-cell *matHeaderCellDef> Items </th>
-        <td mat-cell *matCellDef="let element"> {{element.items.name}}, {{element.items.count}} </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-  </div>
+    <!-- Username -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <!-- Quote Status -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <!-- Items -->
+    <ng-container matColumnDef="items">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Items </th>
+      <td mat-cell *matCellDef="let element"> {{element.items.name}}, {{element.items.count}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  <div *ngIf="dataSource.filteredData.length == 0" class="no-data text-center alert alert-danger mt-3 mb-0"> There are
+    no users</div>
+</div>

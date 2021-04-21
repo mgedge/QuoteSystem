@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ItemService } from 'src/app/shared/services/item.service';
 
 @Component({
@@ -9,25 +11,29 @@ import { ItemService } from 'src/app/shared/services/item.service';
 })
 
 export class ItemListComponent implements OnInit {
-  itemList: any = [
-    {name: '', price: '', description: ''}
-  ];
-
+  searchValue = '';
+  itemList: any = [];
   displayedColumns: string[] = ['name', 'price', 'description'];
-  dataSource: any;
-  @ViewChild(MatPaginator) set paginator(mp: MatPaginator) {
-    this.dataSource.paginator = mp;
+  dataSource = new MatTableDataSource<Element>(this.itemList);
+
+  @ViewChild(MatPaginator)
+  set paginator(value: MatPaginator) {
+    this.dataSource.paginator = value;
   }
 
-  applyFilter(filterValue: string) {
+  @ViewChild(MatSort)
+  set sort(value: MatSort) {
+    this.dataSource.sort = value;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   constructor(
     private _item: ItemService,
-  ) { 
-    
-  }
+  ) { }
 
   ngOnInit(): void {
     this.loadItems();
@@ -35,8 +41,13 @@ export class ItemListComponent implements OnInit {
 
   loadItems() {
     this._item.getItems().subscribe(items =>{
-      this.itemList = items;
-      this.dataSource = this.itemList;
+      this.dataSource = items;
     })
   }
+}
+
+interface Element {
+  name: String
+  description: String
+  price: number
 }

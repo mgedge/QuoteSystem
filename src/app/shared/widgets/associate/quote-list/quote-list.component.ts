@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { QuoteService } from 'src/app/shared/services/quote.service';
 
 @Component({
@@ -8,27 +11,48 @@ import { QuoteService } from 'src/app/shared/services/quote.service';
 })
 
 export class QuoteListComponent implements OnInit {
-  quoteList: any = [
-    {quoteID: '', customer: '', username: '', status: ''}
-  ];
+  searchValue = '';
+  quoteList: any = [];
 
   displayedColumns: string[] = ['quoteID', 'customer', 'username', 'status'];
-  dataSource: any;
+  dataSource = new MatTableDataSource<Element>(this.quoteList);
 
   constructor(
     private _quote: QuoteService,
   ) { 
-    this.loadQuotes();
+  }
+
+  @ViewChild(MatPaginator)
+  set paginator(value: MatPaginator) {
+    this.dataSource.paginator = value;
+  }
+
+  @ViewChild(MatSort)
+  set sort(value: MatSort) {
+    this.dataSource.sort = value;
   }
 
   ngOnInit(): void {
+    this.loadQuotes();
   }
 
   loadQuotes() {
     this._quote.getQuotes().subscribe(quotes =>{
-      this.quoteList = quotes;
-      this.dataSource = this.quoteList;
+      this.dataSource.data = quotes;
     })
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+}
+
+interface Element {
+  QuoteID: String
+  username: String
+  customer: String
+  email: String
+  status: String
+  discount: String
 }

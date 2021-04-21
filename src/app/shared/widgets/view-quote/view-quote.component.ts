@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-view-quote',
@@ -7,23 +10,33 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./view-quote.component.css']
 })
 export class ViewQuoteComponent implements OnInit {
+  searchValue = '';
+  quotes:any = [];
+  displayedColumns: string[] = ["QuoteID", "username", "customer", "email", "status", "discount", "buttons"];
+  dataSource = new MatTableDataSource<Element>(this.quotes);
 
-  Quote:any = [];
-  dataSource: any;
 
   constructor(
     private _auth: AuthService,
-  ) {
-    this.loadQuotes();
+  ) { }
+
+   @ViewChild(MatPaginator)
+   set paginator(value: MatPaginator) {
+     this.dataSource.paginator = value;
+   }
+ 
+   @ViewChild(MatSort)
+   set sort(value: MatSort) {
+     this.dataSource.sort = value;
    }
 
   ngOnInit(): void {
+    this.loadQuotes();
   }
 
   loadQuotes() {
     this._auth.getQuotes().subscribe(quotes =>{
-      this.Quote = quotes
-      this.dataSource = this.Quote;
+      this.dataSource.data = quotes;
     })
   }
 
@@ -35,4 +48,17 @@ export class ViewQuoteComponent implements OnInit {
     }
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+}
+
+interface Element {
+  QuoteID: String
+  username: String
+  customer: String
+  email: String
+  status: String
+  discount: String
 }
