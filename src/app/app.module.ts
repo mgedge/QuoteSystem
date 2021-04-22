@@ -63,6 +63,7 @@ import { ViewUserComponent } from './shared/widgets/view-user/view-user.componen
 import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
 import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
 import { PrchseOrderComponent } from './shared/widgets/prchse-order/prchse-order.component';
+import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-cart.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { PrchseOrderComponent } from './shared/widgets/prchse-order/prchse-order
     EditQuoteComponent,
     ViewQuoteComponent,
     PrchseOrderComponent
+    QuoteCartComponent,
   ],
   imports: [
     AppRoutingModule,
