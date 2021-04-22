@@ -32,6 +32,7 @@ import { AdminComponent } from './modules/admin/admin.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
 import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
 import { CommissionsComponent } from './shared/widgets/commissions/commissions.component';
+import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-cart.component';
 
 
 const routes: Routes = [
@@ -58,7 +59,7 @@ const routes: Routes = [
       {
         path: 'cards', component: SampleCardsComponent, children: [
           { path: '', component: EmployeesComponent, outlet: 'users' },
-          { path: '', component: VideoComponent, outlet: 'video'},
+          { path: '', component: VideoComponent, outlet: 'video' },
         ]
       },
       { path: 'graphql', component: SampleGraphqlComponent },
@@ -66,7 +67,7 @@ const routes: Routes = [
         path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         data: { role: ['1'] }, children: [
           { path: '', component: ViewUserComponent, outlet: 'users' },
-          { path: '', component: CommissionsComponent, outlet: 'comms'}
+          { path: '', component: CommissionsComponent, outlet: 'comms' }
 
         ]
       },
@@ -79,11 +80,16 @@ const routes: Routes = [
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
-          { path: '', component: AddQuoteComponent, outlet: 'new-quote'},
-          { path: '', component: ViewQuoteComponent, outlet: 'view-quote'},
-          { path: '', component: QuoteListComponent, outlet: 'quotes'},
-          { path: '', component: ItemListComponent, outlet: 'items'},
-          { path: '', component: ItemListComponent, outlet: 'parts'},
+          {
+            path: '', component: AddQuoteComponent, outlet: 'new-quote',
+            children: [
+              { path: '', component: QuoteCartComponent, outlet: 'cart' },
+            ]
+          },
+          { path: '', component: ViewQuoteComponent, outlet: 'view-quote' },
+          { path: '', component: QuoteListComponent, outlet: 'quotes' },
+          { path: '', component: ItemListComponent, outlet: 'items' },
+          { path: '', component: ItemListComponent, outlet: 'parts' },
         ]
       },
 
