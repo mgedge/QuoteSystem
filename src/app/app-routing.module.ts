@@ -81,7 +81,6 @@ const routes: Routes = [
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
-          { path: '', component: AddQuoteComponent, outlet: 'new-quote'},
           { path: '', component: ViewQuoteComponent, outlet: 'view-quote'},
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
           { path: '', component: ItemListComponent, outlet: 'items'},
@@ -93,10 +92,6 @@ const routes: Routes = [
               { path: '', component: QuoteCartComponent, outlet: 'cart' },
             ]
           },
-          { path: '', component: ViewQuoteComponent, outlet: 'view-quote' },
-          { path: '', component: QuoteListComponent, outlet: 'quotes' },
-          { path: '', component: ItemListComponent, outlet: 'items' },
-          { path: '', component: ItemListComponent, outlet: 'parts' },
         ]
       },
 

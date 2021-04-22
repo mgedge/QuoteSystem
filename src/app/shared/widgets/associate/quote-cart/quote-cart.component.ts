@@ -59,7 +59,7 @@ export class QuoteCartComponent implements OnInit {
     this._quote.cartObservable.subscribe((cart: any) => {
       console.log(cart);
       // this.dataSource.data = cart;
-      this.dataSource = new MatTableDataSource(cart);
+      // this.dataSource = new MatTableDataSource(cart);
     });
 
   }
