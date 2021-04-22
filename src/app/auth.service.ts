@@ -278,9 +278,9 @@ export class AuthService {
       if (obj[<any>"quoteID"] == targetID) //find the quote with the target ID
       {
         quote = obj; //and store that quote
-        console.log(quote);
         break; //leaving the loop afterwards
       }
+      console.log(targetID);
     }
     if (quote == null) //if that quote couldn't be found
       return; //leave the function

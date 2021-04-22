@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PrchseOrderComponent implements OnInit {
   commForm:any= FormGroup;
 
+  orderData:any = {}; 
+
   constructor(
     private _auth: AuthService,
     public fb: FormBuilder,
@@ -23,7 +25,7 @@ export class PrchseOrderComponent implements OnInit {
 
   onSubmit() {
     if (window.confirm('Are you sure?')) {
-      this._auth.processOrder(this.commForm.quoteID)
+      this._auth.processOrder(this.orderData)
       }
     }
 }
