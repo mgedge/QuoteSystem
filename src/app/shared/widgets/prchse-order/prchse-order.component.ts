@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./prchse-order.component.css']
 })
 export class PrchseOrderComponent implements OnInit {
-  editForm:any= FormGroup;
+  commForm:any= FormGroup;
 
   constructor(
     private _auth: AuthService,
@@ -16,14 +16,14 @@ export class PrchseOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.editForm = this.fb.group({
+    this.commForm = this.fb.group({
       quoteID: ['', [Validators.required]],
     })
   }
 
   onSubmit() {
     if (window.confirm('Are you sure?')) {
-      this._auth.processOrder(this.editForm.quoteID)
+      this._auth.processOrder(this.commForm.quoteID)
       }
     }
 }
