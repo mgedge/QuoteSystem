@@ -31,6 +31,7 @@ import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.compo
 import { AdminComponent } from './modules/admin/admin.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
 import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
+import { CommissionsComponent } from './shared/widgets/commissions/commissions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -64,6 +65,7 @@ const routes: Routes = [
         path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         data: { role: ['1'] }, children: [
           { path: '', component: ViewUserComponent, outlet: 'users' },
+          { path: '', component: CommissionsComponent, outlet: 'comms'}
 
         ]
       },

@@ -8,14 +8,19 @@ import { AuthService } from '../../../../auth.service'
   templateUrl: './add-quote.component.html',
   styleUrls: ['./add-quote.component.css']
 })
+
 export class AddQuoteComponent implements OnInit {
   quoteForm: FormGroup;
   quoteData: any = {
-    customerName: '',
+    quoteID: '',
+    username: '', 
+    customer: '',
     contact: '',
     items: [
       { name: '', count: ''}
-    ]
+    ],
+    status: '',
+    discount: ''
   };
 
   constructor(
@@ -23,15 +28,11 @@ export class AddQuoteComponent implements OnInit {
     public formBuilder: FormBuilder,
   ) { 
     this.quoteForm = this.formBuilder.group({
-      quoteID: ['', Validators.required], 
-      username: ['', Validators.required],
       customer: ['', Validators.required],
       contact: ['', Validators.required],
       items: [
         // {name: '', count: ''}
       ],
-      status: 'open',
-      discount: '0%'
     })
   }
 
@@ -44,16 +45,19 @@ export class AddQuoteComponent implements OnInit {
     { count: '10', checked: false },
     { count: '20', checked: false },
     { count: '50', checked: false }
-  ];   
+  ];
 
   itemOptions: any = [
     { name: 'steel screws', checked: false },
     { name: '2x4 wood planks', checked: false }
-  ]
+  ];
 
+  
   newQuote() {
-    this.quoteForm.quoteID = getNextQuoteID();
-    this.quoteForm; 
+    this.quoteData.quoteID = this._auth.getNextQuoteID();
+    this.quoteData.username = this._auth.getCurrentID(); 
+    this.quoteData.status = 'open';
+    this.quoteData.discount = '0%';
 
     this._auth.createQuote(this.quoteData)
       .subscribe(
@@ -69,5 +73,6 @@ export class AddQuoteComponent implements OnInit {
 
       )
   }
+ 
 
 }

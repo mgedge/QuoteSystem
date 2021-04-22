@@ -13,6 +13,7 @@ import { VideoComponent } from './widgets/demo/video/video.component';
 import { QuoteListComponent } from './widgets/associate/quote-list/quote-list.component';
 import { ItemsInQuoteComponent } from './widgets/associate/items-in-quote/items-in-quote.component';
 import { ItemListComponent } from './widgets/associate/item-list/item-list.component';
+import { CommissionsComponent } from './widgets/commissions/commissions.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ItemListComponent } from './widgets/associate/item-list/item-list.compo
     QuoteListComponent,
     ItemsInQuoteComponent,
     ItemListComponent,
+    CommissionsComponent,
   ],
   imports: [
     CommonModule,

@@ -106,13 +106,13 @@ router.post('/register', (req, res) => {
 // Attemps to save a new quote to the database
 router.post('/newQuote', (req, res) => {
   const quote = new Quote({
-    username: getCurrentID(),
-    quoteID: getNextQuoteID(),
+    quoteID: req.body.quoteID,
+    username: req.body.username,
     customer: req.body.customer,
     contact: req.body.contact,
     items: req.body.item1,
-    status: 'open',
-    discount: '0%'
+    status: req.body.status,
+    discount: req.body.discount
     });
 
       //Save the user to the database
