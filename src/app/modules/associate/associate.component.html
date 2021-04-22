@@ -3,6 +3,7 @@
         <!-- New Quotes -->
         <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
+                <div class="form">
                 <div class="container">
                     <mat-toolbar>Create New Quote</mat-toolbar>
                     <div class="container">
@@ -12,6 +13,50 @@
             </mat-card>
         </div>
 
+    <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <mat-card>
+            <div class="container">
+                <mat-toolbar>Currently Open Quotes</mat-toolbar>
+                <div class="container">
+                    <router-outlet name="view-quote"></router-outlet>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+        <mat-card>
+            <div class="form">
+                <mat-toolbar>Item List</mat-toolbar>
+                <div class="container">
+                    <router-outlet name="items"></router-outlet>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    
+        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+            <mat-card>
+                <div class="form">
+                    <mat-toolbar>Legacy Customers</mat-toolbar>
+                    <div class="container">
+                        <div class="chart-wrapper">
+                            <ngx-charts-bar-horizontal class="chart" 
+                            [results]="saleData" 
+                            [scheme]="colorSchemeA"
+                            [xAxisLabel]="'Sale'"
+                            [yAxisLabel]="'Products'" 
+                            [showXAxisLabel]="true" 
+                            [showYAxisLabel]="true"
+                            [xAxis]="true" 
+                            [yAxis]="true"
+                            [legend]="true">
+                            </ngx-charts-bar-horizontal>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div> 
+    </div>     
           <!-- All Quotes -->
           <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>

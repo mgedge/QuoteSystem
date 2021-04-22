@@ -6,19 +6,7 @@
 
                     <mat-toolbar>Admin Card #1</mat-toolbar>
                     <div class="container">
-                        <div class="chart-wrapper-large">
-                            <ngx-charts-bar-vertical class="chart" 
-                            [results]="saleData" 
-                            [xAxisLabel]="'Products'"
-                            [yAxisLabel]="'Sale'" 
-                            [scheme]="colorSchemeC"
-                            [legend]="true" 
-                            [showXAxisLabel]="true" 
-                            [showYAxisLabel]="true"
-                            [xAxis]="true" 
-                            [yAxis]="true">
-                            </ngx-charts-bar-vertical>
-                        </div>
+                        <router-outlet name="comm"></router-outlet>
                     </div>
                 </div>
             </mat-card>

@@ -30,6 +30,9 @@ import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.compo
 import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
+import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
+import { CommissionsComponent } from './shared/widgets/commissions/commissions.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -63,6 +66,7 @@ const routes: Routes = [
         path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         data: { role: ['1'] }, children: [
           { path: '', component: ViewUserComponent, outlet: 'users' },
+          { path: '', component: CommissionsComponent, outlet: 'comms'}
 
         ]
       },
@@ -75,8 +79,10 @@ const routes: Routes = [
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
-          { path: '', component: ViewQuoteComponent, outlet: 'newquotes' },
+          { path: '', component: AddQuoteComponent, outlet: 'new-quote'},
+          { path: '', component: ViewQuoteComponent, outlet: 'view-quote'},
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
+          { path: '', component: ItemListComponent, outlet: 'items'},
           { path: '', component: ItemListComponent, outlet: 'parts'},
         ]
       },
