@@ -32,6 +32,7 @@ import { AdminComponent } from './modules/admin/admin.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
 import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
 import { CommissionsComponent } from './shared/widgets/commissions/commissions.component';
+import { PrchseOrderComponent } from './shared/widgets/prchse-order/prchse-order.component';
 import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-cart.component';
 
 
@@ -80,6 +81,12 @@ const routes: Routes = [
       {
         path: 'associate', component: AssociateComponent, canActivate: [AuthGuard],
         data: { role: ['3'] }, children: [
+          { path: '', component: AddQuoteComponent, outlet: 'new-quote'},
+          { path: '', component: ViewQuoteComponent, outlet: 'view-quote'},
+          { path: '', component: QuoteListComponent, outlet: 'quotes'},
+          { path: '', component: ItemListComponent, outlet: 'items'},
+          { path: '', component: ItemListComponent, outlet: 'parts'},
+          { path: '', component: PrchseOrderComponent, outlet: 'prchse-order'},
           {
             path: '', component: AddQuoteComponent, outlet: 'new-quote',
             children: [

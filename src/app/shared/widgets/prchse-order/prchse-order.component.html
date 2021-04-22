@@ -1,0 +1,14 @@
+<div class="purchaseOrder">
+    <form [formGroup]="commForm" (ngSubmit)="onSubmit()">
+        <br>
+        <div class="form-group">
+            <label for="inputName">Quote ID</label>
+            <input class="form-control" type="text" formControlName="quoteID" required>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success btn-lg btn-block" type="submit">Purchase Order</button>
+        </div>
+        
+    </form>
+</div>

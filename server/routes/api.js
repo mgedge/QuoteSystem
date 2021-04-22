@@ -27,6 +27,7 @@ require('dotenv/config')
 const User = require('../models/users');
 const Quote = require('../models/quotes');
 const Item = require('../models/item');
+const Comm = require('../models/comm');
 const { Mongoose } = require('mongoose');
 const item = require('../models/item');
 const { Customer } = require('../external');
@@ -215,6 +216,21 @@ router.route('/updatequote/:id').put((req, res, next) => {
       }
     })
   })
+
+  // PUT the new commission data by id
+router.route('updatecommission/:id').put((req, res, next) => {
+  Comm.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, (error, data) => {
+    if (error) {
+      return next(error);
+      console.log(error)
+    } else {
+      res.json(data)
+      console.log('Data updated successfully')
+    }
+  })
+})
   
 
 // POST : Login authentication
