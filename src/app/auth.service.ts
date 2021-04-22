@@ -2,7 +2,8 @@
  * auth.service
  * 
  * This file allows components throughout the project
- * to login/register, access user's token, and logout
+ * to login/register, access user's token, create, 
+ * edit, and delete quotes, and logout
  * 
  **************************************************/
 
@@ -45,7 +46,6 @@ export class AuthService {
         catchError(this.handleError)
       )
   }
-  
 
   // Load user by id
   loadUser(id: any): Observable<any> {
@@ -191,6 +191,19 @@ export class AuthService {
 
   public getCurrentRole() {
     return this.currentUserRole;
+  }
+  
+  public getNextQuoteID() {
+    var quoteList = this.getQuotes(); //access all known quotes
+    let nextID = 0; //initialize container
+    for (var quote in quoteList) //for all quotes
+    {
+      if (parseInt(quote[<any>"quoteID"]) > nextID) { //check if this is the highest used quoteID
+        nextID = parseInt(quote[<any>"quoteID"]); //if so, store it
+      }
+    }
+    ++nextID; //increment by 1
+    return nextID;
   }
 
   handleError(error: HttpErrorResponse) {

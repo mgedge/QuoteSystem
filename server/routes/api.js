@@ -102,6 +102,34 @@ router.post('/register', (req, res) => {
     })
 });
 
+// POST : New Quote
+// Attemps to save a new quote to the database
+router.post('/newQuote', (req, res) => {
+  const quote = new Quote({
+    username: getCurrentID(),
+    quoteID: getNextQuoteID(),
+    customer: req.body.customer,
+    contact: req.body.contact,
+    items: req.body.item1,
+    status: 'open',
+    discount: '0%'
+    });
+
+      //Save the user to the database
+      quote.save().then((response) => {
+          res.status(201).json({
+              message: "Registration successful",
+              new_quote: response
+          });
+
+          console.log(response);
+      }).catch(err => {
+          res.status(500).json({
+              error: err
+          });
+  });
+});
+
 // DELETE: Delete user
 // Deletes user by id
 router.route('/deleteuser/:id').delete((req, res, next) => {
