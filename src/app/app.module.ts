@@ -56,7 +56,6 @@ import { GraphQLModule } from './graphql.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { QuoteListComponent } from './shared/widgets/associate/quote-list/quote-list.component';
 import { ItemListComponent } from './shared/widgets/associate/item-list/item-list.component';
-import { ItemsInQuoteComponent } from './shared/widgets/associate/items-in-quote/items-in-quote.component';
 import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component'
 import { EditUserComponent } from './shared/widgets/edit-user/edit-user.component';
 import { ViewUserComponent } from './shared/widgets/view-user/view-user.component';
@@ -64,6 +63,7 @@ import { EditQuoteComponent } from './shared/widgets/edit-quote/edit-quote.compo
 import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.component';
 import { PrchseOrderComponent } from './shared/widgets/prchse-order/prchse-order.component';
 import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-cart.component';
+import { CustomersComponent } from './shared/widgets/customers/customers.component';
 
 @NgModule({
   declarations: [
@@ -83,14 +83,14 @@ import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-
     SampleGraphqlComponent,
     QuoteListComponent,
     ItemListComponent,
-    ItemsInQuoteComponent,
     AddQuoteComponent,
     EditUserComponent,
     ViewUserComponent,
     EditQuoteComponent,
     ViewQuoteComponent,
-    PrchseOrderComponent
+    PrchseOrderComponent,
     QuoteCartComponent,
+    CustomersComponent,
   ],
   imports: [
     AppRoutingModule,

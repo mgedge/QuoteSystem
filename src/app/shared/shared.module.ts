@@ -8,14 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { EmployeesComponent } from './widgets/admin/employees/employees.component';
 import { AddQuoteComponent } from './widgets/associate/add-quote/add-quote.component';
-import { EditQuoteComponent } from './widgets/supervisor/edit-quote/edit-quote.component';
 import { VideoComponent } from './widgets/demo/video/video.component';
 import { QuoteListComponent } from './widgets/associate/quote-list/quote-list.component';
-import { ItemsInQuoteComponent } from './widgets/associate/items-in-quote/items-in-quote.component';
 import { ItemListComponent } from './widgets/associate/item-list/item-list.component';
 import { CommissionsComponent } from './widgets/commissions/commissions.component';
 import { PrchseOrderComponent } from './widgets/prchse-order/prchse-order.component';
 import { QuoteCartComponent } from './widgets/associate/quote-cart/quote-cart.component';
+import { CustomersComponent } from './widgets/customers/customers.component';
+import { EditQuoteComponent } from './widgets/edit-quote/edit-quote.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +27,11 @@ import { QuoteCartComponent } from './widgets/associate/quote-cart/quote-cart.co
     EditQuoteComponent,
     VideoComponent,
     QuoteListComponent,
-    ItemsInQuoteComponent,
     ItemListComponent,
     CommissionsComponent,
     PrchseOrderComponent,
     QuoteCartComponent,
+    CustomersComponent,
   ],
   imports: [
     CommonModule,

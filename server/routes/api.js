@@ -113,7 +113,7 @@ router.post('/newQuote', (req, res) => {
     username: req.body.username,
     customer: req.body.customer,
     contact: req.body.contact,
-    items: req.body.item1,
+    items: req.body.items,
     status: req.body.status,
     discount: req.body.discount
     });
@@ -121,7 +121,7 @@ router.post('/newQuote', (req, res) => {
       //Save the user to the database
       quote.save().then((response) => {
           res.status(201).json({
-              message: "Registration successful",
+              message: "Quote added",
               new_quote: response
           });
 
