@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ItemService } from 'src/app/shared/services/item.service';
+import { QuoteService } from 'src/app/shared/services/quote.service';
 
 @Component({
   selector: 'app-item-list',
@@ -33,24 +34,24 @@ export class ItemListComponent implements OnInit {
 
   constructor(
     private _item: ItemService,
+    private _quote: QuoteService,
   ) { }
 
   ngOnInit(): void {
+    this.itemList = this._quote.cartArray;
     this.loadItems();
   }
 
+
   loadItems() {
-    // this._item.getItems().subscribe(items =>{
-    //   this.dataSource = items;
-    // })
-
-    //     this._item.getParts().subscribe(items =>{
-    //   this.dataSource = items;
-    // })
-
     this._item.getParts().then(items => {
       this.dataSource.data = items;
     });
+  }
+
+  sendItem(element: Element) {
+    console.log(element);
+    this._quote.addItemToCart(element);
   }
 }
 

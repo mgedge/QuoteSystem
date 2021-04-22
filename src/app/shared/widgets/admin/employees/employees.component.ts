@@ -45,7 +45,6 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
-    this._auth.getCurrentRole
   }
 
   //CHANGE modify this function to retrieve your data
