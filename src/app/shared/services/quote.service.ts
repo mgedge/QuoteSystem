@@ -41,7 +41,15 @@ export class QuoteService {
     )
   }
 
-  
+  public addQuote(quote: any) {
+    let api = `${this.endpoint}/add-quote`
+    return this.http.post<any>(api, quote)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+
 
   handleError(error: HttpErrorResponse) {
     let msg = '';

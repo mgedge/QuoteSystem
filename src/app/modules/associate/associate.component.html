@@ -1,16 +1,6 @@
 <div class="content" fxLayoutWrap>
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Sales Card #1</mat-toolbar>
-                    <div class="container">
-                        <router-outlet name="quotes"></router-outlet>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-
+        <!-- New Quotes -->
         <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="container">
@@ -22,8 +12,8 @@
             </mat-card>
         </div>
 
-
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+          <!-- All Quotes -->
+          <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
                     <mat-toolbar>Quote List</mat-toolbar>
@@ -32,7 +22,8 @@
             </mat-card>
         </div>
 
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+          <!-- Open Quotes -->
+          <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
                     <mat-toolbar>Sales Card #4</mat-toolbar>
@@ -40,19 +31,13 @@
                 </div>
             </mat-card>
         </div>
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
+
+          <!-- Item list -->
+          <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
                     <mat-toolbar>Item List</mat-toolbar>
                     <router-outlet name="parts"></router-outlet>
-                </div>
-            </mat-card>
-        </div>
-
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-                    <mat-toolbar>Sales Card #4</mat-toolbar>
                 </div>
             </mat-card>
         </div>

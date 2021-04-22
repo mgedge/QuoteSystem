@@ -5,6 +5,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth.service';
 
+const userSchema = {
+  "username": "text",
+  "firstname": "text",
+  "lastname": "text",
+  "image": "text"
+}
+
 @Component({
   selector: 'app-widget-admin-employees',
   templateUrl: './employees.component.html',
@@ -16,9 +23,10 @@ export class EmployeesComponent implements OnInit {
   
   //CHANGE to match the  to filter
   employees: any = [ ];
+  dataSchema: any = userSchema;
 
   //CHANGE the displayed columns to match the matColumnDef
-  displayedColumns: string[] = ['username', 'firstname', 'lastname', 'image'];
+  displayedColumns: string[] = ['username', 'firstname', 'lastname', 'image', '$$edit'];
   dataSource = new MatTableDataSource<Element>(this.employees);
 
   constructor(
@@ -37,6 +45,7 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+    this._auth.getCurrentRole
   }
 
   //CHANGE modify this function to retrieve your data

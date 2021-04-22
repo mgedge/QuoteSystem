@@ -19,6 +19,7 @@
 
 table {
     width: 100%;
+    margin: auto;
 }
 
 .refresh {
@@ -36,6 +37,10 @@ table {
 
 .buttonCol {
     display: table-cell;
+}
+
+.mat-form-field {
+    width: auto;
 }
 
 .mat-row:not(.mat-no-data-row):hover {

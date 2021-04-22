@@ -65,18 +65,9 @@ mongoose.connect(process.env.DB_CONNECTION,
   console.log("Connected to database through server.js")
 )
 
+//Connect to external database
 const db = require("./external");
 db.sequelize.sync();
-
-// external.connect(function(err) {
-//   if(err) throw err;
-
-//   else console.log("Successfully connected to the external server");
-
-//   // external.query("SELECT * FROM customers", function(err, result, fields) {
-//   //   if(err) throw err;
-//   // })
-// })
 
 //Open connection
 app.listen(PORT, function() {

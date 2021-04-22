@@ -20,28 +20,40 @@
 
   <!-- NOTE modify the matColumnDef and the th/td property to match what you need -->
   <table mat-table [dataSource]="dataSource" matSort>
-    <!-- Column -->
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
-      <td mat-cell *matCellDef="let element"> <b> {{element.username}} </b> </td>
-    </ng-container>
 
-    <!-- Column -->
-    <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-    </ng-container>
+    <ng-container matColumnDef="{{col}}" *ngFor="let col of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="col !== '$$edit'">
+          {{col}}
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let element">
 
-    <!-- Column -->
-    <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last name </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-    </ng-container>
+        <div *ngIf="!element.isEdit">
+          <div *ngIf="col === '$$edit'; spanHeader" >
+            <button mat-button (click)="element.isEdit = !element.isEdit">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          <span #spanHeader>
+            {{element[col]}}
+          </span>
+        </div>
 
-    <!-- Column -->
-    <ng-container matColumnDef="image">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
-      <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+        <div *ngIf="element.isEdit">
+          <div  *ngIf="col === '$$edit'; else dataField">
+            <button mat-button (click)="element.isEdit = !element.isEdit">
+              <mat-icon class="red">check</mat-icon>
+            </button>
+          </div>
+          <ng-template #dataField>
+            <mat-form-field class="edit">
+              <mat-label>{{col}}</mat-label>
+              <input type="{{dataSchema[col]}}" matInput [(ngModel)]="element[col]">
+            </mat-form-field>
+          </ng-template>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
