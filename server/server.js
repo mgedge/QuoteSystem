@@ -26,6 +26,8 @@ const { graphqlHTTP } = require('express-graphql');
 const resolvers = require('./GraphQL/resolvers');
 const schema = require('./GraphQL/schema');
 
+const mysql = require('mysql');
+
 //Setup the express server
 const app = express();
 
@@ -62,6 +64,10 @@ mongoose.connect(process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true }, () => 
   console.log("Connected to database through server.js")
 )
+
+//Connect to external database
+const db = require("./external");
+db.sequelize.sync();
 
 //Open connection
 app.listen(PORT, function() {

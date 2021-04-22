@@ -33,6 +33,7 @@ import { ItemListComponent } from './shared/widgets/associate/item-list/item-lis
 import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quote.component';
 import { CommissionsComponent } from './shared/widgets/commissions/commissions.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -82,6 +83,7 @@ const routes: Routes = [
           { path: '', component: ViewQuoteComponent, outlet: 'view-quote'},
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
           { path: '', component: ItemListComponent, outlet: 'items'},
+          { path: '', component: ItemListComponent, outlet: 'parts'},
         ]
       },
 

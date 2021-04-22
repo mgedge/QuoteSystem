@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ItemService } from 'src/app/shared/services/item.service';
 
 @Component({
@@ -9,34 +11,53 @@ import { ItemService } from 'src/app/shared/services/item.service';
 })
 
 export class ItemListComponent implements OnInit {
-  itemList: any = [
-    {name: '', price: '', description: ''}
-  ];
+  searchValue = '';
+  itemList: any = [];
+  displayedColumns: string[] = ['number', 'name', 'price', 'weight', 'image'];
+  dataSource = new MatTableDataSource<Element>(this.itemList);
 
-  displayedColumns: string[] = ['name', 'price', 'description'];
-  dataSource: any;
-  @ViewChild(MatPaginator) set paginator(mp: MatPaginator) {
-    this.dataSource.paginator = mp;
+  @ViewChild(MatPaginator)
+  set paginator(value: MatPaginator) {
+    this.dataSource.paginator = value;
   }
 
-  applyFilter(filterValue: string) {
+  @ViewChild(MatSort)
+  set sort(value: MatSort) {
+    this.dataSource.sort = value;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   constructor(
     private _item: ItemService,
-  ) { 
-    
-  }
+  ) { }
 
   ngOnInit(): void {
     this.loadItems();
   }
 
   loadItems() {
-    this._item.getItems().subscribe(items =>{
-      this.itemList = items;
-      this.dataSource = this.itemList;
-    })
+    // this._item.getItems().subscribe(items =>{
+    //   this.dataSource = items;
+    // })
+
+    //     this._item.getParts().subscribe(items =>{
+    //   this.dataSource = items;
+    // })
+
+    this._item.getParts().then(items => {
+      this.dataSource.data = items;
+    });
   }
+}
+
+interface Element {
+  number: String
+  name: String
+  description: String
+  price: number
+  weight: number
 }

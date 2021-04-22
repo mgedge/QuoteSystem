@@ -1,40 +1,59 @@
-<div>
+<div class="container">
+  <!-- Fitler and refresh -->
   <div class="row">
-    <div>
-
+    <div class="col">
+      <mat-form-field class="search">
+        <mat-label>Filter</mat-label>
+        <input matInput type="text" (keyup)="applyFilter($event)" [(ngModel)]="searchValue">
+        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
-    <button mat-icon-button  class="refresh" (click)="loadUsers()">                        
-      <mat-icon>refresh</mat-icon>
-    </button>
+    <div class="refresh">
+      <!-- NOTE change the loadUsers to match your data retrieval function -->
+      <button mat-icon-button class="refresh" (click)="loadUsers()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
   </div>
 
+  <!-- NOTE modify the matColumnDef and the th/td property to match what you need -->
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+    <ng-container matColumnDef="{{col}}" *ngFor="let col of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="col !== '$$edit'">
+          {{col}}
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let element">
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
-      <td mat-cell *matCellDef="let element"> <b> {{element.username}} </b> </td>
-    </ng-container>
+        <div *ngIf="!element.isEdit">
+          <div *ngIf="col === '$$edit'; spanHeader" >
+            <button mat-button (click)="element.isEdit = !element.isEdit">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          <span #spanHeader>
+            {{element[col]}}
+          </span>
+        </div>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last name </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="image">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
-      <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+        <div *ngIf="element.isEdit">
+          <div  *ngIf="col === '$$edit'; else dataField">
+            <button mat-button (click)="element.isEdit = !element.isEdit">
+              <mat-icon class="red">check</mat-icon>
+            </button>
+          </div>
+          <ng-template #dataField>
+            <mat-form-field class="edit">
+              <mat-label>{{col}}</mat-label>
+              <input type="{{dataSchema[col]}}" matInput [(ngModel)]="element[col]">
+            </mat-form-field>
+          </ng-template>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

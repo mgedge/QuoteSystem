@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <p *ngIf="User.length <= 0" class="no-data text-center"> There are no users</p>
 
     <table class = "table table-bordered" *ngIf="User.length > 0">
@@ -30,4 +30,89 @@
             </tr>
         </tbody>
     </table>
+</div> -->
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <mat-form-field class="search">
+                <mat-label>Filter</mat-label>
+                <input matInput type="text" (keyup)="applyFilter($event)" [(ngModel)]="searchValue">
+                <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="searchValue=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="refresh">
+            <button mat-icon-button class="refresh" (click)="loadUsers()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Column -->
+        <ng-container matColumnDef="UserID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> User ID </th>
+            <td mat-cell *matCellDef="let element"> <b> {{element._id}} </b> </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+            <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="discount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+            <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="buttons">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="buttonRow">
+                    <div class="buttonCol">
+                        <a mat-icon-button [routerLink]="['/#/edit-user/', element._id]">
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                    </div>
+                    <div class="buttonCol">
+                        <a mat-icon-button (click)="removeUser(element._id)">
+                            <mat-icon color="warn">delete</mat-icon>
+                        </a>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    <div *ngIf="dataSource.filteredData.length == 0" class="no-data text-center alert alert-danger mt-3 mb-0"> There are
+        no users</div>
 </div>

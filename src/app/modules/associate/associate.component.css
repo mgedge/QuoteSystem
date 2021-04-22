@@ -47,20 +47,15 @@
 
 .chart-wrapper {
     display: grid;
-    /* padding: 10px; */
-    /* padding-bottom: 30% */
     padding-bottom: 56.25%;
-    /* overflow: auto; */
     max-width: 100%;
     max-height: 300px;
     position: relative;
 }
 
 .chart-wrapper-large {
-    /* display: grid; */
     padding: 10px;
     padding-bottom: 15%;
-    /* overflow: auto; */
     max-width: 100%;
     min-width: 450px;
     height: 300px;
