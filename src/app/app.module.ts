@@ -89,7 +89,7 @@ import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-
     ViewUserComponent,
     EditQuoteComponent,
     ViewQuoteComponent,
-    PrchseOrderComponent
+    PrchseOrderComponent,
     QuoteCartComponent,
   ],
   imports: [
