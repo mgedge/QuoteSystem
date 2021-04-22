@@ -14,6 +14,7 @@ import { QuoteListComponent } from './widgets/associate/quote-list/quote-list.co
 import { ItemsInQuoteComponent } from './widgets/associate/items-in-quote/items-in-quote.component';
 import { ItemListComponent } from './widgets/associate/item-list/item-list.component';
 import { CommissionsComponent } from './widgets/commissions/commissions.component';
+import { PrchseOrderComponent } from './widgets/prchse-order/prchse-order.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CommissionsComponent } from './widgets/commissions/commissions.componen
     ItemsInQuoteComponent,
     ItemListComponent,
     CommissionsComponent,
+    PrchseOrderComponent,
   ],
   imports: [
     CommonModule,
