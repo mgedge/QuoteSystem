@@ -34,6 +34,7 @@ import { AddQuoteComponent } from './shared/widgets/associate/add-quote/add-quot
 import { CommissionsComponent } from './shared/widgets/commissions/commissions.component';
 import { PrchseOrderComponent } from './shared/widgets/prchse-order/prchse-order.component';
 import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-cart.component';
+import { CustomersComponent } from './shared/widgets/customers/customers.component';
 
 
 const routes: Routes = [
@@ -85,6 +86,7 @@ const routes: Routes = [
           { path: '', component: QuoteListComponent, outlet: 'quotes'},
           { path: '', component: ItemListComponent, outlet: 'items'},
           { path: '', component: ItemListComponent, outlet: 'parts'},
+          { path: '', component: CustomersComponent, outlet: 'customers'},
           { path: '', component: PrchseOrderComponent, outlet: 'prchse-order'},
           {
             path: '', component: AddQuoteComponent, outlet: 'new-quote',

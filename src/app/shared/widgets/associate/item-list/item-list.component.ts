@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ItemService } from 'src/app/shared/services/item.service';
 import { QuoteService } from 'src/app/shared/services/quote.service';
+// import { QuoteCartComponent } from '../quote-cart/quote-cart.component';
 
 @Component({
   selector: 'app-item-list',
@@ -35,6 +36,7 @@ export class ItemListComponent implements OnInit {
   constructor(
     private _item: ItemService,
     private _quote: QuoteService,
+    // private _cart: QuoteCartComponent,
   ) { }
 
   ngOnInit(): void {
@@ -49,16 +51,18 @@ export class ItemListComponent implements OnInit {
     });
   }
 
-  sendItem(element: Element) {
+  sendItem(element: Item) {
     console.log(element);
     this._quote.addItemToCart(element);
+    // this._cart.loadCart();
   }
 }
 
-interface Element {
+interface Item {
   number: String
-  name: String
   description: String
-  price: number
-  weight: number
+  price: Number
+  weight: Number
+  pictureURL: String
+  quantity: Number
 }

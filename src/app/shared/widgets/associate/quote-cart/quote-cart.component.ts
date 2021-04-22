@@ -41,31 +41,15 @@ export class QuoteCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCart();
-    // this._quote.cartObservable.subscribe(cart => {
-    //   // this.dataSource.data = cart
-    //   this.itemList = cart;
-    //   // this.dataSource = new MatTableDataSource<any>(cart.data);
-    //   //  = this.itemList
-    //   console.log(this.itemList)
-    //   console.log(this.dataSource.data)
 
-    //   // this.dataSource.
-    // });
-    // this._quote.cartObs.subscribe();
-    // this.loadCart();
   }
 
   loadCart() {
     this._quote.cartObservable.subscribe((cart: any) => {
       console.log(cart);
-      // this.dataSource.data = cart;
-      // this.dataSource = new MatTableDataSource(cart);
+      this.dataSource.data = cart;
     });
-
   }
-
-
-
 }
 
 export interface Item {

@@ -11,6 +11,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Injectable({
@@ -22,13 +23,13 @@ export class QuoteService {
   //endpoints
   private endpoint = "http://localhost:3000/api"
 
-  cartArray: any = [
-    {number: 1, description: "aSda", price: 50, weight: 50, pictureURL: "asda"},
-    {number: 1, description: "aSda", price: 50, weight: 50, pictureURL: "asda"},
-    {number: 1, description: "aSda", price: 50, weight: 50, pictureURL: "asda"},
-  ]
+  cartArray: any = []
+  cartUser: any = {};
+
   // private cart = new Subject<Element>();
-  private cartSubject = new BehaviorSubject<any>(this.cartArray);
+  private userSubject = new BehaviorSubject<User>(this.cartUser);
+  userObservable = this.userSubject.asObservable();
+  private cartSubject = new BehaviorSubject<Item>(this.cartArray);
   cartObservable = this.cartSubject.asObservable();
   // cartObs = this.cart.asObservable();
 
@@ -62,24 +63,26 @@ export class QuoteService {
    * Cart Functions
    * 
    * ******************************/
-  public addItemToCart(item: any) {
+  public addItemToCart(item: Item) {
     console.log("Cart ");
     console.log(this.cartArray);
-    // this.cart.next(item);
+  
     this.cartArray.push(item);
-    // this.cartSubject.next(item);
+    this.cartSubject = new BehaviorSubject<Item>(this.cartArray);
+  }
+
+  public addCustomerToCart(user: User) {
+    this.cartUser = user;
+    this.userSubject.next(user);
   }
 
   public getCart(): Observable<Item> {
-    return this.cartSubject.asObservable()
-
-    map((res: any) => {
-      return res || {}
-    }),
-    catchError(this.handleError)
+    return this.cartSubject.asObservable();
   }
 
-
+  public getCustomer(): Observable<User> {
+    return this.userSubject.asObservable();
+  }
 
   handleError(error: HttpErrorResponse) {
     let msg = '';
@@ -102,4 +105,14 @@ export interface Item {
   weight: Number
   pictureURL: String
   quantity: Number
+}
+
+export interface Cart {
+  description: String
+  price: Number
+}
+
+export interface User {
+  name: String
+  contact: String
 }
