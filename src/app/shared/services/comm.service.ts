@@ -31,7 +31,7 @@
  
    // Returns ALL items from the database
    public getComm(): Observable<any> {
-     let api = `${this.endpoint}/comms`;
+     let api = `${this.endpoint}/commissions`;
  
      return this.http.get(api, { headers: this.headers }).pipe(
        map((res: any) => {

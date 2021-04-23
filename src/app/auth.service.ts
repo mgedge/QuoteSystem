@@ -221,10 +221,9 @@ export class AuthService {
           nextID = quote.quoteID; //if so, store it
         }
       }
+      ++nextID; //increment by 1
+      return nextID;
     });
-    
-    ++nextID; //increment by 1
-    return nextID;
   }
 
   public updateCommission(username: any, commission: any)
@@ -238,9 +237,9 @@ export class AuthService {
       let num = 0;
       for (let commObj of commList)
       {
-        if (commObj["username"] == username)
+        if (commObj.username == username)
         {
-          _id = commObj["_id"];
+          _id = commObj._id;
           console.log(username); //store this object's _id
           total = parseFloat(commObj.totalCommissionAmt); //store this user's current total
           num = parseInt(commObj.totalNumCommissions); //store this user's current num commissions\
