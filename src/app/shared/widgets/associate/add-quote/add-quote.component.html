@@ -16,9 +16,18 @@
 
         <router-outlet name="cart"></router-outlet>
 
-        <div class="submitButtons">
-            <button mat-raised-button type="button" class="btn btn-success" color="primary" (click)="newQuote()">Submit</button>
+        <div class="row buttonRow">
+            <div *ngIf="!update" class="submitButton">
+                <button mat-raised-button type="button" class="btn btn-success" color="primary" (click)="newQuote()">Submit</button>
+            </div>
+            <div *ngIf="update" class="submitButton">
+                <button mat-raised-button type="button" class="btn btn-success" color="primary" (click)="updateQuote()">Update</button>
+            </div>
+            <!-- <div class="submitButton">
+                <button mat-raised-button type="button" class="btn btn-success"  (click)="reset()">Reset</button>
+            </div> -->
         </div>
+
 
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
     </form>

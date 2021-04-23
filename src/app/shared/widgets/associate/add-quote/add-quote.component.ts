@@ -15,8 +15,11 @@ export class AddQuoteComponent implements OnInit {
 
   error: string = '';
 
+  update: boolean = false;
   customer: any = {};
   cart: any = [];
+
+  quoteID: any;
 
   employeeID: any;
   quoteForm: FormGroup;
@@ -36,8 +39,7 @@ export class AddQuoteComponent implements OnInit {
     private _auth: AuthService,
     private _quote: QuoteService,
     public formBuilder: FormBuilder,
-  ) 
-  {
+  ) {
     this.quoteForm = this.formBuilder.group({
       customer: ['', Validators.required],
       contact: ['', Validators.required],
@@ -46,23 +48,29 @@ export class AddQuoteComponent implements OnInit {
       ],
     });
 
+
   }
 
   ngOnInit(): void {
     this.getAssociate();
     this.loadCustomer();
     this.loadItems();
+    this.loadUpdate();
   }
 
 
   newQuote() {
-    this.quoteData.quoteID = 11;
+    console.log("new quote");
+    this.quoteData.quoteID = this._auth.getNextQuoteID();
     // this.quoteData.username = this._auth.getCurrentID();
     this.quoteData.status = 'open';
     this.quoteData.discount = '0%';
 
-    
-    console.log(this.quoteData);
+    this.quoteData.email = this.customer.contact;
+    this.quoteData.customer = this.customer.name;
+
+    this.convertToCart();
+
 
     this._auth.createQuote(this.quoteData)
       .subscribe(
@@ -75,6 +83,34 @@ export class AddQuoteComponent implements OnInit {
           }
         },
         err => console.log(err)
+
+      )
+  }
+
+  updateQuote() {
+    console.log("update quote");
+
+    this.quoteData.quoteID = this._auth.getNextQuoteID();
+    // this.quoteData.username = this._auth.getCurrentID();
+    this.quoteData.status = 'open';
+    this.quoteData.discount = '0%';
+
+    this.quoteData.contact = this.customer.contact;
+    this.quoteData.customer = this.customer.name;
+
+    this.convertToCart();
+
+    this._auth.updateQuote(this._quote.quoteID, this.quoteData)
+      .subscribe(
+        (res: { new_quote: any; }) => {
+          console.log(res)
+
+          //Registration complete
+          if (res.new_quote) {
+            this.quoteForm.reset();
+          }
+        },
+        (err: any) => console.log(err)
 
       )
   }
@@ -98,6 +134,27 @@ export class AddQuoteComponent implements OnInit {
       this.quoteData.contact = cart.contact;
     });
   }
+
+  loadUpdate() {
+    this._quote.updateObservable.subscribe((res: boolean) => {
+      this.update = res;
+      console.log(this.update);
+    });
+  }
+
+  convertToCart() {
+    // this.quoteData.items.forEach((element: any) => {
+    for (let element of this.quoteData.items) {
+      element.name = element.description;
+      element.count = element.weight;
+    };
+  }
+
+  // reset() {
+  //   this.update = false;
+  //   this.quoteData = null;
+  //   this.quoteForm.reset();
+  // }
 
   getAssociate() {
     //First get the userID from the token

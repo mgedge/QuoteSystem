@@ -12,11 +12,13 @@ import { QuoteService } from 'src/app/shared/services/quote.service';
 })
 export class QuoteCartComponent implements OnInit {
   // subscription: Subscription | undefined;
+  // isEdit = false;
+
   employee: any;
 
   searchValue = '';
-  itemList: any = [{}];
-  displayedColumns: string[] = ['number', 'name', 'price', 'weight', 'image', 'quantity', 'delete'];
+  itemList: any = [];
+  displayedColumns: string[] = ['number', 'name', 'price', 'weight', 'image', 'quantity', 'buttons'];
   dataSource = new MatTableDataSource<any>(this.itemList);
 
   @ViewChild(MatPaginator)
@@ -41,7 +43,6 @@ export class QuoteCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCart();
-
   }
 
   loadCart() {
@@ -49,6 +50,11 @@ export class QuoteCartComponent implements OnInit {
       console.log(cart);
       this.dataSource.data = cart;
     });
+  }
+
+  removeItemFromCart(item: Item) {
+    this._quote.removeItemFromCart(item)
+
   }
 }
 

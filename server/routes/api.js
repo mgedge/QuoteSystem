@@ -108,11 +108,12 @@ router.post('/register', (req, res) => {
 // POST : New Quote
 // Attemps to save a new quote to the database
 router.post('/newQuote', (req, res) => {
+  console.log(req.body);
   const quote = new Quote({
     quoteID: req.body.quoteID,
     username: req.body.username,
     customer: req.body.customer,
-    contact: req.body.contact,
+    email: req.body.contact,
     items: req.body.items,
     status: req.body.status,
     discount: req.body.discount
@@ -404,6 +405,24 @@ router.get('/customers', (req, res) => {
 // Returns JSON array of all parts
 router.get('/parts', (req, res) => {
   Part.findAll({
+    attributes: [
+      'number', 'description', 'price', 'weight', 'pictureURL'
+    ]
+  }).then((parts) => {
+    res.status(200).json(parts);
+  })
+  .catch(err=> {
+    res.status(500).json({error: err});
+  });
+})
+
+router.get('/parts/:name', (req, res) => {
+  const item = req.params.name;
+
+  Part.findOne({
+    where: {
+      description: item
+    },
     attributes: [
       'number', 'description', 'price', 'weight', 'pictureURL'
     ]
