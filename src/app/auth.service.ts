@@ -14,8 +14,6 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { LayoutStyleBuilder } from '@angular/flex-layout';
 import { ItemService } from '../app/shared/services/item.service';
-//import { Console } from 'node:console';
-//import { totalmem } from 'node:os';
 
 @Injectable({
   providedIn: 'root'
@@ -228,11 +226,10 @@ export class AuthService {
 
   public updateCommission(username: any, commission: any)
   {
-    console.log(username);
-    console.log(commission);
     var commList;
     this.getComms().subscribe((res : any) => { //get the list of all commission objects
       commList = res;
+      console.log(commList);
       var _id, total; //container for Mongo-side id, total commission amt, and num commissions
       let num = 0;
       for (let commObj of commList)
@@ -240,10 +237,9 @@ export class AuthService {
         if (commObj.username == username)
         {
           _id = commObj._id;
-          console.log(username); //store this object's _id
+          console.log(commObj.totalCommissionAmt); //store this object's _id
           total = parseFloat(commObj.totalCommissionAmt); //store this user's current total
           num = parseInt(commObj.totalNumCommissions); //store this user's current num commissions\
-          return; 
         }
       }
 
@@ -350,13 +346,19 @@ export class AuthService {
               let price = dbItem.price; //get the item's price from the db
               let count = itemTarget.count; //get the count of that item from the quote
               amt += ( parseFloat(price) * parseInt(count) );
-              console.log(amt);
+              //console.log(amt);
               break; //break out of the inner loop AKA move on to the next item in the quote
             }
           }
         }
         if (amt === 0) //if no items could be correctly compared
           return; //leave the function
+
+      //We need to check if there is a discount on this quote
+      var discount = quote.discount; //get the discount amount from the quote
+      var discAmt = parseInt(discount.slice(0,-1)) / 100;
+      amt = amt - (amt * discAmt); //update the new total based on the discount application 
+      console.log(amt); 
   
       //Lastly, we need to generate and order number
       //this is done using a set prefix and a random number
@@ -365,11 +367,10 @@ export class AuthService {
       //combine these variables into a JSON object and send it off to the external system
       var quoteData = { "order": orderNum , "associate": userID, "custid": custID, "amount": amt};
       this.extPurchaseOrder(quoteData).then((res: any) => {
-        console.log(res);
+        //console.log(res);
         var percentage = res.commission;
-        console.log(percentage);
+        //console.log(percentage);
         let commPct = (parseInt(percentage.slice(0,-1)) /100); //remove the percent sign and convert to an float percentage
-        //commPct = Math.round(((commPct * 100) + Number.EPSILON) / 100)
         let commission = commPct * amt; //calculate the total commission
         commission = Math.round((commission * 100) + Number.EPSILON) / 100;
         this.updateCommission(username, commission); //update that user's commission total with the current amount
