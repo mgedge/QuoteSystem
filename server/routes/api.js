@@ -219,7 +219,7 @@ router.route('/updatequote/:id').put((req, res, next) => {
   })
 
   // PUT the new commission data by id
-router.route('updatecommission/:id').put((req, res, next) => {
+router.route('/updatecommission/:id').put((req, res, next) => {
   Comm.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, (error, data) => {
