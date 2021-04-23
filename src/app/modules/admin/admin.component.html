@@ -1,124 +1,12 @@
 <div class="content" fxLayoutWrap>
     <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="100" class="main-div">
+        <div fxFlex="100" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
             <mat-card>
                 <div class="form">
 
-                    <mat-toolbar>Admin Card #1</mat-toolbar>
-                    <div class="container">
-                        <router-outlet name="comm"></router-outlet>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-    </div><br>
-    
-    <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-
-                    <mat-toolbar>Admin Card #2</mat-toolbar>
-                    <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-bar-horizontal class="chart" 
-                            [results]="saleData" 
-                            [scheme]="colorSchemeA"
-                            [xAxisLabel]="'Sale'"
-                            [yAxisLabel]="'Products'" 
-                            [showXAxisLabel]="true" 
-                            [showYAxisLabel]="true"
-                            [xAxis]="true" 
-                            [yAxis]="true"
-                            [legend]="true">
-                            </ngx-charts-bar-horizontal>
-                        </div>
-                    </div>
-
-                </div>
-            </mat-card>
-        </div>
-
-        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" class="main-div">
-            <mat-card>
-                <div class="form">
-
-                    <mat-toolbar>Admin Card #3</mat-toolbar>
+                    <mat-toolbar>Edit Employee Data</mat-toolbar>
                     <div class="container">
                         <router-outlet name="users"></router-outlet>
-                    </div>
-
-                </div>
-            </mat-card>
-        </div>
-    </div><br>
-
-
-
-    <div fxLayoutGap="16px grid" fxLayoutWrap fxLayout="row wrap" class="row">
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" class="main-div">
-            <mat-card>
-                <div class="form">
-
-                    <mat-toolbar>Admin Card #4</mat-toolbar>
-                    <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-bar-vertical class="chart" 
-                            [results]="saleData" 
-                            [xAxisLabel]="'Products'"
-                            [yAxisLabel]="'Sale'" 
-                            [scheme]="colorSchemeC"
-                            [legend]="true" 
-                            [showXAxisLabel]="true" 
-                            [showYAxisLabel]="true"
-                            [xAxis]="true" 
-                            [yAxis]="true">
-                            </ngx-charts-bar-vertical>
-                        </div>
-                    </div>
-
-                </div>
-            </mat-card>
-        </div>
-
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" class="main-div">
-            <mat-card>
-                <div class="form">
-
-                    <mat-toolbar>Admin Card #5</mat-toolbar>
-                    <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-pie-chart class="chart" 
-                            [results]="saleData" 
-                            [scheme]="colorSchemeB"
-                            [legend]="true"
-                            [legendTitle]="'Product Sale Report'" 
-                            [labels]="true">
-                            </ngx-charts-pie-chart>
-                        </div>
-                    </div>
-
-                </div>
-            </mat-card>
-        </div>
-
-        <div fxFlex="33.33" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" class="main-div">
-            <mat-card>
-                <div class="form">
-
-                    <mat-toolbar>Admin Card #6</mat-toolbar>
-                    <div class="container">
-                        <div class="chart-wrapper">
-                            <ngx-charts-line-chart 
-                              [results]="countryData"
-                              [showXAxisLabel]="true"
-                              [showYAxisLabel]="true"
-                              [xAxis]="true"
-                              [yAxis]="true"
-                              [xAxisLabel]="'Year'"
-                              [yAxisLabel]="'Sales'" >
-                            </ngx-charts-line-chart>
-                        </div>
                     </div>
 
                 </div>
