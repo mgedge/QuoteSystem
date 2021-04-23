@@ -88,6 +88,7 @@ const routes: Routes = [
           { path: '', component: ItemListComponent, outlet: 'parts'},
           { path: '', component: CustomersComponent, outlet: 'customers'},
           { path: '', component: PrchseOrderComponent, outlet: 'prchse-order'},
+          //{ path: '', component: PrchseOrderComponent, outlet: 'commissions'},
           {
             path: '', component: AddQuoteComponent, outlet: 'new-quote',
             children: [
