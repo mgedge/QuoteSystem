@@ -108,11 +108,12 @@ router.post('/register', (req, res) => {
 // POST : New Quote
 // Attemps to save a new quote to the database
 router.post('/newQuote', (req, res) => {
+  console.log(req.body);
   const quote = new Quote({
     quoteID: req.body.quoteID,
     username: req.body.username,
     customer: req.body.customer,
-    contact: req.body.contact,
+    email: req.body.contact,
     items: req.body.items,
     status: req.body.status,
     discount: req.body.discount

@@ -60,6 +60,7 @@ export class AddQuoteComponent implements OnInit {
 
 
   newQuote() {
+    console.log("new quote");
     this.quoteData.quoteID = this._auth.getNextQuoteID();
     // this.quoteData.username = this._auth.getCurrentID();
     this.quoteData.status = 'open';
@@ -70,7 +71,6 @@ export class AddQuoteComponent implements OnInit {
 
     this.convertToCart();
 
-    console.log(this.quoteData);
 
     this._auth.createQuote(this.quoteData)
       .subscribe(
@@ -88,6 +88,8 @@ export class AddQuoteComponent implements OnInit {
   }
 
   updateQuote() {
+    console.log("update quote");
+
     this.quoteData.quoteID = this._auth.getNextQuoteID();
     // this.quoteData.username = this._auth.getCurrentID();
     this.quoteData.status = 'open';
@@ -97,10 +99,6 @@ export class AddQuoteComponent implements OnInit {
     this.quoteData.customer = this.customer.name;
 
     this.convertToCart();
-
-    console.log(this.quoteData);
-    console.log(this._quote.quoteID);
-
 
     this._auth.updateQuote(this._quote.quoteID, this.quoteData)
       .subscribe(
