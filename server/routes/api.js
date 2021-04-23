@@ -371,6 +371,17 @@ router.get('/items', (req, res) => {
         });
 })
 
+// GET All Commission objects and their data
+// Returns as JSON array
+router.get('/commissions', (req, res) => {
+  Comm.find().exec().then(result => {
+      res.status(200).json(result);
+  })
+      .catch(err => {
+          res.status(500).json({ error: err })
+      });
+})
+
 /**************************************************/
 /*              EXTERNAL DATABASE                 */
 /**************************************************/
