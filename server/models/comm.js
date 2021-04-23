@@ -7,4 +7,4 @@ const commSchema = new mongoose.Schema({
     totalCommissionAmt: {type: Number, required: true},
     totalNumCommissions: {type: Number, required: true}
 })
-module.exports = mongoose.model('Commission', commSchema, 'commissions')
+module.exports = mongoose.model('commission', commSchema, 'commission')

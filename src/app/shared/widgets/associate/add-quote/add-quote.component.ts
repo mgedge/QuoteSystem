@@ -47,8 +47,6 @@ export class AddQuoteComponent implements OnInit {
         // {name: '', count: ''}
       ],
     });
-
-
   }
 
   ngOnInit(): void {
@@ -56,10 +54,8 @@ export class AddQuoteComponent implements OnInit {
     this.loadCustomer();
     this.loadItems();
     this.loadUpdate();
-
-    this.quoteData.quoteID = this._auth.getNextQuoteID();
+    this.getNextQuote();
   }
-
 
   newQuote() {
     console.log("new quote");
@@ -73,6 +69,7 @@ export class AddQuoteComponent implements OnInit {
 
     this.convertToCart();
 
+    console.log(this.quoteData);
 
     this._auth.createQuote(this.quoteData)
       .subscribe(
@@ -143,11 +140,27 @@ export class AddQuoteComponent implements OnInit {
     });
   }
 
+  getNextQuote() {
+    var quoteList; //access all known quotes
+    let nextID = 0; //initialize container
+    this._auth.getQuotes().subscribe((res:any) => { 
+      quoteList = res;
+      for (let quote of quoteList) //for all quotes
+      {
+        if (quote.quoteID > nextID) { //check if this is the highest used quoteID
+          nextID = quote.quoteID; //if so, store it
+        }
+      }
+      ++nextID; //increment by 1
+      this.quoteData.quoteID = nextID;
+    });
+  }
+
   convertToCart() {
     // this.quoteData.items.forEach((element: any) => {
     for (let element of this.quoteData.items) {
       element.name = element.description;
-      element.count = element.quantity;
+      element.count = parseInt(element.quantity);
     };
   }
 

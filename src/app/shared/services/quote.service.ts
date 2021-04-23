@@ -96,6 +96,7 @@ export class QuoteService {
       this._item.findPart(item.name).then(res => {
         if (res != null) {
           console.log(res);
+          // item.count = item.
           this.addItemToCart(res);
         }
       }).catch((res: any) => {

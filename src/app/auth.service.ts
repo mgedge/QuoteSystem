@@ -45,7 +45,7 @@ export class AuthService {
   // Service to call the register API
   createQuote(quote: any) {
     // quote.username = this.getCurrentID();
-    quote.quoteID = this.getNextQuoteID();
+    // quote.quoteID = this.getNextQuoteID();
     let api = `${this.endpoint}/newQuote`
     return this.http.post<any>(api, quote)
       .pipe(
@@ -210,21 +210,21 @@ export class AuthService {
     return this.currentUserRole;
   }
   
-  public getNextQuoteID() {
-    var quoteList; //access all known quotes
-    let nextID = 0; //initialize container
-    this.getQuotes().subscribe((res:any) => {
-      quoteList = res;
-      for (let quote of quoteList) //for all quotes
-      {
-        if (quote.quoteID > nextID) { //check if this is the highest used quoteID
-          nextID = quote.quoteID; //if so, store it
-        }
-      }
-      ++nextID; //increment by 1
-      return nextID;
-    });
-  }
+  // public getNextQuoteID(): Observable<any> {
+  //   var quoteList; //access all known quotes
+  //   let nextID = 0; //initialize container
+  //   this.getQuotes().subscribe((res:any) => { 
+  //     quoteList = res;
+  //     for (let quote of quoteList) //for all quotes
+  //     {
+  //       if (quote.quoteID > nextID) { //check if this is the highest used quoteID
+  //         nextID = quote.quoteID; //if so, store it
+  //       }
+  //     }
+  //     ++nextID; //increment by 1
+  //     return nextID;
+  //   });
+  // }
 
   public updateCommission(username: any, commission: any)
   {
