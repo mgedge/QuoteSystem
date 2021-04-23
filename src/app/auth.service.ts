@@ -231,42 +231,32 @@ export class AuthService {
   {
     console.log(username);
     console.log(commission);
-    var commList = this.getComms(); //get the list of all commission objects
-    var _id, total; //container for Mongo-side id, total commission amt, and num commissions
-    let num = 0;
-    /**
-    for (var obj in commList)
-    {
-      if (obj[<any>"username"] === username)
+    var commList;
+    this.getComms().subscribe((res : any) => { //get the list of all commission objects
+      commList = res;
+      var _id, total; //container for Mongo-side id, total commission amt, and num commissions
+      let num = 0;
+      for (let commObj of commList)
       {
-        console.log(username);
-        _id = obj[<any>"_id"]; //store this object's _id
-        total = parseFloat(obj[<any>"totalCommissionAmt"]); //store this user's current total
-        num = parseInt(obj[<any>"totalNumCommissions"]); //store this user's current num commissions\
-        break;
+        if (commObj["username"] == username)
+        {
+          _id = commObj["_id"];
+          console.log(username); //store this object's _id
+          total = parseFloat(commObj.totalCommissionAmt); //store this user's current total
+          num = parseInt(commObj.totalNumCommissions); //store this user's current num commissions\
+          return; 
+        }
       }
-    }
-    if (total == null || _id == null) { //if no matching user was found 
-      return; }
-    */
-    commList.forEach(function (arrayItem) {
-      if (arrayItem["username"] == username)
-      {
-        _id = arrayItem["_id"];
-        console.log(username); //store this object's _id
-        total = parseFloat(arrayItem["totalCommissionAmt"]); //store this user's current total
-        num = parseInt(arrayItem["totalNumCommissions"]); //store this user's current num commissions\
-        return; 
-      }
-    }); 
-    total += commission; //once found, add commission to that totalCommissionAmt
-    ++num; // and increment the totalNumCommissions
-    var updated = { "totalCommissionAmt":total, "totalNumCommissions":num};
 
-    //PUT the changes back to the database
-    let url = `${this.endpoint}/updatecommission/${_id}`;
-    return this.http.put(url, updated, { headers: this.headers }).pipe(
-      catchError(this.handleError) );
+      total += commission; //once found, add commission to that totalCommissionAmt
+      ++num; // and increment the totalNumCommissions
+      var updated = { "totalCommissionAmt":total, "totalNumCommissions":num };
+  
+      //PUT the changes back to the database
+      let url = `${this.endpoint}/updatecommission/${_id}`;
+      return this.http.put(url, updated, { headers: this.headers }).pipe(
+        catchError(this.handleError) );
+    }); 
   }
 
   public getParts(): Promise<any> {
