@@ -11,7 +11,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
-import { ThisReceiver } from '@angular/compiler';
+import { ItemService } from './item.service';
 
 
 @Injectable({
@@ -25,16 +25,23 @@ export class QuoteService {
 
   cartArray: any = []
   cartUser: any = {};
+  update: boolean = false;
 
-  // private cart = new Subject<Element>();
+  quoteID: any;
+
   private userSubject = new BehaviorSubject<User>(this.cartUser);
   userObservable = this.userSubject.asObservable();
   private cartSubject = new BehaviorSubject<Item>(this.cartArray);
   cartObservable = this.cartSubject.asObservable();
-  // cartObs = this.cart.asObservable();
+  private updateSubject = new BehaviorSubject<boolean>(this.update);
+  updateObservable = this.updateSubject.asObservable();
 
 
-  constructor(private http: HttpClient, public _router: Router) { }
+  constructor(
+    private http: HttpClient,
+    public _router: Router,
+    private _item: ItemService,
+  ) { }
 
   // Returns ALL quotes from the database
   public getQuotes(): Observable<any> {
@@ -64,10 +71,12 @@ export class QuoteService {
    * 
    * ******************************/
   public addItemToCart(item: Item) {
-    console.log("Cart ");
-    console.log(this.cartArray);
-  
     this.cartArray.push(item);
+    this.cartSubject = new BehaviorSubject<Item>(this.cartArray);
+  }
+
+  public removeItemFromCart(item: Item) {
+    this.cartArray.pop(item);
     this.cartSubject = new BehaviorSubject<Item>(this.cartArray);
   }
 
@@ -76,12 +85,40 @@ export class QuoteService {
     this.userSubject.next(user);
   }
 
+  public addQuoteToCart(res: any) {
+    console.log(res);
+    this.quoteID = res._id;
+    this.cartUser.name = res.customer;
+    this.cartUser.contact = res.email;
+    this.userSubject.next(this.cartUser);
+
+    for (let item of res.items) {
+      this._item.findPart(item.name).then(res => {
+        if (res != null) {
+          console.log(res);
+          this.addItemToCart(res);
+        }
+      }).catch((res: any) => {
+        console.log(res);
+      })
+    }
+  }
+
+  public switchUpdate(res: boolean) {
+    this.update = res;
+    this.updateSubject.next(this.update);
+  }
+
   public getCart(): Observable<Item> {
     return this.cartSubject.asObservable();
   }
 
   public getCustomer(): Observable<User> {
     return this.userSubject.asObservable();
+  }
+
+  public getUpdate(): Observable<boolean> {
+    return this.updateSubject.asObservable();
   }
 
   handleError(error: HttpErrorResponse) {

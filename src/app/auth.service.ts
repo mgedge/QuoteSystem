@@ -44,7 +44,7 @@ export class AuthService {
   
   // Service to call the register API
   createQuote(quote: any) {
-    quote.username = this.getCurrentID();
+    // quote.username = this.getCurrentID();
     quote.quoteID = this.getNextQuoteID();
     let api = `${this.endpoint}/newQuote`
     return this.http.post<any>(api, quote)

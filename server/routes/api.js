@@ -403,4 +403,22 @@ router.get('/parts', (req, res) => {
     res.status(500).json({error: err});
   });
 })
+
+router.get('/parts/:name', (req, res) => {
+  const item = req.params.name;
+
+  Part.findOne({
+    where: {
+      description: item
+    },
+    attributes: [
+      'number', 'description', 'price', 'weight', 'pictureURL'
+    ]
+  }).then((parts) => {
+    res.status(200).json(parts);
+  })
+  .catch(err=> {
+    res.status(500).json({error: err});
+  });
+})
 module.exports = router;

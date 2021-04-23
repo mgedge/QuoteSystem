@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { QuoteService } from '../../services/quote.service';
 
 @Component({
   selector: 'app-view-quote',
@@ -18,6 +19,7 @@ export class ViewQuoteComponent implements OnInit {
 
   constructor(
     private _auth: AuthService,
+    private _quote: QuoteService,
   ) { }
 
    @ViewChild(MatPaginator)
@@ -52,13 +54,18 @@ export class ViewQuoteComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sendItem(item: any) {
+    this._quote.addQuoteToCart(item);
+    this._quote.switchUpdate(true);
+  }
 }
 
 interface Element {
   QuoteID: String
   username: String
   customer: String
-  email: String
+  contact: String
   status: String
   discount: String
 }
