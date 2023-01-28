@@ -7,7 +7,7 @@
     "dev": "ng serve --configuration development --hmr",
     "init-assets": "webpack --config webpack.dev.js",
     "init-server": "nodemon server/server.js",
-    "build": "npm install --legacy-peer-deps && ng build && npm run init-server",
+    "build": "npm cache clean --force && npm install --legacy-peer-deps && ng build && npm run init-server",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
