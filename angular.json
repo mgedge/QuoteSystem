@@ -25,7 +25,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/config.js"
             ],
             "styles": [
               "src/custom-theme.scss",
@@ -72,6 +73,10 @@
           "configurations": {
             "production": {
               "browserTarget": "QuoteSystem:build:production"
+            },
+            "development": {
+              "sourceMap": true,
+              "optimization": false
             }
           }
         },
