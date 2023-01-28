@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultComponent } from 'src/app/layouts/default/default.component';
 import { EmployeesComponent } from 'src/app/shared/widgets/admin/employees/employees.component';
@@ -12,7 +12,7 @@ import { AuthService } from './../../auth.service'
 })
 export class DashboardComponent implements OnInit {
   //Form Group
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   registerUserData: any = {
     username: '',
     password: '',
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private _router: Router,
     private _default: DefaultComponent,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     //private employees: EmployeesComponent,
   ) {
     this.registerForm = this.formBuilder.group({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +9,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  formGroup!: FormGroup;
+  loginForm!: UntypedFormGroup;
+  formGroup!: UntypedFormGroup;
   error = ''
 
   loginUserData:any = {};
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private _router: Router,
-    private formBuilder: FormBuilder) {    
+    private formBuilder: UntypedFormBuilder) {    
       this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

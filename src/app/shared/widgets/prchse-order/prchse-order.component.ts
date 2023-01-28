@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-prchse-order',
@@ -8,13 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./prchse-order.component.css']
 })
 export class PrchseOrderComponent implements OnInit {
-  commForm:any= FormGroup;
+  commForm:any= UntypedFormGroup;
 
   orderData:any = {}; 
 
   constructor(
     private _auth: AuthService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {

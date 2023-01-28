@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,11 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  editForm:any= FormGroup;
+  editForm:any= UntypedFormGroup;
 
   constructor(
     private _auth: AuthService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     private actRoute: ActivatedRoute,
     private _router: Router
   ) { }

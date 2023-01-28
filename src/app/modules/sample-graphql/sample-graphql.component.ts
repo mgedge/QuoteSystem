@@ -1,6 +1,6 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup } from '@angular/forms';
 import { getQueryDefinition } from '@apollo/client/utilities';
 import { Apollo } from 'apollo-angular';
 import { GraphQLType } from 'graphql';
@@ -54,7 +54,7 @@ export class SampleGraphqlComponent implements OnInit {
 
   constructor(
     private apollo: Apollo,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
   ) {
     // this.chipsForm = this.formBuilder.group({
     //   username: false,

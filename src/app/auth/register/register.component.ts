@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,14 +9,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
 
   registerUserData:any = {};
 
   constructor(
     private _auth: AuthService,
     private _router: Router,
-    public formBuilder: FormBuilder
+    public formBuilder: UntypedFormBuilder
   ) { 
     this.registerForm = this.formBuilder.group({
       firstname: [''], 

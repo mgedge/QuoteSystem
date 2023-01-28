@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { QuoteService } from 'src/app/shared/services/quote.service';
 import { AuthService } from '../../../../auth.service'
@@ -22,7 +22,7 @@ export class AddQuoteComponent implements OnInit {
   quoteID: any;
 
   employeeID: any;
-  quoteForm: FormGroup;
+  quoteForm: UntypedFormGroup;
   quoteData: any = {
     quoteID: '',
     username: '',
@@ -38,7 +38,7 @@ export class AddQuoteComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private _quote: QuoteService,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
   ) {
     this.quoteForm = this.formBuilder.group({
       customer: ['', Validators.required],
