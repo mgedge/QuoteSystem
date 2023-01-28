@@ -1,13 +1,13 @@
 /***************************************************
  * app-routing.module
- * 
+ *
  * This file defines the routing for the application.
- * 
+ *
  * This file defines the routes the user may take in the
- * application. Additionally, this file will call the 
+ * application. Additionally, this file will call the
  * AuthGuard to determine if the user is permitted to
  * access the route.
- * 
+ *
  **************************************************/
 
 import { NgModule } from '@angular/core';
@@ -88,7 +88,6 @@ const routes: Routes = [
           { path: '', component: ItemListComponent, outlet: 'parts'},
           { path: '', component: CustomersComponent, outlet: 'customers'},
           { path: '', component: PrchseOrderComponent, outlet: 'prchse-order'},
-          //{ path: '', component: PrchseOrderComponent, outlet: 'commissions'},
           {
             path: '', component: AddQuoteComponent, outlet: 'new-quote',
             children: [
@@ -103,12 +102,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [    
+  imports: [
     RouterModule.forRoot(routes, {
-      useHash: true,
-      preloadingStrategy: PreloadAllModules,
-      relativeLinkResolution: 'legacy'
-    })],
+    useHash: true,
+    preloadingStrategy: PreloadAllModules
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,11 +1,11 @@
 /***************************************************
  * app.module
- * 
+ *
  * This file defines the components for the application.
- * 
+ *
  * Any components added to the project must be added
  * here to function correctly.
- * 
+ *
  **************************************************/
 
 import { NgModule } from '@angular/core';
@@ -64,35 +64,34 @@ import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.compo
 import { PrchseOrderComponent } from './shared/widgets/prchse-order/prchse-order.component';
 import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-cart.component';
 import { CustomersComponent } from './shared/widgets/customers/customers.component';
-import { APP_BASE_HREF } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Apollo } from 'apollo-angular';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DefaultComponent,
-    DashboardComponent,
-    HeaderComponent,
-    FooterComponent,
-    SidebarComponent,
-    EmployeesComponent,
-    AdminComponent,
-    AssociateComponent,
-    SupervisorComponent,
-    SampleCardsComponent,
-    SampleGraphqlComponent,
-    QuoteListComponent,
-    ItemListComponent,
     AddQuoteComponent,
-    EditUserComponent,
-    ViewUserComponent,
+    AdminComponent,
+    AppComponent,
+    AssociateComponent,
+    CustomersComponent,
+    DashboardComponent,
+    DefaultComponent,
     EditQuoteComponent,
-    ViewQuoteComponent,
+    EditUserComponent,
+    EmployeesComponent,
+    FooterComponent,
+    HeaderComponent,
+    ItemListComponent,
+    LoginComponent,
     PrchseOrderComponent,
     QuoteCartComponent,
-    CustomersComponent,
+    QuoteListComponent,
+    RegisterComponent,
+    SampleCardsComponent,
+    SampleGraphqlComponent,
+    SidebarComponent,
+    SupervisorComponent,
+    ViewQuoteComponent,
+    ViewUserComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -100,6 +99,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     FlexLayoutModule,
     FormsModule,
+    GraphQLModule,
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
@@ -112,17 +112,17 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatPaginatorModule,
     MatSidenavModule,
+    MatSortModule,
     MatTableModule,
     MatToolbarModule,
     NgxChartsModule,
     ReactiveFormsModule,
-    MatPaginatorModule,
-    MatSortModule,
-    GraphQLModule,
   ],
   providers: [
     AuthService,
+    Apollo,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -133,19 +133,6 @@ import { RouterModule } from '@angular/router';
       useClass: ErrorInterceptor,
       multi: true
     },
-    { provide: APP_BASE_HREF, useValue: '/' }, 
-    // {
-    //   provide: APOLLO_OPTIONS,
-    //   useFactory: (httpLink: HttpLink) => {
-    //     return {
-    //       cache: new InMemoryCache(),
-    //       link: httpLink.create({
-    //         uri: 'https://48p1r2roz4.sse.codesandbox.io',
-    //       }),
-    //     };
-    //   },
-    //   deps: [HttpLink],
-    // },
   ],
   bootstrap: [AppComponent]
 })

@@ -21,9 +21,13 @@ export class SupervisorComponent implements OnInit {
   timeline: boolean = true;
 
   //Colors
-  colorSchemeA = flat;
-  colorSchemeB = colorful;
-  colorSchemeC = rainbow;
+  // colorSchemeA = flat;
+  // colorSchemeB = colorful;
+  // colorSchemeC = rainbow;
+  
+  colorSchemeA = flat.domain[0];
+  colorSchemeB = colorful.domain[0];
+  colorSchemeC = rainbow.domain[0];
 
   //Data
   saleData = saleData;

@@ -4511,3 +4511,6 @@ server/external.config.js
 server/external.config.js
 package-lock.json
 package-lock.json
+
+# Local Netlify folder
+.netlify
