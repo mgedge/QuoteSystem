@@ -34,6 +34,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 // app.use(bodyParser.json());
+// app.use(bearerToken());
 // app.use(bodyParser.urlencoded({
 //     extended: false
 // }));
@@ -54,30 +55,40 @@ app.use(
 app.use('/api', api);
 
 //Connect to the server
-app.get('/', function(req, res) {
-    console.log("Connected at port " + PORT)
-    res.send("Hello from server")
+app.get('/', function (req, res) {
+  console.log("Connected at port " + PORT)
+  res.send("Hello from server")
 })
 
-//Connect to mongoose (middleman for API)
-mongoose.connect(process.env.DB_CONNECTION, 
-  { useNewUrlParser: true, useUnifiedTopology: true }, () => 
-  console.log("Connected to database through server.js")
-)
+//Connect to primary database
+mongoose.set('strictQuery', false);
+mongoose.connect(process.env.DB_CONNECTION,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+
+const database = mongoose.connection;
+
+database.on('error', (error) => { console.log(error) });
+database.once('connected', (res) => {
+  console.log("Database connected.");
+});
 
 //Connect to external database
 const db = require("./external");
 db.sequelize.sync();
 
 //Open connection
-app.listen(PORT, function() {
-    console.log('Running on localhost:' + PORT)
+app.listen(PORT, function () {
+  console.log('Running on localhost:' + PORT)
 })
 
 //Express error handling
 app.use((req, res, next) => {
   setImmediate(() => {
-      next(new Error('Something went wrong'));
+    next(new Error('Something went wrong'));
+    console.log(res);
   });
 });
 

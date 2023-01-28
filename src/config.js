@@ -1,0 +1,5 @@
+var CONFIG = {
+    APP_INITIALIZATION_CONSTANT: {
+
+    }
+}

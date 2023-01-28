@@ -14,7 +14,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //Insert models here
-db.Customer = require("./models/customers.js")(sequelize, Sequelize);
-db.Part = require("./models/parts.js")(sequelize, Sequelize);
+db.Customer = require("./schemas/customers.js")(sequelize, Sequelize);
+db.Part = require("./schemas/parts.js")(sequelize, Sequelize);
 
 module.exports = db;

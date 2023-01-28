@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "dev": "ng serve --configuration development --hmr",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -28,6 +29,7 @@
     "dotenv": "^8.2.0",
     "express-graphql": "^0.12.0",
     "graphql": "^15.5.0",
+    "mongoose": "^6.9.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

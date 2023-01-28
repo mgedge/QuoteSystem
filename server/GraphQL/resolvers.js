@@ -4,16 +4,16 @@
  * This file defines GraphQL calls.
  * 
  **************************************************/
-const User = require('../models/users');
+const User = require('../schemas/users');
 
 module.exports = {
     // GET GraphQL call for ALL users
-    users: async function() {
+    users: async function () {
         const users = await User.find();
         return {
             users: users.map((q) => {
                 return {
-                    ...q._doc, 
+                    ...q._doc,
                     _id: q._id.toString(),
                 }
             })
@@ -21,10 +21,10 @@ module.exports = {
     },
 
     // GET GraphQL call for all users with the specified ID
-    getUserRoleByID: async function({_id}) {
+    getUserRoleByID: async function ({ _id }) {
         const user = await User.findById(_id);
 
-        if(!user) {
+        if (!user) {
             throw new error("User not found");
         }
 
