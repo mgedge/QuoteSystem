@@ -76,8 +76,8 @@ database.once('connected', (res) => {
 });
 
 //Connect to external database
-const db = require("./external");
-db.sequelize.sync();
+// const db = require("./external");
+// db.sequelize.sync();
 
 //Open connection
 app.listen(PORT, function () {
