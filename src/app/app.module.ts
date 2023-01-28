@@ -64,6 +64,8 @@ import { ViewQuoteComponent } from './shared/widgets/view-quote/view-quote.compo
 import { PrchseOrderComponent } from './shared/widgets/prchse-order/prchse-order.component';
 import { QuoteCartComponent } from './shared/widgets/associate/quote-cart/quote-cart.component';
 import { CustomersComponent } from './shared/widgets/customers/customers.component';
+import { APP_BASE_HREF } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -131,6 +133,7 @@ import { CustomersComponent } from './shared/widgets/customers/customers.compone
       useClass: ErrorInterceptor,
       multi: true
     },
+    { provide: APP_BASE_HREF, useValue: '/' }, 
     // {
     //   provide: APOLLO_OPTIONS,
     //   useFactory: (httpLink: HttpLink) => {

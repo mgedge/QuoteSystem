@@ -8,7 +8,7 @@ export const environment = {
 
 export const secretKey = {
   secretKey: '123abc'
-}
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

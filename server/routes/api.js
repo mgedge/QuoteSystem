@@ -24,12 +24,12 @@ const router = express.Router();
 //Hidden keys
 require('dotenv/config')
 
-const User = require('../models/users');
-const Quote = require('../models/quotes');
-const Item = require('../models/item');
-const Comm = require('../models/comm');
+const User = require('../schemas/users');
+const Quote = require('../schemas/quotes');
+const Item = require('../schemas/item');
+const Comm = require('../schemas/comm');
 const { Mongoose } = require('mongoose');
-const item = require('../models/item');
+const item = require('../schemas/item');
 const { Customer } = require('../external');
 const { Part } = require('../external');
 
@@ -40,69 +40,69 @@ const { Part } = require('../external');
 
 //Sample get call for testing connection
 router.get('/', (req, res) => {
-    res.send('From API')
+  res.send('From API')
 });
 
 //Verifies the user's token
 function verifyToken(req, res, next) {
-    //Check auth in header
-    if (!req.headers.authorization) {
-        return res.status(401).send('Unauthorized request');
-    }
+  //Check auth in header
+  if (!req.headers.authorization) {
+    return res.status(401).send('Unauthorized request');
+  }
 
-    let token = req.headers.authorization.split(' ')[1];
+  let token = req.headers.authorization.split(' ')[1];
 
-    //Check token
-    if (token === 'null') {
-        return res.status(401).send('Unauthorized request');
-    }
+  //Check token
+  if (token === 'null') {
+    return res.status(401).send('Unauthorized request');
+  }
 
-    let payload = jwt.verify(token, process.env.SECRET_KEY);
+  let payload = jwt.verify(token, process.env.SECRET_KEY);
 
-    //Invalid token
-    if (!payload) {
-        return res.status(401).send('Unauthorized request')
-    }
+  //Invalid token
+  if (!payload) {
+    return res.status(401).send('Unauthorized request')
+  }
 
-    req.userID = playload.subject;
-    next();
+  req.userID = playload.subject;
+  next();
 }
 
 // POST : Registration
 // Hashes the entered password, then attempts to save the 
 // account to the database
 router.post('/register', (req, res) => {
-    //Hash the password
-    bcrypt.hash(req.body.password, 10).then((hash) => {
-        //Create the user using the hashed password
-        const user = new User({
-            username: req.body.username,
-            password: hash,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            image: req.body.image,
-            roles: req.body.roles
-        });
+  //Hash the password
+  bcrypt.hash(req.body.password, 10).then((hash) => {
+    //Create the user using the hashed password
+    const user = new User({
+      username: req.body.username,
+      password: hash,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      image: req.body.image,
+      roles: req.body.roles
+    });
 
-        //Save the user to the database
-        user.save().then((response) => {
-            res.status(201).json({
-                message: "Registration successful",
-                new_user: response
-            });
+    //Save the user to the database
+    user.save().then((response) => {
+      res.status(201).json({
+        message: "Registration successful",
+        new_user: response
+      });
 
-            console.log(response);
-        }).catch(err => {
-            res.status(500).json({
-                error: err
-            });
-        });
+      console.log(response);
     }).catch(err => {
-        res.status(500).json({
-            message: "Failed to hash password",
-            error: err
-        })
+      res.status(500).json({
+        error: err
+      });
+    });
+  }).catch(err => {
+    res.status(500).json({
+      message: "Failed to hash password",
+      error: err
     })
+  })
 });
 
 // POST : New Quote
@@ -117,108 +117,108 @@ router.post('/newQuote', (req, res) => {
     items: req.body.items,
     status: req.body.status,
     discount: req.body.discount
+  });
+
+  //Save the user to the database
+  quote.save().then((response) => {
+    res.status(201).json({
+      message: "Quote added",
+      new_quote: response
     });
 
-      //Save the user to the database
-      quote.save().then((response) => {
-          res.status(201).json({
-              message: "Quote added",
-              new_quote: response
-          });
-
-          console.log(response);
-      }).catch(err => {
-          res.status(500).json({
-              error: err
-          });
+    console.log(response);
+  }).catch(err => {
+    res.status(500).json({
+      error: err
+    });
   });
 });
 
 // DELETE: Delete user
 // Deletes user by id
 router.route('/deleteuser/:id').delete((req, res, next) => {
-    // console.log('API deleting (' + req.params.id + ')')
-    User.findByIdAndRemove(req.params.id, (error, data) => {
-      if (error) {
-        return next(error);
-      } else {
-        res.status(200).json({
-          msg: data
-        })
-      }
-    })
+  // console.log('API deleting (' + req.params.id + ')')
+  User.findByIdAndRemove(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        msg: data
+      })
+    }
   })
+})
 
 // DELETE: Delete quote
 // Deletes quote by id
 router.route('/deletequote/:id').delete((req, res, next) => {
-    // console.log('API deleting (' + req.params.id + ')')
-    Quote.findByIdAndRemove(req.params.id, (error, data) => {
-      if (error) {
-        return next(error);
-      } else {
-        res.status(200).json({
-          msg: data
-        })
-      }
-    })
+  // console.log('API deleting (' + req.params.id + ')')
+  Quote.findByIdAndRemove(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        msg: data
+      })
+    }
   })
+})
 
 // GET the requested user data
 // Returns the user data
 router.route('/loaduser/:id').get((req, res) => {
-    User.findById(req.params.id, (error, data) => {
-      if (error) {
-        return next(error)
-      } else {
-        res.json(data)
-      }
-    })
+  User.findById(req.params.id, (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
   })
+})
 
 // GET the requested quote data
 // Returns the quote data
 router.route('/loadquote/:id').get((req, res) => {
-    Quote.findById(req.params.id, (error, data) => {
-      if (error) {
-        return next(error)
-      } else {
-        res.json(data)
-      }
-    })
+  Quote.findById(req.params.id, (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
   })
+})
 
 // PUT the new user data by id
 router.route('/updateuser/:id').put((req, res, next) => {
-    User.findByIdAndUpdate(req.params.id, {
-      $set: req.body
-    }, (error, data) => {
-      if (error) {
-        return next(error);
-        console.log(error)
-      } else {
-        res.json(data)
-        console.log('Data updated successfully')
-      }
-    })
+  User.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, (error, data) => {
+    if (error) {
+      return next(error);
+      console.log(error)
+    } else {
+      res.json(data)
+      console.log('Data updated successfully')
+    }
   })
+})
 
 // PUT the new quote data by id
 router.route('/updatequote/:id').put((req, res, next) => {
-    Quote.findByIdAndUpdate(req.params.id, {
-      $set: req.body
-    }, (error, data) => {
-      if (error) {
-        return next(error);
-        console.log(error)
-      } else {
-        res.json(data)
-        console.log('Data updated successfully')
-      }
-    })
+  Quote.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, (error, data) => {
+    if (error) {
+      return next(error);
+      console.log(error)
+    } else {
+      res.json(data)
+      console.log('Data updated successfully')
+    }
   })
+})
 
-  // PUT the new commission data by id
+// PUT the new commission data by id
 router.route('/updatecommission/:id').put((req, res, next) => {
   Comm.findByIdAndUpdate(req.params.id, {
     $set: req.body
@@ -232,155 +232,155 @@ router.route('/updatecommission/:id').put((req, res, next) => {
     }
   })
 })
-  
+
 
 // POST : Login authentication
 // Finds the username then password from the database.
 // If the password does not match the database password login attempt fails
 // Otherwise, sign a token and give it to the user
 router.post('/login', (req, res) => {
-    let thisUser;
+  let thisUser;
 
-    //Find the username in the database
-    User.find({ username: req.body.username }).exec().then(userFound => {
-        thisUser = userFound[0];
+  //Find the username in the database
+  User.find({ username: req.body.username }).exec().then(userFound => {
+    thisUser = userFound[0];
 
-        //Next compare the hashed passwords
-        return bcrypt.compare(req.body.password, userFound[0].password)
-    }).then(pass => {
-        //If they're the same, send token
-        if (pass) {
-            //Create a token for the logged in user
-            let token = jwt.sign({
-                username: thisUser.username,
-                userID: thisUser._id
-            }, process.env.SECRET_KEY, {
-                expiresIn: "1h"
-            });
+    //Next compare the hashed passwords
+    return bcrypt.compare(req.body.password, userFound[0].password)
+  }).then(pass => {
+    //If they're the same, send token
+    if (pass) {
+      //Create a token for the logged in user
+      let token = jwt.sign({
+        username: thisUser.username,
+        userID: thisUser._id
+      }, process.env.SECRET_KEY, {
+        expiresIn: "1h"
+      });
 
-            //Hide password from the return
-            thisUser.password = '';
+      //Hide password from the return
+      thisUser.password = '';
 
-            //User login checks out
-            res.status(200).json({
-                token: token,
-                expiresIn: 3600,
-                user: thisUser
-            })
-        }
-        else {
-            return res.status(404).json({
-                message: "Invalid credentials"
-            });
-        }
-    }).catch(err => {
-        return res.status(404).json({
-            message: "Invalid credentials"
-        });
+      //User login checks out
+      res.status(200).json({
+        token: token,
+        expiresIn: 3600,
+        user: thisUser
+      })
+    }
+    else {
+      return res.status(404).json({
+        message: "Invalid credentials"
+      });
+    }
+  }).catch(err => {
+    return res.status(404).json({
+      message: "Invalid credentials"
     });
+  });
 });
 
 // Verifies token for dashboard
 router.get('/#', verifyToken, (req, res) => {
-    res.sendStatus(200);
+  res.sendStatus(200);
 })
 
 // GET the logged in user's id and username from the token
 // Returns the userID
 router.get('/user', (req, res) => {
-    let token = req.headers.authorization.split(' ')[1];
+  let token = req.headers.authorization.split(' ')[1];
 
-    let decode = jwt.verify(token, process.env.SECRET_KEY,);
-    console.log(decode)
+  let decode = jwt.verify(token, process.env.SECRET_KEY,);
+  console.log(decode)
 
-    let userID = decode.userID;
+  let userID = decode.userID;
 
-    console.log(userID)
+  console.log(userID)
 
-    res.status(200).json({
-        userID: userID
-    })
+  res.status(200).json({
+    userID: userID
+  })
 })
 
 // GET All Users (employees) and their data
 // Returns JSON array of all users in database
-router.get('/users', (req, res) => {
-    User.find().exec().then(result => {
-        res.status(200).json(result);
-    })
-        .catch(err => {
-            res.status(500).json({ error: err })
-        });
+router.get('/users', async (req, res) => {
+  User.find().exec().then(result => {
+    res.status(200).json(result);
+  })
+    .catch(err => {
+      res.status(500).json({ error: err })
+    });
 })
 
 // GET the user information by their id
 // TODO implement GraphQL call to trim info
 // Returns the user's data from the id
 router.get('/user/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const user = await User.findById(id);
+  try {
+    const id = req.params.id;
+    const user = await User.findById(id);
 
-        //TODO REMOVE this line when GraphQL implemented
-        user.password = "";
+    //TODO REMOVE this line when GraphQL implemented
+    user.password = "";
 
-        if (user) {
-            res.status(200).json({ user: user });
-        }
-        else {
-            res.status(404).json({ message: "No user found by that id" })
-        }
+    if (user) {
+      res.status(200).json({ user: user });
     }
-    catch (err) {
-        res.status(500).json({ message: err })
+    else {
+      res.status(404).json({ message: "No user found by that id" })
     }
+  }
+  catch (err) {
+    res.status(500).json({ message: err })
+  }
 });
 
 // GET the user role info from the user_role table
 // Returns json object of the row where passed id is requested
 router.route('/user/role/:id').get((req, res) => {
-    User.findOne({ where: { role_id: req.params.id } }).then((user) => {
-        //console.log("The user role is: " + user.role_id)
+  User.findOne({ where: { role_id: req.params.id } }).then((user) => {
+    //console.log("The user role is: " + user.role_id)
 
-        res.status(200).json({
-            msg: user
-        })
+    res.status(200).json({
+      msg: user
+    })
 
-        //return user.role_id;
-    });
+    //return user.role_id;
+  });
 });
 
 // GET All Quotes and their data
 // Returns JSON array of all quotes in database
 router.get('/quotes', (req, res) => {
-    Quote.find().exec().then(result => {
-        res.status(200).json(result);
-    })
-        .catch(err => {
-            res.status(500).json({ error: err })
-        });
+  Quote.find().exec().then(result => {
+    res.status(200).json(result);
+  })
+    .catch(err => {
+      res.status(500).json({ error: err })
+    });
 })
 
 // GET All Items and their prices
 // Returns JSON array of all quotes in database
 router.get('/items', (req, res) => {
-    Item.find().exec().then(result => {
-        res.status(200).json(result);
-    })
-        .catch(err => {
-            res.status(500).json({ error: err })
-        });
+  Item.find().exec().then(result => {
+    res.status(200).json(result);
+  })
+    .catch(err => {
+      res.status(500).json({ error: err })
+    });
 })
 
 // GET All Commission objects and their data
 // Returns as JSON array
 router.get('/commissions', (req, res) => {
   Comm.find().exec().then(result => {
-      res.status(200).json(result);
+    res.status(200).json(result);
   })
-      .catch(err => {
-          res.status(500).json({ error: err })
-      });
+    .catch(err => {
+      res.status(500).json({ error: err })
+    });
 })
 
 /**************************************************/
@@ -396,9 +396,9 @@ router.get('/customers', (req, res) => {
   }).then((customers) => {
     res.status(200).json(customers);
   })
-  .catch(err=> {
-    res.status(500).json({error: err});
-  });
+    .catch(err => {
+      res.status(500).json({ error: err });
+    });
 })
 
 // GET All parts and their properties from the external dB
@@ -411,9 +411,9 @@ router.get('/parts', (req, res) => {
   }).then((parts) => {
     res.status(200).json(parts);
   })
-  .catch(err=> {
-    res.status(500).json({error: err});
-  });
+    .catch(err => {
+      res.status(500).json({ error: err });
+    });
 })
 
 router.get('/parts/:name', (req, res) => {
@@ -429,8 +429,8 @@ router.get('/parts/:name', (req, res) => {
   }).then((parts) => {
     res.status(200).json(parts);
   })
-  .catch(err=> {
-    res.status(500).json({error: err});
-  });
+    .catch(err => {
+      res.status(500).json({ error: err });
+    });
 })
 module.exports = router;
