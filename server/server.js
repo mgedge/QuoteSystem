@@ -1,16 +1,15 @@
 /***************************************************
  * server.js
- * 
+ *
  * This file creates the backend service for the application
- * 
+ *
  * When run, using 'node server' or 'nodemon server',
  * the user will be able to log-in. Without it, the API
- * calls would do nothing. This file would be run on the 
+ * calls would do nothing. This file would be run on the
  * home server users to connect to.
- * 
+ *
  **************************************************/
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 
 //Hidden passkeys
@@ -26,18 +25,11 @@ const { graphqlHTTP } = require('express-graphql');
 const resolvers = require('./GraphQL/resolvers');
 const schema = require('./GraphQL/schema');
 
-const mysql = require('mysql');
-
 //Setup the express server
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// app.use(bodyParser.json());
-// app.use(bearerToken());
-// app.use(bodyParser.urlencoded({
-//     extended: false
-// }));
 app.use(cors());
 
 
@@ -75,10 +67,6 @@ database.once('connected', (res) => {
   console.log("Database connected.");
 });
 
-//Connect to external database
-// const db = require("./external");
-// db.sequelize.sync();
-
 //Open connection
 app.listen(PORT, function () {
   console.log('Running on localhost:' + PORT)
@@ -97,3 +85,5 @@ app.use(function (err, req, res, next) {
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
+
+exports.handler = app;
