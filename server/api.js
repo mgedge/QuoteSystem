@@ -30,8 +30,8 @@ const Item = require('./schemas/item');
 const Comm = require('./comm');
 const { Mongoose } = require('mongoose');
 const item = require('./schemas/item');
-const { Customer } = require('../external');
-const { Part } = require('../external');
+// const { Customer } = require('../external');
+// const { Part } = require('../external');
 
 /**************************************************/
 /*               END OF CONFIGURATION             */
