@@ -22,7 +22,7 @@ const api = require('./api');
 
 const { graphqlHTTP } = require('express-graphql');
 
-const resolvers = require('./GraphQL/resolvers');
+const resolvers = require('./resolvers');
 const schema = require('./schema');
 
 //Setup the express server
