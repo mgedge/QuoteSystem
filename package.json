@@ -7,7 +7,7 @@
     "dev": "ng serve  && npm init-server",
     "init-assets": "webpack --config webpack.dev.js",
     "init-server": "node server/server.js",
-    "build": "ng build",
+    "build": "ng build --configuration production --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -1,6 +1,6 @@
 # example netlify.toml
 [build]
-  command = "ng build --configuration production"
+  command = "ng build --configuration production --aot"
   functions = "server"
   publish = "dist/quotesystem"
 
