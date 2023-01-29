@@ -2,7 +2,7 @@
 [build]
   command = "ng build"
   functions = "server"
-  publish = "dist"
+  publish = "dist\QuoteSystem"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
