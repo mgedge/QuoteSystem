@@ -24,12 +24,12 @@ const router = express.Router();
 //Hidden keys
 require('dotenv/config')
 
-const User = require('./schemas/users');
-const Quote = require('./schemas/quotes');
-const Item = require('./schemas/item');
+const User = require('./users');
+const Quote = require('./quotes');
+const Item = require('./item');
 const Comm = require('./comm');
 const { Mongoose } = require('mongoose');
-const item = require('./schemas/item');
+const item = require('./item');
 // const { Customer } = require('../external');
 // const { Part } = require('../external');
 

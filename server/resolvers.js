@@ -1,10 +1,10 @@
 /***************************************************
  * resolvers.js
- * 
+ *
  * This file defines GraphQL calls.
- * 
+ *
  **************************************************/
-const User = require('../schemas/users');
+const User = require('./users');
 
 module.exports = {
     // GET GraphQL call for ALL users
