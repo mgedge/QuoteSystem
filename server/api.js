@@ -1,15 +1,15 @@
 /***************************************************
  * API.js
- * 
+ *
  * This file utilizes the traditional RESTful calls
  * to retrieve data from the database.
- * 
- * For example, auth.service will call the HTTP 
+ *
+ * For example, auth.service will call the HTTP
  * methods to register/login users. For login, this file
- * will send the HTTP GET method to the server to find 
- * the user's data using the user's username and password. 
+ * will send the HTTP GET method to the server to find
+ * the user's data using the user's username and password.
  * Once verified, a JWT is signed and returned to the caller.
- * 
+ *
  **************************************************/
 
 
@@ -24,12 +24,12 @@ const router = express.Router();
 //Hidden keys
 require('dotenv/config')
 
-const User = require('../schemas/users');
-const Quote = require('../schemas/quotes');
-const Item = require('../schemas/item');
-const Comm = require('../schemas/comm');
+const User = require('./schemas/users');
+const Quote = require('./schemas/quotes');
+const Item = require('./schemas/item');
+const Comm = require('./comm');
 const { Mongoose } = require('mongoose');
-const item = require('../schemas/item');
+const item = require('./schemas/item');
 const { Customer } = require('../external');
 const { Part } = require('../external');
 
@@ -69,7 +69,7 @@ function verifyToken(req, res, next) {
 }
 
 // POST : Registration
-// Hashes the entered password, then attempts to save the 
+// Hashes the entered password, then attempts to save the
 // account to the database
 router.post('/register', (req, res) => {
   //Hash the password
